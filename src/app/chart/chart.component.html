@@ -1,0 +1,10 @@
+<div class="container-fluid chart-component">
+  <h3>{{ title }}</h3>
+  <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>

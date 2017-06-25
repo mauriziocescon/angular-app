@@ -1,0 +1,78 @@
+// -------------------------------------------------------
+// App variables
+
+$primary-color: $app-green-1 !default;
+$accent-color: $app-white !default;
+$secondary-color: $app-black !default;
+$danger-color: $app-red-3 !default;
+$gray-color: $app-gray-2 !default;
+
+// -------------------------------------------------------
+// Bootstrap variables
+
+//== Typography
+$font-size-base: 1rem;
+
+//== Grid system
+
+//== Navbar
+$navbar-padding-y: 1rem;
+
+//== Buttons
+
+// -------------------------------------------------------
+// Font awesome variables
+
+// -------------------------------------------------------
+// Common style
+
+.full-width-message {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: $font-size-base;
+  text-align: center;
+  font-weight: bold;
+}
+
+.go-up {
+  //@extend .fa;
+  //@extend .fa-3x;
+  //@extend .fa-chevron-circle-up;
+
+  position: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: $primary-color;
+  background-color: $app-white;
+  opacity: 0.7;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+input.ng-invalid,
+select.ng-invalid,
+textarea.ng-invalid {
+  color: $danger-color;
+  border-color: $danger-color;
+}
+
+input.ng-invalid-mc-custom-validator-error,
+select.ng-invalid-mc-custom-validator-error,
+textarea.ng-invalid-mc-custom-validator-error {
+  color: $danger-color;
+  border-color: $danger-color;
+}
+
+// angular-loading-bar override style
+#loading-bar .bar {
+  background: $primary-color !important;
+  height: 4px !important;
+}
