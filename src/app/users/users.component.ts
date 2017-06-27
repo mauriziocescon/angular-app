@@ -36,6 +36,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
   }
 
+  public get textFilterPlaceholder(): string {
+    return "Placeholder";
+  }
+
   public get dataSource(): User[] {
     return this.users;
   }
@@ -54,5 +58,42 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.usersRequest.unsubscribe();
+  }
+
+  public resetTextFilter(): void {
+    if (this.textFilter === undefined) {
+      return;
+    }
+
+    this.textFilter = undefined;
+    this.loadDataSource();
+  }
+
+  public textFilterDidChange(newValue: string): void {
+    console.log(this.textFilter + " " + newValue);
+    // this.delayExecutionService.execute(() => {
+    //   this.loadDataSource();
+    // }, this.loadUsersKey, 1500);
+  }
+
+  public loadDataSource(): void {
+    // this.busy = true;
+    // this.users = undefined;
+    //
+    // this.usersService.getUsers(this.textFilter).then((response: ResponseWs<User[]>) => {
+    //
+    //   if (response.isSuccess()) {
+    //     this.users = response.getData();
+    //   }
+    //   else if (response.hasBeenCanceled() === false) {
+    //     // we do not notify the user in case of cancel request
+    //     this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
+    //   }
+    // }).catch((reason: any) => {
+    //   this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
+    //   Logger.log(reason);
+    // }).finally(() => {
+    //   this.busy = false;
+    // });
   }
 }

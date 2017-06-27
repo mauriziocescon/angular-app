@@ -1,3 +1,18 @@
 <div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="input-group">
+        <input type="search" class="form-control" (ngModelChange)="textFilterDidChange($event)" [ngModel]="textFilter"
+               placeholder="{{ textFilterPlaceholder }}">
+        <span class="input-group-addon addon" (click)="resetTextFilter()">
+          <span class="fa fa-search" [hidden]="textFilter"></span>
+          <span class="fa fa-remove" [hidden]="!textFilter"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+
   <div *ngFor="let user of users">{{ user.id + ' ' + user.name }}</div>
 </div>
