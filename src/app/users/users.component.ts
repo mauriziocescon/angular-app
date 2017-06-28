@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 
+import { TranslateService } from "ng2-translate";
+
 import { UsersService } from "./users.data-service";
 import { User } from "./users.model";
 
@@ -11,12 +13,15 @@ import { User } from "./users.model";
 export class UsersComponent implements OnInit, OnDestroy {
   public textFilter: string;
 
+  protected translate: TranslateService;
   protected usersService: UsersService;
   protected usersRequest: any;
   protected users: User[];
   protected busy: boolean;
 
-  constructor(UsersService: UsersService) {
+  constructor(TranslateService: TranslateService,
+              UsersService: UsersService) {
+    this.translate = TranslateService;
     this.usersService = UsersService;
   }
 
@@ -34,10 +39,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public get showData(): boolean {
     return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
-  }
-
-  public get textFilterPlaceholder(): string {
-    return "Placeholder";
   }
 
   public get dataSource(): User[] {
