@@ -46,15 +46,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.usersRequest = this.usersService.getUsers(this.textFilter)
-      .subscribe(
-        (users: User[]) => {
-          this.users = users;
-        },
-        (err) => {
-          console.error(err);
-        },
-        () => console.log("getUsers Complete"));
+    this.busy = false;
+    this.loadDataSource();
   }
 
   public ngOnDestroy(): void {
@@ -71,13 +64,27 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public textFilterDidChange(newValue: string): void {
-    console.log(this.textFilter + " " + newValue);
-    // this.delayExecutionService.execute(() => {
-    //   this.loadDataSource();
-    // }, this.loadUsersKey, 1500);
+    this.textFilter = newValue;
+    this.loadDataSource();
   }
 
   public loadDataSource(): void {
+    this.busy = true;
+    this.users = undefined;
+
+    this.usersRequest = this.usersService.getUsers(this.textFilter)
+      .debounceTime(5000)
+      .subscribe(
+        (users: User[]) => {
+          this.busy = false;
+          this.users = users;
+        },
+        (err) => {
+          this.busy = false;
+          console.error(err);
+        },
+        () => console.log("getUsers Complete"));
+
     // this.busy = true;
     // this.users = undefined;
     //

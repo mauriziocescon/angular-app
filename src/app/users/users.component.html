@@ -13,6 +13,13 @@
     </div>
   </div>
 
+  <div class="row" [hidden]="!showData">
+    <div class="col-12" *ngFor="let user of users">
+      {{ user.id + ' ' + user.name }}
+    </div>
+  </div>
 
-  <div *ngFor="let user of users">{{ user.id + ' ' + user.name }}</div>
+  <div class="full-width-message" [hidden]="!isLoadingData">{{ 'LOADING' | translate }}</div>
+  <div class="full-width-message" [hidden]="!hasNoData">{{ 'NO_RESULT' | translate }}</div>
+  <div class="full-width-message" [hidden]="!shouldRetry" (click)="loadDataSource()">{{ 'RETRY' | translate }}</div>
 </div>
