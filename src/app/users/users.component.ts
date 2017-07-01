@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 import { TranslateService } from "ng2-translate";
 
@@ -11,7 +12,9 @@ import { User } from "./users.model";
   styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  public textFilter: string;
+  protected formBuilder: FormBuilder;
+  protected searchForm: FormGroup;
+  protected searchControl: FormControl;
 
   protected translate: TranslateService;
   protected usersService: UsersService;
@@ -19,8 +22,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected users: User[];
   protected busy: boolean;
 
-  constructor(TranslateService: TranslateService,
+  constructor(FormBuilder: FormBuilder,
+              TranslateService: TranslateService,
               UsersService: UsersService) {
+    this.formBuilder = FormBuilder;
     this.translate = TranslateService;
     this.usersService = UsersService;
   }
@@ -47,33 +52,42 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.busy = false;
+
+    this.searchForm = this.formBuilder.group({
+      textFilter: this.searchControl = new FormControl(),
+    });
+
     this.loadDataSource();
   }
 
   public ngOnDestroy(): void {
-    this.usersRequest.unsubscribe();
+    if (this.usersRequest) {
+      this.usersRequest.unsubscribe();
+    }
   }
 
   public resetTextFilter(): void {
-    if (this.textFilter === undefined) {
+    if (this.searchControl.value === undefined) {
       return;
     }
 
-    this.textFilter = undefined;
+    this.searchControl.setValue(undefined);
     this.loadDataSource();
   }
 
-  public textFilterDidChange(newValue: string): void {
-    this.textFilter = newValue;
-    this.loadDataSource();
+  public trackByUser(index: number, user: User): number {
+    return user.id;
   }
 
   public loadDataSource(): void {
     this.busy = true;
     this.users = undefined;
 
-    this.usersRequest = this.usersService.getUsers(this.textFilter)
-      .debounceTime(5000)
+    this.usersRequest = this.searchControl
+      .valueChanges
+      .startWith("")
+      .debounceTime(400)
+      .switchMap(term => this.usersService.getUsers(term))
       .subscribe(
         (users: User[]) => {
           this.busy = false;
@@ -81,27 +95,8 @@ export class UsersComponent implements OnInit, OnDestroy {
         },
         (err) => {
           this.busy = false;
-          console.error(err);
+          alert("error");
         },
         () => console.log("getUsers Complete"));
-
-    // this.busy = true;
-    // this.users = undefined;
-    //
-    // this.usersService.getUsers(this.textFilter).then((response: ResponseWs<User[]>) => {
-    //
-    //   if (response.isSuccess()) {
-    //     this.users = response.getData();
-    //   }
-    //   else if (response.hasBeenCanceled() === false) {
-    //     // we do not notify the user in case of cancel request
-    //     this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA"), response.getMessage(), this.localizedStringService.getLocalizedString("CLOSE"));
-    //   }
-    // }).catch((reason: any) => {
-    //   this.uiUtilitiesService.modalAlert(this.localizedStringService.getLocalizedString("ERROR_ACCESS_DATA_COMPONENT"), reason.toString(), this.localizedStringService.getLocalizedString("CLOSE"));
-    //   Logger.log(reason);
-    // }).finally(() => {
-    //   this.busy = false;
-    // });
   }
 }
