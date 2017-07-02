@@ -4,6 +4,7 @@ import { Http } from "@angular/http";
 import { FormBuilder } from "@angular/forms";
 
 import { TranslateModule, TranslateStaticLoader, TranslateLoader, TranslateService } from "ng2-translate";
+import "rxjs/Rx";
 
 import { CoreModule } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
@@ -36,7 +37,7 @@ describe("UsersComponent", () => {
       providers: [
         FormBuilder,
         TranslateService,
-        UsersService, // {provide: UsersService, useValue: {}}, // todo: Provide a test-double service
+        {provide: UsersService, useValue: {}}, // todo: Provide a test-double service
       ],
     })
       .compileComponents();
