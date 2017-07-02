@@ -31,15 +31,15 @@ export class NavigationBarComponent implements OnInit {
     this.selectedLanguageId = language;
   }
 
-  protected goToUsers(): void {
+  public goToUsers(): void {
     this.router.navigate(["/users"]);
   }
 
-  protected goToAlbums(): void {
+  public goToAlbums(): void {
     this.router.navigate(["/albums"]);
   }
 
-  protected goToCharts(): void {
+  public goToCharts(): void {
     this.router.navigate(["/chart"]);
   }
 }

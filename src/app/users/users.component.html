@@ -5,9 +5,9 @@
       <form [formGroup]="searchForm">
         <input class="form-control" formControlName="textFilter" placeholder="{{ 'INPUT_TEXT_PLACEHOLDER' | translate }}">
         <span class="input-group-addon addon" (click)="resetTextFilter()">
-            <span class="fa fa-search" [hidden]="textFilter"></span>
-            <span class="fa fa-remove" [hidden]="!textFilter"></span>
-          </span>
+          <!--<span class="fa fa-search" [hidden]="textFilter.value"></span>-->
+          <!--<span class="fa fa-remove" [hidden]="!textFilter.value"></span>-->
+        </span>
       </form>
     </div>
   </div>

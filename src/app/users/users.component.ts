@@ -13,7 +13,7 @@ import { User } from "./users.model";
 })
 export class UsersComponent implements OnInit, OnDestroy {
   protected formBuilder: FormBuilder;
-  protected searchForm: FormGroup;
+  public searchForm: FormGroup;
   protected searchControl: FormControl;
 
   protected translate: TranslateService;
