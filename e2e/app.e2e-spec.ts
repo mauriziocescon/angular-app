@@ -1,3 +1,4 @@
+import { browser } from "protractor";
 import { AppPage } from "./app.po";
 
 describe("angular App", () => {
@@ -9,8 +10,8 @@ describe("angular App", () => {
 
   it("should display message saying app works", () => {
     page.navigateTo();
-    page.getParagraphText().then((text: string) => {
-      expect(text).toEqual("app works!")
+    browser.getTitle().then((title: string) => {
+      expect(title).toEqual("Demo");
     });
   });
 });
