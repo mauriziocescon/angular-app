@@ -22,14 +22,14 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     HttpModule,
-    CoreModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    SharedModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http],
     }),
+    CoreModule.forRoot(),
+    SharedModule,
     ChartModule,
     UsersModule,
   ],

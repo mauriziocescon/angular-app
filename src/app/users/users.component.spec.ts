@@ -1,6 +1,19 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { Http } from "@angular/http";
+import { FormBuilder } from "@angular/forms";
+
+import { TranslateModule, TranslateStaticLoader, TranslateLoader, TranslateService } from "ng2-translate";
+
+import { CoreModule } from "../core/core.module";
+import { SharedModule } from "../shared/shared.module";
+
 import { UsersComponent } from "./users.component";
+import { UsersService } from "./users.data-service";
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+}
 
 describe("UsersComponent", () => {
   let component: UsersComponent;
@@ -8,7 +21,23 @@ describe("UsersComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UsersComponent],
+      imports: [
+        CoreModule.forRoot(),
+        SharedModule,
+        TranslateModule.forRoot({
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [Http],
+        }),
+      ],
+      declarations: [
+        UsersComponent
+      ],
+      providers: [
+        FormBuilder,
+        TranslateService,
+        {provide: UsersService, useValue: {}}, // Provide a test-double service
+      ],
     })
       .compileComponents();
   }));

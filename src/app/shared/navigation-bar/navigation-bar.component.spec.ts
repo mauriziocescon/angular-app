@@ -1,4 +1,11 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { ChartsModule } from "ng2-charts/ng2-charts";
+import { TranslateModule } from "ng2-translate";
 
 import { NavigationBarComponent } from "./navigation-bar.component";
 
@@ -8,7 +15,17 @@ describe("NavigationBarComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NavigationBarComponent],
+      imports: [
+        RouterTestingModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ChartsModule,
+        TranslateModule,
+      ],
+      declarations: [
+        NavigationBarComponent
+      ],
     })
       .compileComponents();
   }));

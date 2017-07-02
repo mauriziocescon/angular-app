@@ -1,10 +1,32 @@
 import { TestBed, async } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+
+import { Http } from "@angular/http";
+
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
+
+import { CoreModule } from "./core/core.module";
+import { SharedModule } from "./shared/shared.module";
 
 import { AppComponent } from "./app.component";
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+}
 
 describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        CoreModule.forRoot(),
+        RouterTestingModule,
+        SharedModule,
+        TranslateModule.forRoot({
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [Http],
+        })
+      ],
       declarations: [
         AppComponent
       ],
