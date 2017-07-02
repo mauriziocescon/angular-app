@@ -38,7 +38,7 @@ describe("NavigationBarComponent", () => {
         NavigationBarComponent
       ],
       providers: [
-        AppConstantsService, // todo: Provide a test-double service
+        AppConstantsService, // todo: Provide a test-double service {provide: AppConstantsService, useValue: {}}
       ],
     })
       .compileComponents();
