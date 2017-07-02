@@ -36,7 +36,7 @@ describe("UsersComponent", () => {
       providers: [
         FormBuilder,
         TranslateService,
-        {provide: UsersService, useValue: {}}, // Provide a test-double service
+        UsersService, // {provide: UsersService, useValue: {}}, // todo: Provide a test-double service
       ],
     })
       .compileComponents();

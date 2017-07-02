@@ -3,11 +3,18 @@ import { RouterTestingModule } from "@angular/router/testing";
 
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Http } from "@angular/http";
 
 import { ChartsModule } from "ng2-charts/ng2-charts";
-import { TranslateModule } from "ng2-translate";
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
+
+import { AppConstantsService } from "../../core/core.module";
 
 import { NavigationBarComponent } from "./navigation-bar.component";
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+}
 
 describe("NavigationBarComponent", () => {
   let component: NavigationBarComponent;
@@ -16,15 +23,22 @@ describe("NavigationBarComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        RouterTestingModule,
         ChartsModule,
-        TranslateModule,
+        TranslateModule.forRoot({
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [Http],
+        }),
       ],
       declarations: [
         NavigationBarComponent
+      ],
+      providers: [
+        AppConstantsService, // todo: Provide a test-double service
       ],
     })
       .compileComponents();
