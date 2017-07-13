@@ -10,11 +10,9 @@ export class PostCommentsComponent implements OnInit {
   @Input() post: any[];
 
   constructor() {
-    console.log("You must be undefined: PostCommentsComponent." + JSON.stringify(this.post));
-
   }
 
   ngOnInit() {
-
+    console.log("You must be undefined: PostCommentsComponent." + JSON.stringify(this.post));
   }
 }

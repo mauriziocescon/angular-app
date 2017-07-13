@@ -1,8 +1,14 @@
 @import "../../styles";
 
 .users-component {
+  padding-top: 10px;
+
   .addon {
     color: $accent-color;
   }
 
+  .user {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $gray-color;
+  }
 }

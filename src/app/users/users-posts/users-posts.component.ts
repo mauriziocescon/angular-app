@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { post } from "selenium-webdriver/http";
 
 @Component({
   selector: "app-users-posts",
@@ -11,9 +10,9 @@ export class UsersPostsComponent implements OnInit {
   @Input() post: any[];
 
   constructor() {
-    console.log("You must be undefined: UsersPostsComponent." + JSON.stringify(this.post));
   }
 
   ngOnInit() {
+    console.log("You must be undefined: UsersPostsComponent." + JSON.stringify(this.post));
   }
 }
