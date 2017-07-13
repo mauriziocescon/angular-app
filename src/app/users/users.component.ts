@@ -7,7 +7,7 @@ import { UsersService } from "./users.data-service";
 import { User } from "./users.model";
 
 @Component({
-  selector: "appnpm run test-users",
+  selector: "app-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"],
 })

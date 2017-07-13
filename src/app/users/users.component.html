@@ -15,6 +15,7 @@
   <div class="row" [hidden]="!showData">
     <div class="col-12" *ngFor="let user of dataSource; trackBy: trackByUser">
       {{ user.id + ' ' + user.name }}
+      <app-users-posts [post]="post"></app-users-posts>
     </div>
   </div>
 
