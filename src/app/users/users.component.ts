@@ -7,7 +7,7 @@ import { UsersService } from "./users.data-service";
 import { User } from "./users.model";
 
 @Component({
-  selector: "app-users",
+  selector: "appnpm run test-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"],
 })
@@ -21,6 +21,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected usersRequest: any;
   protected users: User[];
   protected busy: boolean;
+
+  public post: any[];
 
   constructor(FormBuilder: FormBuilder,
               TranslateService: TranslateService,
@@ -51,6 +53,15 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.post = [
+      {
+        id: "1",
+        comment: {
+          id: 1,
+          text: "one"
+        }
+      }];
+
     this.busy = false;
 
     this.searchForm = this.formBuilder.group({
@@ -92,6 +103,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         (users: User[]) => {
           this.busy = false;
           this.users = users;
+          this.post[0].comment.text = new Date().getTime().toString();
         },
         (err) => {
           this.busy = false;
