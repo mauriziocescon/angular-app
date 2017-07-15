@@ -37,7 +37,7 @@
     "papaparse": "4.3.3",
     "rxjs": "5.4.2",
     "tether": "1.4.0",
-    "zone.js": "0.8.13"
+    "zone.js": "0.8.12"
   },
   "devDependencies": {
     "@angular/cli": "latest",

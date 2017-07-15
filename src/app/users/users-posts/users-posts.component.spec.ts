@@ -10,6 +10,7 @@ import { CoreModule } from "../../core/core.module";
 import { SharedModule } from "../../shared/shared.module";
 
 import { UsersPostsComponent } from "./users-posts.component";
+import { PostCommentsComponent } from "./post-comments/post-comments.component";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n/", ".json");
@@ -31,7 +32,8 @@ describe("UsersPostsComponent", () => {
         }),
       ],
       declarations: [
-        UsersPostsComponent
+        UsersPostsComponent,
+        PostCommentsComponent
       ],
       providers: [
         FormBuilder,

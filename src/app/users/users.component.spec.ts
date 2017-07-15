@@ -11,6 +11,8 @@ import { SharedModule } from "../shared/shared.module";
 
 import { UsersComponent } from "./users.component";
 import { UsersService } from "./users.data-service";
+import { UsersPostsComponent } from "./users-posts/users-posts.component";
+import { PostCommentsComponent } from "./users-posts/post-comments/post-comments.component";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n/", ".json");
@@ -32,7 +34,9 @@ describe("UsersComponent", () => {
         }),
       ],
       declarations: [
-        UsersComponent
+        UsersComponent,
+        UsersPostsComponent,
+        PostCommentsComponent
       ],
       providers: [
         FormBuilder,
