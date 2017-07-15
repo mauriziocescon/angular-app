@@ -35,10 +35,6 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigate(["/users"]);
   }
 
-  public goToAlbums(): void {
-    this.router.navigate(["/albums"]);
-  }
-
   public goToCharts(): void {
     this.router.navigate(["/chart"]);
   }

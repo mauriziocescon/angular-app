@@ -10,9 +10,9 @@ import { AppConstantsService, CsvParserService } from "../core/core.module";
   styleUrls: ["./chart.component.scss"],
 })
 export class ChartComponent implements OnInit {
-  public title: string;
   public barChartOptions: any;
   public barChartLabels: string[];
+  public colors: any[];
   public barChartType: string;
   public barChartLegend: boolean;
   public barChartData: any[];
@@ -30,14 +30,9 @@ export class ChartComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
-    this.translate.get("DESCRIPTION")
-      .subscribe((res: string) => {
-        this.title = res;
-      });
-
     this.setupChart();
 
+    // parse a local csv
     // this.csvParser.parse();
   }
 
@@ -70,10 +65,33 @@ export class ChartComponent implements OnInit {
     this.barChartLabels = ["2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"];
     this.barChartType = "bar";
     this.barChartLegend = true;
+    this.colors = [
+      {
+        backgroundColor: "rgba(255,0,0,0.2)",
+        borderColor: "rgba(255,0,0,0,1)",
+        pointBackgroundColor: "rgba(255,0,0,0,1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(255,0,0,0,0.8)",
+      },
+      {
+        backgroundColor: "rgba(232,185,12,0.2)",
+        borderColor: "rgba(232,185,12,1)",
+        pointBackgroundColor: "rgba(232,185,12,1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(232,185,12,0.8)",
+      }];
 
     this.barChartData = [
-      {data: [200, 500, 600, 780, 856, 700, 600, 550, 300, 180], label: "Series A"},
-      {data: [208, 500, 400, 190, 806, 207, 900, 100, 200, 10], label: "Series B"},
+      {
+        data: [200, 500, 600, 780, 856, 700, 600, 550, 300, 180],
+        label: "Series A",
+      },
+      {
+        data: [208, 500, 400, 190, 806, 207, 900, 100, 200, 10],
+        label: "Series B",
+      },
     ];
   }
 }
