@@ -19,6 +19,7 @@ $brand-success: $success-color;
 $brand-info: $info-color;
 $brand-warning: $warning-color;
 $brand-danger: $danger-color;
+$brand-inverse: #292b2c;
 
 //== Typography
 $font-size-base: 1rem;
@@ -29,6 +30,9 @@ $font-size-base: 1rem;
 $navbar-padding-y: 1rem;
 
 //== Buttons
+
+// Forms
+$input-group-addon-bg: $primary-color;
 
 // -------------------------------------------------------
 // Font awesome variables
