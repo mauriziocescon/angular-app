@@ -52,6 +52,12 @@ export class UsersComponent implements OnInit, OnDestroy {
     return this.users;
   }
 
+  public isTextFilterNotEmpty(): boolean {
+
+    console.log(this.searchControl.value);
+    return this.searchControl.value;
+  }
+
   public ngOnInit(): void {
     this.post = [
       {

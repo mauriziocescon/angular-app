@@ -13,6 +13,6 @@ export class PostCommentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("You must be undefined: PostCommentsComponent." + JSON.stringify(this.post));
+    // console.log("You must be undefined: PostCommentsComponent." + JSON.stringify(this.post));
   }
 }
