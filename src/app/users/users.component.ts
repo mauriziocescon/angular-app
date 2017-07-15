@@ -24,12 +24,12 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   public post: any[];
 
-  constructor(FormBuilder: FormBuilder,
-              TranslateService: TranslateService,
-              UsersService: UsersService) {
-    this.formBuilder = FormBuilder;
-    this.translate = TranslateService;
-    this.usersService = UsersService;
+  constructor(formBuilder: FormBuilder,
+              translateService: TranslateService,
+              usersService: UsersService) {
+    this.formBuilder = formBuilder;
+    this.translate = translateService;
+    this.usersService = usersService;
   }
 
   public get isLoadingData(): boolean {

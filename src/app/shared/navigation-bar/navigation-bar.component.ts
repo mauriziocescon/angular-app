@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { TranslateService } from "ng2-translate";
+
 import { AppConstantsService } from "../../core/core.module";
 
 @Component({
@@ -14,12 +16,15 @@ export class NavigationBarComponent implements OnInit {
   public selectedLanguageId: string;
 
   protected router: Router;
+  protected translate: TranslateService;
   protected appConstants: AppConstantsService;
 
   constructor(router: Router,
-              AppConstantsService: AppConstantsService) {
+              translateService: TranslateService,
+              appConstantsService: AppConstantsService) {
     this.router = router;
-    this.appConstants = AppConstantsService;
+    this.translate = translateService;
+    this.appConstants = appConstantsService;
   }
 
   public ngOnInit(): void {
@@ -29,6 +34,7 @@ export class NavigationBarComponent implements OnInit {
 
   public selectLanguage(language: string): void {
     this.selectedLanguageId = language;
+    this.translate.use(this.selectedLanguageId);
   }
 
   public goToUsers(): void {

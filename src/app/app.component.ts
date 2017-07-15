@@ -13,10 +13,10 @@ export class AppComponent implements OnInit, OnDestroy {
   protected translate: TranslateService;
   protected appConstants: AppConstantsService;
 
-  constructor(TranslateService: TranslateService,
-              AppConstantsService: AppConstantsService) {
-    this.translate = TranslateService;
-    this.appConstants = AppConstantsService;
+  constructor(translateService: TranslateService,
+              appConstantsService: AppConstantsService) {
+    this.translate = translateService;
+    this.appConstants = appConstantsService;
 
     this.translate.setDefaultLang(this.appConstants.Languages.DEFAULT_LANGUAGE);
     this.translate.use(this.appConstants.Languages.DEFAULT_LANGUAGE);

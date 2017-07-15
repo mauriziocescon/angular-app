@@ -12,12 +12,12 @@ export class UsersService {
   protected appConstants: AppConstantsService;
   protected utilities: UtilitiesService;
 
-  constructor(Http: Http,
-              AppConstantsService: AppConstantsService,
-              UtilitiesService: UtilitiesService) {
-    this.http = Http;
-    this.appConstants = AppConstantsService;
-    this.utilities = UtilitiesService;
+  constructor(http: Http,
+              appConstantsService: AppConstantsService,
+              utilitiesService: UtilitiesService) {
+    this.http = http;
+    this.appConstants = appConstantsService;
+    this.utilities = utilitiesService;
   }
 
   public getUsers(textFilter: string): Observable<User[]> {

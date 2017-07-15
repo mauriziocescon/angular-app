@@ -11,9 +11,10 @@ export class CsvParserService {
   protected http: Http;
   protected appConstants: AppConstantsService;
 
-  constructor(http: Http, appConstants: AppConstantsService) {
+  constructor(http: Http,
+              appConstantsService: AppConstantsService) {
     this.http = http;
-    this.appConstants = appConstants;
+    this.appConstants = appConstantsService;
   }
 
   public parse(): void {
