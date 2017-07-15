@@ -52,9 +52,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     return this.users;
   }
 
-  public isTextFilterNotEmpty(): boolean {
-
-    console.log(this.searchControl.value);
+  public get isTextFilterNotEmpty(): boolean {
     return this.searchControl.value;
   }
 
