@@ -75,8 +75,8 @@
     "style-loader": "0.18.2",
     "stylus-loader": "3.0.1",
     "ts-node": "3.2.0",
-    "tslint": "5.4.3",
-    "typescript": "2.3.4",
+    "tslint": "5.5.0",
+    "typescript": "2.4.1",
     "url-loader": "0.5.9",
     "webpack": "3.2.0",
     "webpack-dev-server": "2.5.1"
