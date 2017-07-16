@@ -50,9 +50,9 @@ $input-group-addon-bg: $primary-color;
 }
 
 .go-up {
-  //@extend .fa;
-  //@extend .fa-3x;
-  //@extend .fa-chevron-circle-up;
+  @extend .fa;
+  @extend .fa-3x;
+  @extend .fa-chevron-circle-up;
 
   position: fixed;
   background-size: contain;

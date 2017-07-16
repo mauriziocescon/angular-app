@@ -6,8 +6,8 @@
         <div class="input-group">
           <input class="form-control" formControlName="textFilter" placeholder="{{ 'INPUT_TEXT_PLACEHOLDER' | translate }}">
           <span class="input-group-addon addon" (click)="resetTextFilter()">
-            <span class="fa fa-search" [hidden]="isTextFilterNotEmpty">{{ 'GO' | translate }}</span>
-            <span class="fa fa-remove" [hidden]="!isTextFilterNotEmpty">{{ 'CANCEL' | translate }}</span>
+            <span class="fa fa-search" [hidden]="isTextFilterNotEmpty"></span>
+            <span class="fa fa-remove" [hidden]="!isTextFilterNotEmpty"></span>
         </span>
         </div>
       </form>

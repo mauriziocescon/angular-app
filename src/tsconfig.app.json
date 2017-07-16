@@ -1,9 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "",
-    "module": "es2015",
     "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",
     "types": []
   },
   "exclude": [

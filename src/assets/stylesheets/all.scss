@@ -8,5 +8,5 @@
 
 // Vendors
 @import "~bootstrap/scss/bootstrap";
-//$fa-font-path: "~font-awesome/fonts";
-//@import "~font-awesome/scss/font-awesome"; // bug on angular-cli
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
