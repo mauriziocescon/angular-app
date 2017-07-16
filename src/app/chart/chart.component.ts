@@ -21,19 +21,19 @@ export class ChartComponent implements OnInit {
   protected appConstants: AppConstantsService;
   protected csvParser: CsvParserService;
 
-  constructor(TranslateService: TranslateService,
-              AppConstantsService: AppConstantsService,
-              CsvParserService: CsvParserService) {
-    this.translate = TranslateService;
-    this.appConstants = AppConstantsService;
-    this.csvParser = CsvParserService;
+  constructor(translateService: TranslateService,
+              appConstantsService: AppConstantsService,
+              csvParserService: CsvParserService) {
+    this.translate = translateService;
+    this.appConstants = appConstantsService;
+    this.csvParser = csvParserService;
   }
 
   public ngOnInit(): void {
     this.setupChart();
 
     // parse a local csv
-    // this.csvParser.parse();
+    this.csvParser.parse();
   }
 
   protected setupChart(): void {

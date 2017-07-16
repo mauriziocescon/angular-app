@@ -35,7 +35,7 @@ export class CsvParserService {
               console.log("error:", error.message);
             },
             complete: (results) => {
-              console.log("Finished:", results.data);
+              console.log("Finished: \n\n", results.data);
             },
           });
         },

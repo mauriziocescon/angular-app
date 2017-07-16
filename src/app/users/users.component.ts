@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
+import "rxjs/Rx";
 import { TranslateService } from "ng2-translate";
 
 import { UsersService } from "./users.data-service";
