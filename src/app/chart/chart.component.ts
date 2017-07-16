@@ -33,7 +33,7 @@ export class ChartComponent implements OnInit {
     this.setupChart();
 
     // parse a local csv
-    this.csvParser.parse();
+    // this.csvParser.parse();
   }
 
   protected setupChart(): void {
