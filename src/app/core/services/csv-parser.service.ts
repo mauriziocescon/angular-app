@@ -20,30 +20,27 @@ export class CsvParserService {
   public parse(): void {
 
     this.http.get("assets/csv/test.csv", {})
-      // .switchMap((res: Response) => {
-      //   return res.text();
-      // })
+      .switchMap(res => res.text())
       .subscribe(
-        (data) => {
-
-          console.log("ciao" + data.text());
-
-          Papa.parse(data.text(), {
+        (text) => {
+          Papa.parse(text, {
             worker: true,
             header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
             error: (error: ParseError, file?: File) => {
-              console.log("error:", error.message);
+              console.log("Papa.parse error: \n\n", error.message);
             },
             complete: (results) => {
-              console.log("Finished: \n\n", results.data);
+              console.log("Papa.parse finished: \n\n", results.data);
             },
           });
         },
         (err) => {
-          console.log(err);
+          console.log("test.csv error: " + err);
         },
         () => {
-          console.log("Request Complete");
+          console.log("test.csv request complete");
         },
       );
   }
