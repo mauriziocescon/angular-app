@@ -103,7 +103,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       .valueChanges
       .startWith("")
       .debounceTime(400)
-      .switchMap(term => this.usersService.getUsers(term))
+      .switchMap(textSearch => this.usersService.getUsers(textSearch))
       .subscribe(
         (users: User[]) => {
           this.busy = false;
