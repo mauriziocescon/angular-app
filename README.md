@@ -1,7 +1,7 @@
 Demo built on angular 4.x using [Angular CLI](https://github.com/angular/angular-cli)
 =========
 
-Application currently in alpha
+Application currently in beta
 
 ## Development server
 
