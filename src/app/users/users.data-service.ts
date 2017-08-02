@@ -21,7 +21,7 @@ export class UsersService {
   }
 
   public getUsers(textFilter: string): Observable<User[]> {
-    const url = this.appConstants.Application.WS_URL + "/users";
+    const url = this.appConstants.Api.users;
     const options: RequestOptionsArgs = {
       params: {q: textFilter},
     };
