@@ -6,6 +6,8 @@ import { ChartsModule } from "ng2-charts/ng2-charts";
 import { TranslateModule } from "ng2-translate";
 
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
+import { Enum } from "./utilities/enum";
+import { KeyValue } from "./utilities/keyvalue";
 
 @NgModule({
   imports: [
@@ -30,4 +32,7 @@ import { NavigationBarComponent } from "./navigation-bar/navigation-bar.componen
 export class SharedModule {
 }
 
-export {};
+export {
+  Enum,
+  KeyValue
+};

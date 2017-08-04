@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { TranslateService } from "ng2-translate";
-
 import { AppConstantsService } from "../../core/core.module";
+import { AppLanguageService } from "../../core/services/app-language.service";
 
 @Component({
   selector: "app-navigation-bar",
@@ -16,25 +15,27 @@ export class NavigationBarComponent implements OnInit {
   public selectedLanguageId: string;
 
   protected router: Router;
-  protected translate: TranslateService;
   protected appConstants: AppConstantsService;
+  protected appLanguage: AppLanguageService;
 
   constructor(router: Router,
-              translateService: TranslateService,
-              appConstantsService: AppConstantsService) {
+              appConstantsService: AppConstantsService,
+              appLanguageService: AppLanguageService) {
     this.router = router;
-    this.translate = translateService;
+    this.appLanguage = appLanguageService;
     this.appConstants = appConstantsService;
   }
 
   public ngOnInit(): void {
-    this.selectedLanguageId = this.appConstants.Languages.DEFAULT_LANGUAGE;
-    this.languages = this.appConstants.Languages.SUPPORTED_LANG;
+    this.languages = this.appLanguage.getSupportedLanguagesList();
+    this.selectedLanguageId = this.appLanguage.getLanguageId();
   }
 
   public selectLanguage(language: string): void {
-    this.selectedLanguageId = language;
-    this.translate.use(this.selectedLanguageId);
+    if (this.appLanguage.getLanguageId() !== language) {
+      this.selectedLanguageId = language;
+      this.appLanguage.setLanguageId(this.selectedLanguageId);
+    }
   }
 
   public goToUsers(): void {

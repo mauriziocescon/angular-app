@@ -1,3 +1,5 @@
+import { Enum } from "../../shared/shared.module";
+
 export class Api {
   public albums = "http://jsonplaceholder.typicode.com/albums";
   public comments = "http://jsonplaceholder.typicode.com/comments";
@@ -15,4 +17,8 @@ export class Languages {
   public SUPPORTED_LANG = ["en", "it", "de"];
   public SUPPORTED_LANG_DESC = ["English", "Italiano", "Deutsch"];
   public DEFAULT_LANGUAGE = "en";
+}
+
+export class LocalStorageKey {
+  public LANGUAGE_ID = new Enum("LANGUAGE_ID");
 }
