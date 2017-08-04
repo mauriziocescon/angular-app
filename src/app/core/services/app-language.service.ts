@@ -45,7 +45,7 @@ export class AppLanguageService {
       this.selectedLanguageId = languageId;
       this.localStorage.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
       this.translate.use(languageId);
-      // location.reload(true);
+      location.reload(true);
     }
   }
 

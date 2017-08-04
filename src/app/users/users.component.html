@@ -18,6 +18,9 @@
     <div class="col-12 user" *ngFor="let user of dataSource; trackBy: trackByUser">
       {{ user.id + ' ' + user.name }}
       <app-users-posts [post]="post"></app-users-posts>
+      <div>{{ date | date }}</div>
+      <div>{{ 1245.12 | currency }}</div>
+      <div>{{ 1245.12 | number }}</div>
     </div>
   </div>
 

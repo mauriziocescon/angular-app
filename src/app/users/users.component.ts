@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected busy: boolean;
 
   public post: any[];
+  public date: Date;
 
   constructor(formBuilder: FormBuilder,
               translateService: TranslateService,
@@ -66,6 +67,8 @@ export class UsersComponent implements OnInit, OnDestroy {
           text: "one"
         }
       }];
+
+    this.date = new Date();
 
     this.busy = false;
 
