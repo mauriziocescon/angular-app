@@ -8,7 +8,7 @@ import { LocalStorageService } from "./local-storage.service";
 @Injectable()
 export class AppLanguageService {
   protected translate: TranslateService;
-  protected appConstantsService: AppConstantsService;
+  protected appConstants: AppConstantsService;
   protected localStorage: LocalStorageService;
   protected selectedLanguageId: string;
 
@@ -16,25 +16,25 @@ export class AppLanguageService {
               appConstantsService: AppConstantsService,
               localStorageService: LocalStorageService) {
     this.translate = translate;
-    this.appConstantsService = appConstantsService;
+    this.appConstants = appConstantsService;
     this.localStorage = localStorageService;
 
     this.start();
 
-    this.translate.setDefaultLang(this.appConstantsService.Languages.DEFAULT_LANGUAGE);
+    this.translate.setDefaultLang(this.appConstants.Languages.DEFAULT_LANGUAGE);
     this.translate.use(this.getLanguageId());
   }
 
   public start(): void {
-    const localStorageLang = this.localStorage.getData<string>(this.appConstantsService.LocalStorageKey.LANGUAGE_ID);
+    const localStorageLang = this.localStorage.getData<string>(this.appConstants.LocalStorageKey.LANGUAGE_ID);
     const browserLang = this.getBrowserLang();
     const defaultLang = this.getDefaultLanguageId();
 
-    if (localStorageLang && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
+    if (localStorageLang && this.appConstants.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
       this.selectedLanguageId = localStorageLang;
     } else {
-      this.selectedLanguageId = this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
-      this.localStorage.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+      this.selectedLanguageId = this.appConstants.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
+      this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
     }
   }
 
@@ -43,20 +43,20 @@ export class AppLanguageService {
   }
 
   public setLanguageId(languageId: string): void {
-    if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstantsService.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
+    if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstants.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
       this.selectedLanguageId = languageId;
-      this.localStorage.setData(this.appConstantsService.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+      this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
       this.translate.use(languageId);
       location.reload(true);
     }
   }
 
   public getSupportedLanguagesList(): string[] {
-    return this.appConstantsService.Languages.SUPPORTED_LANG;
+    return this.appConstants.Languages.SUPPORTED_LANG;
   }
 
   public getDefaultLanguageId(): string {
-    return this.appConstantsService.Languages.SUPPORTED_LANG[0];
+    return this.appConstants.Languages.SUPPORTED_LANG[0];
   }
 
   protected getBrowserLang(): string {
