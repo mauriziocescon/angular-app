@@ -20,6 +20,8 @@ export class AppLanguageService {
     this.localStorage = localStorageService;
 
     this.start();
+
+    this.translate.setDefaultLang(this.appConstantsService.Languages.DEFAULT_LANGUAGE);
     this.translate.use(this.getLanguageId());
   }
 
