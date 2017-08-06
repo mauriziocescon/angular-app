@@ -29,7 +29,7 @@
     "@angular/router": "4.3.3",
     "bootstrap": "next",
     "chart.js": "2.6.0",
-    "core-js": "2.4.1",
+    "core-js": "2.5.0",
     "font-awesome": "4.7.0",
     "jquery": "3.2.1",
     "ng2-charts": "1.6.0",
@@ -40,7 +40,7 @@
     "zone.js": "0.8.16"
   },
   "devDependencies": {
-    "@angular/cli": "latest",
+    "@angular/cli": "1.2.7",
     "@angular/compiler-cli": "4.3.3",
     "@angular/language-service": "4.3.3",
     "@types/bootstrap": "3.3.35",
