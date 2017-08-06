@@ -8,7 +8,7 @@ import { Http } from "@angular/http";
 import { ChartsModule } from "ng2-charts/ng2-charts";
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
 
-import { AppConstantsService } from "../../core/core.module";
+import { AppConstantsService, AppLanguageService } from "../../core/core.module";
 
 import { NavigationBarComponent } from "./navigation-bar.component";
 
@@ -39,6 +39,7 @@ describe("NavigationBarComponent", () => {
       ],
       providers: [
         AppConstantsService, // todo: Provide a test-double service {provide: AppConstantsService, useValue: {}}
+        AppLanguageService, // todo: Provide a test-double service {provide: AppLanguageService, useValue: {}}
       ],
     })
       .compileComponents();
