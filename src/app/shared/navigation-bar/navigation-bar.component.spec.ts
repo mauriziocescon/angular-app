@@ -6,9 +6,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Http } from "@angular/http";
 
 import { ChartsModule } from "ng2-charts/ng2-charts";
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
+import { TranslateModule, TranslateStaticLoader, TranslateLoader, TranslateService } from "ng2-translate";
+import "rxjs/Rx";
 
-import { AppConstantsService, AppLanguageService } from "../../core/core.module";
+import { CoreModule, AppLanguageService } from "../../core/core.module";
 
 import { NavigationBarComponent } from "./navigation-bar.component";
 
@@ -23,6 +24,7 @@ describe("NavigationBarComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        CoreModule.forRoot(),
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -38,7 +40,7 @@ describe("NavigationBarComponent", () => {
         NavigationBarComponent
       ],
       providers: [
-        {provide: AppConstantsService, useValue: {}}, // todo: Provide a test-double service
+        TranslateService,
         {provide: AppLanguageService, useValue: {}}, // todo: Provide a test-double service
       ],
     })

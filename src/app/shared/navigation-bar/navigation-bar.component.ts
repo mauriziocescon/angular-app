@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { AppConstantsService, AppLanguageService } from "../../core/core.module";
+import { AppLanguageService } from "../../core/core.module";
 
 @Component({
   selector: "app-navigation-bar",
@@ -14,15 +14,12 @@ export class NavigationBarComponent implements OnInit {
   public selectedLanguageId: string;
 
   protected router: Router;
-  protected appConstants: AppConstantsService;
   protected appLanguage: AppLanguageService;
 
   constructor(router: Router,
-              appConstantsService: AppConstantsService,
               appLanguageService: AppLanguageService) {
     this.router = router;
     this.appLanguage = appLanguageService;
-    this.appConstants = appConstantsService;
   }
 
   public ngOnInit(): void {
