@@ -6,13 +6,14 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./post-comments.component.scss"]
 })
 export class PostCommentsComponent implements OnInit {
-
   @Input() post: any[];
+
+  public date: Date;
 
   constructor() {
   }
 
   ngOnInit() {
-    // console.log("You must be undefined: PostCommentsComponent." + JSON.stringify(this.post));
+    this.date = new Date();
   }
 }

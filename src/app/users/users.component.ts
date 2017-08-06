@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected busy: boolean;
 
   public post: any[];
-  public date: Date;
 
   constructor(formBuilder: FormBuilder,
               translateService: TranslateService,
@@ -59,16 +58,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.post = [
-      {
-        id: "1",
-        comment: {
-          id: 1,
-          text: "one"
-        }
-      }];
-
-    this.date = new Date();
+    this.post = [{id: "1"}];
 
     this.busy = false;
 

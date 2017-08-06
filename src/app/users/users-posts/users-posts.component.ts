@@ -13,6 +13,6 @@ export class UsersPostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log("You must be undefined: UsersPostsComponent." + JSON.stringify(this.post));
+    // do nothing
   }
 }

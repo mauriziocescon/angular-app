@@ -48,6 +48,8 @@ export class CoreModule {
 
 export {
   AppConstantsService,
+  AppLanguageService,
   CsvParserService,
+  LocalStorageService,
   UtilitiesService
 };
