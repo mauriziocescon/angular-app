@@ -38,8 +38,8 @@ describe("NavigationBarComponent", () => {
         NavigationBarComponent
       ],
       providers: [
-        AppConstantsService, // todo: Provide a test-double service {provide: AppConstantsService, useValue: {}}
-        AppLanguageService, // todo: Provide a test-double service {provide: AppLanguageService, useValue: {}}
+        {provide: AppConstantsService, useValue: {}}, // todo: Provide a test-double service
+        {provide: AppLanguageService, useValue: {}}, // todo: Provide a test-double service
       ],
     })
       .compileComponents();
