@@ -33,6 +33,7 @@ export class SharedModule {
 }
 
 export {
+  NavigationBarComponent,
   Enum,
   KeyValue
 };

@@ -1,4 +1,4 @@
-import { Enum } from "../../shared/shared.module";
+import { Enum } from "../../shared/utilities/enum";
 
 export class Api {
   public albums = "http://jsonplaceholder.typicode.com/albums";
