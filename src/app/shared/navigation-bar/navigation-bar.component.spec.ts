@@ -24,7 +24,6 @@ describe("NavigationBarComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        CoreModule.forRoot(),
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -35,6 +34,7 @@ describe("NavigationBarComponent", () => {
           useFactory: (createTranslateLoader),
           deps: [Http],
         }),
+        CoreModule.forRoot(),
       ],
       declarations: [
         NavigationBarComponent
