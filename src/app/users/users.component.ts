@@ -23,7 +23,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected users: User[];
   protected busy: boolean;
 
-  public post: any[];
+  // todo: remove it when you're done
+  public date: any;
 
   constructor(formBuilder: FormBuilder,
               translateService: TranslateService,
@@ -58,8 +59,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.post = [{id: "1"}];
-
     this.busy = false;
 
     this.searchForm = this.formBuilder.group({
@@ -101,7 +100,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         (users: User[]) => {
           this.busy = false;
           this.users = users;
-          this.post[0].text = new Date().getTime().toString();
+          this.date = new Date();
         },
         (err) => {
           this.busy = false;

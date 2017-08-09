@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class UsersPostsComponent implements OnInit {
 
-  @Input() post: any[];
+  @Input() date: any[];
 
   constructor() {
   }
