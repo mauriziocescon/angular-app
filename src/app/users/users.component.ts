@@ -101,7 +101,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         (users: User[]) => {
           this.busy = false;
           this.users = users;
-          this.post[0].comment.text = new Date().getTime().toString();
+          this.post[0].text = new Date().getTime().toString();
         },
         (err) => {
           this.busy = false;
