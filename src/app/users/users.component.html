@@ -4,7 +4,7 @@
     <div class="col-12">
       <form [formGroup]="searchForm">
         <div class="input-group">
-          <input class="form-control" formControlName="textFilter" placeholder="{{ 'INPUT_TEXT_PLACEHOLDER' | translate }}">
+          <input class="form-control" formControlName="textFilter" placeholder="{{ 'APP.INPUT_TEXT_PLACEHOLDER' | translate }}">
           <span class="input-group-addon addon" (click)="resetTextFilter()">
             <span class="fa fa-search" [hidden]="isTextFilterNotEmpty"></span>
             <span class="fa fa-remove" [hidden]="!isTextFilterNotEmpty"></span>
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="full-width-message" [hidden]="!isLoadingData">{{ "LOADING" | translate }}</div>
-  <div class="full-width-message" [hidden]="!hasNoData">{{ "NO_RESULT" | translate }}</div>
-  <div class="full-width-message" [hidden]="!shouldRetry" (click)="loadDataSource()">{{ "RETRY" | translate }}</div>
+  <div class="full-width-message" [hidden]="!isLoadingData">{{ "APP.LOADING" | translate }}</div>
+  <div class="full-width-message" [hidden]="!hasNoData">{{ "APP.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" [hidden]="!shouldRetry" (click)="loadDataSource()">{{ "APP.RETRY" | translate }}</div>
 </div>
