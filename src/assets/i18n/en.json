@@ -1,26 +1,14 @@
 {
-  "APP": {
-    "BACKWARD": "Back",
-    "CANCEL": "Cancel",
-    "CLOSE": "Close",
-    "DESCRIPTION": "Description",
-    "ERROR_ACCESS_DATA": "Error access data",
-    "FORWARD": "Forward",
-    "INPUT_TEXT_PLACEHOLDER": "Type some text",
-    "LOAD_COMPLETED": "Loading completed",
-    "LOADING": "Loading...",
-    "NAME": "Name",
-    "NO": "No",
-    "NO_RESULT": "Empty",
-    "OK": "Ok",
-    "RESET": "Reset",
-    "RETRY": "Retry",
-    "WARNING": "Warning",
-    "YES": "Yes"
-  },
   "NAVIGATION_BAR": {
     "CHARTS": "Charts",
+    "NAME": "Name",
     "SELECT_LANGUAGE": "Select the language",
     "USERS": "Users"
+  },
+  "USERS": {
+    "INPUT_TEXT_PLACEHOLDER": "Type some text",
+    "LOADING": "Loading...",
+    "NO_RESULT": "Empty",
+    "RETRY": "Retry"
   }
 }
