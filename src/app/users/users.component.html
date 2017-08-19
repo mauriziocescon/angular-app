@@ -17,7 +17,7 @@
   <div class="row" [hidden]="!showData">
     <div class="col-12 col-sm-6 user" *ngFor="let user of dataSource; trackBy: trackByUser">
       <div class="card">
-        <div class="card-block">
+        <div class="card-body">
           <h4 class="card-title">{{ user.name }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
           <p class="card-text">{{ user.website }} <app-users-posts [date]="date"></app-users-posts></p>
