@@ -41,7 +41,7 @@ describe("NavigationBarComponent", () => {
       ],
       providers: [
         TranslateService,
-        {provide: AppLanguageService, useValue: {}}, // todo: Provide a test-double service
+        AppLanguageService, // todo: Provide a test-double service {provide: AppLanguageService, useValue: {}}
       ],
     })
       .compileComponents();
