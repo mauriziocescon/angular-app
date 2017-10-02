@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected translate: TranslateService;
   protected usersService: UsersService;
   protected usersRequest: any;
-  protected users: User[];
+  protected users: User[] | undefined;
   protected busy: boolean;
 
   // todo: remove it when you're done
@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
   }
 
-  public get dataSource(): User[] {
+  public get dataSource(): User[] | undefined {
     return this.users;
   }
 

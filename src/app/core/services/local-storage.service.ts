@@ -21,12 +21,12 @@ export class LocalStorageService {
     this.prefix = this.appConstants.Application.APP_NAME;
   }
 
-  public getData<T>(key: Enum): T {
+  public getData<T>(key: Enum): T | undefined {
     try {
       const result = localStorage.getItem(this.prefix + "_" + key.toString());
-      return result !== undefined ? JSON.parse(result) : undefined;
+      return result !== null ? JSON.parse(result) : undefined;
     } catch (e) {
-      // Logger.warn(e);
+      console.warn(e);
       return undefined;
     }
   }
@@ -40,7 +40,7 @@ export class LocalStorageService {
         localStorage.setItem(this.prefix + "_" + key.toString(), result);
       }
     } catch (e) {
-      // Logger.warn(e);
+      console.warn(e);
     }
   }
 
@@ -48,7 +48,7 @@ export class LocalStorageService {
     try {
       localStorage.removeItem(this.prefix + "_" + key.toString());
     } catch (e) {
-      // Logger.warn(e);
+      console.warn(e);
     }
   }
 
@@ -60,7 +60,7 @@ export class LocalStorageService {
         }
       }
     } catch (e) {
-      // Logger.warn(e);
+      console.warn(e);
     }
   }
 }

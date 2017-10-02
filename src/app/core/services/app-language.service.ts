@@ -43,7 +43,10 @@ export class AppLanguageService {
   }
 
   public setLanguageId(languageId: string): void {
-    if (languageId !== undefined && languageId !== this.selectedLanguageId && this.appConstants.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
+    if (languageId !== undefined &&
+      languageId !== this.selectedLanguageId &&
+      this.appConstants.Languages.SUPPORTED_LANG.indexOf(languageId) !== -1) {
+
       this.selectedLanguageId = languageId;
       this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
       this.translate.use(languageId);
@@ -60,12 +63,7 @@ export class AppLanguageService {
   }
 
   protected getBrowserLang(): string {
-    const browserLanguage = "browserLanguage";
-    let lang: string = navigator[browserLanguage];
-
-    if (lang === undefined) {
-      lang = navigator.language;
-    }
+    let lang: string = navigator.language;
 
     if (lang.length > 0) {
       lang = lang.toLowerCase();
