@@ -1,12 +1,7 @@
 import { Enum } from "../../shared/utilities/enum";
 
 export class Api {
-  public albums = "https://jsonplaceholder.typicode.com/albums";
-  public comments = "https://jsonplaceholder.typicode.com/comments";
-  public photos = "https://jsonplaceholder.typicode.com/photos";
-  public posts = "https://jsonplaceholder.typicode.com/posts";
-  public todos = "https://jsonplaceholder.typicode.com/todos";
-  public users = "https://jsonplaceholder.typicode.com/users";
+  public users = "http://localhost:5000/users";
 }
 
 export class Application {

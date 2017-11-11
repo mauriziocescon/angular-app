@@ -11,7 +11,7 @@ if (fs.existsSync("./mock-server/db.json")) {
 const data = {users: []};
 
 // users
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < faker.random.number(100); i++) {
   data.users.push({
     id: i,
     name: faker.name.findName(),

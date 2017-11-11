@@ -10,9 +10,9 @@
     "npm": ">=5.5.1"
   },
   "scripts": {
+    "postinstall": "node mock-server/db-creator.js",
     "ng": "ng",
-    "prestart": "node mock-server/db-creator.js | json-server --watch mock-server/db.json",
-    "start": "ng serve --open",
+    "start": "ng serve --open | json-server --watch mock-server/db.json --port 5000",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -47,6 +47,7 @@
     "@angular/compiler-cli": "4.4.6",
     "@angular/language-service": "4.4.6",
     "@types/bootstrap": "3.3.36",
+    "@types/faker": "4.1.1",
     "@types/jasmine": "2.6.2",
     "@types/jasminewd2": "2.0.3",
     "@types/jquery": "3.2.15",
