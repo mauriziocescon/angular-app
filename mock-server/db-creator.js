@@ -38,7 +38,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 // save file
-fs.writeFile("mock-server/db.json", JSON.stringify(data), (err) => {
+fs.writeFile("mock-server/db.json", JSON.stringify(data, null, 2), (err) => {
   if (err) {
     throw err;
   }

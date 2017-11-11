@@ -11,13 +11,12 @@
   },
   "scripts": {
     "ng": "ng",
+    "prestart": "node mock-server/db-creator.js | json-server --watch mock-server/db.json"
     "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-
-    "server": "node mock-server/db-creator.js && json-server --watch mock-server/db.json"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "4.4.6",
@@ -44,9 +43,6 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "faker": "4.1.0",
-    "json-server": "0.12.1",
-
     "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "4.4.6",
     "@angular/language-service": "4.4.6",
@@ -58,8 +54,10 @@
     "@types/papaparse": "4.1.31",
     "@types/popper.js": "1.11.0",
     "codelyzer": "3.2.2",
+    "faker": "4.1.0",
     "jasmine-core": "2.8.0",
     "jasmine-spec-reporter": "4.2.1",
+    "json-server": "0.12.1",
     "karma": "1.7.1",
     "karma-chrome-launcher": "2.2.0",
     "karma-cli": "1.0.1",
