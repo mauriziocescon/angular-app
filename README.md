@@ -19,3 +19,7 @@ Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.gi
 
 Run `nmp run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `npm run start`.
+
+## Backend implementation 
+
+Definition of mock responses using [json-server](https://github.com/typicode/json-server) and [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000`)
