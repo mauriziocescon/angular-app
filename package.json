@@ -18,6 +18,27 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mauriziocescon/angular-4-x-app"
+  },
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "webpack",
+    "cescon",
+    "es2017",
+    "maurizio",
+    "sass",
+    "typescript",
+    "jason-server"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/brentertz/scapegoat/blob/master/LICENSE-MIT"
+    }
+  ],
   "dependencies": {
     "@angular/animations": "4.4.6",
     "@angular/common": "4.4.6",
