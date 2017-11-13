@@ -2,7 +2,7 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("./mock-server/db.json");
 const middlewares = jsonServer.defaults({
-  // static: "dist",
+  static: "dist",
 });
 
 // Add middlewares
