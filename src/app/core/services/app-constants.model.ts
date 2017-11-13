@@ -1,7 +1,7 @@
 import { Enum } from "../../shared/utilities/enum";
 
 export class Api {
-  public users = "http://localhost:5000/users";
+  public users = "http://localhost:5000/api/users";
 }
 
 export class Application {

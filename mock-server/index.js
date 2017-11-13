@@ -15,17 +15,16 @@ server.use("/api", router);
 // Simulate a server side error response
 server.use(jsonServer.bodyParser);
 router.render = (req, res, next) => {
-
   const randomOutcome = Math.random();
-  if (req.method === 'POST') {
-    req.body.createdAt = Date.now()
-  }
-  // Continue to JSON Server router
-  next()
 
-  res.status(500).jsonp({
-    error: "error message here",
-  });
+  if (randomOutcome < 0.15) {
+    res.status(500).jsonp({
+      error: "Error message here",
+    });
+  }
+
+  // Continue to JSON Server router
+  next();
 };
 
 // Start listening
