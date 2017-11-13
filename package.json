@@ -11,6 +11,7 @@
   },
   "scripts": {
     "postinstall": "node mock-server/db-creator.js",
+    "js": "node mock-server/index.js",
     "ng": "ng",
     "start": "ng serve --open | json-server --watch mock-server/db.json --port 5000",
     "build": "ng build",
