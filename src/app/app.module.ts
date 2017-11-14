@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { Http, HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
 
@@ -14,6 +15,8 @@ import { SharedModule } from "./shared/shared.module";
 import { ChartModule } from "./chart/chart.module";
 import { UsersModule } from "./users/users.module";
 
+import { environment } from "../environments/environment";
+
 export function createTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n/", ".json");
 }
@@ -21,6 +24,7 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   imports: [
     BrowserModule,
+    environment.production ? ServiceWorkerModule.register("/ngsw-worker.js") : [],
     HttpModule,
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({

@@ -8,7 +8,7 @@ describe("angular App", () => {
     page = new AppPage();
   });
 
-  it("should display message saying app works", () => {
+  it("should display title saying Demo", () => {
     page.navigateTo();
     browser.getTitle().then((title: string) => {
       expect(title).toEqual("Demo");
