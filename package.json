@@ -26,13 +26,13 @@
   "keywords": [
     "angular",
     "bootstrap",
-    "webpack",
     "cescon",
     "es2017",
+    "json-server",
     "maurizio",
     "sass",
     "typescript",
-    "json-server"
+    "webpack"
   ],
   "licenses": [
     {
