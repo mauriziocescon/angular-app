@@ -76,7 +76,7 @@
     "@types/jquery": "3.2.16",
     "@types/node": "8.0.51",
     "@types/papaparse": "4.1.31",
-    "@types/popper.js": "1.11.0",
+    "@types/popper.js": "1.10.0",
     "codelyzer": "4.0.1",
     "faker": "4.1.0",
     "jasmine-core": "2.8.0",
