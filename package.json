@@ -11,9 +11,12 @@
   },
   "scripts": {
     "postinstall": "node ./mock-server/db-creator.js",
+    "prestart": "npm run build",
+    "start": "npm run json-server",
     "json-server": "nodemon ./mock-server/server.js",
+
     "ng": "ng",
-    "start": "ng serve --open | npm run json-server",
+    "serve": "ng serve --open | npm run json-server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
