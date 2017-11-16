@@ -17,7 +17,7 @@
 
     "ng": "ng",
     "serve": "ng serve --open | npm run json-server",
-    "build": "ng build",
+    "build": "ng build --environment=prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

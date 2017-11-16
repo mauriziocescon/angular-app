@@ -12,7 +12,7 @@ app.use(middlewares);
 // Simulate server side delay
 app.use((req, res, next) => {
   const randomOutcome = Math.random();
-  if (randomOutcome < 0.5) {
+  if (randomOutcome < 0.01) {
     setTimeout(next, Math.floor(( Math.random() * 10000 ) + 100));
   } else {
     next();
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 // Simulate server side errors
 app.use((req, res, next) => {
   const randomOutcome = Math.random();
-  if (randomOutcome < 0.1 && req.path.startsWith("/api/")) {
+  if (randomOutcome < 0.01 && req.path.startsWith("/api/")) {
     res.status(500).jsonp({
       error: "Error message here",
     });
