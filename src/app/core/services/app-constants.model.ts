@@ -1,7 +1,8 @@
+import { environment } from "../../../environments/environment";
 import { Enum } from "../../shared/utilities/enum";
 
 export class Api {
-  public users = "http://localhost:5000/api/users";
+  public users = environment.apiUrl + "users";
 }
 
 export class Application {
