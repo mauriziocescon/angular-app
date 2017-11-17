@@ -14,7 +14,6 @@
     "prestart": "npm run build",
     "start": "npm run json-server",
     "json-server": "nodemon ./mock-server/server.js",
-
     "ng": "ng",
     "serve": "ng serve --open | npm run json-server",
     "build": "ng build --environment=prod",
