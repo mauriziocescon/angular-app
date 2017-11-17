@@ -5,7 +5,9 @@ Application currently in beta
 
 ## Backend implementation 
 
-Definition of mock responses using [json-server](https://github.com/typicode/json-server) and [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
+1. Based on [json-server](https://github.com/typicode/json-server) with mocks from [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
+
+2. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
 
 ## Development server
 
