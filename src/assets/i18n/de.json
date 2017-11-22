@@ -7,6 +7,7 @@
   },
   "USERS": {
     "INPUT_TEXT_PLACEHOLDER": "Text eingeben",
+    "LOAD_COMPLETED": "Ladevorgang abgeschlossen",
     "LOADING": "Daten werden geladen",
     "NO_RESULT": "Leer",
     "RETRY": "Erneut versuchen"

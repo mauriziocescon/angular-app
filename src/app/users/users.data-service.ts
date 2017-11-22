@@ -27,6 +27,7 @@ export class UsersService {
     };
 
     return this.http.get(url, options)
-      .map(response => response.json());
+      .map(response => response.json())
+      .catch(err => Observable.throw(err.json().error || "Server error"));
   }
 }

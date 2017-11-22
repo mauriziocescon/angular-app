@@ -88,24 +88,25 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public loadDataSource(): void {
-    this.busy = true;
-    this.users = undefined;
-
     this.usersRequest = this.searchControl
       .valueChanges
       .startWith("")
       .debounceTime(400)
+      .do(() => this.busy = true)
       .switchMap(textSearch => this.usersService.getUsers(textSearch))
+      .do(() => this.busy = false)
       .subscribe(
         (users: User[]) => {
-          this.busy = false;
           this.users = users;
           this.date = new Date();
         },
-        (err) => {
+        (err: string) => {
           this.busy = false;
-          alert("error");
+          this.users = undefined;
+          alert(err);
         },
-        () => console.log("getUsers Complete"));
+        () => {
+          console.log("getUsers Completed");
+        });
   }
 }
