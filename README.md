@@ -9,6 +9,8 @@ Application currently in beta
 
 2. Run ``npm start`` in order to launch the server (``http://localhost:5000``) with the distribution version of the app 
 
+3. The server randomly simulates delays and errors for testing purposes 
+
 ## Development server
 
 Run `npm run start` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
