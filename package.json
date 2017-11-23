@@ -32,7 +32,9 @@
     "es2017",
     "json-server",
     "maurizio",
+    "mock-server",
     "sass",
+    "travis",
     "typescript",
     "webpack"
   ],
