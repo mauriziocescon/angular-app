@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { RouterTestingModule } from "@angular/router/testing";
 
-import { HttpClient } from "@angular/common/http";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
@@ -11,6 +13,7 @@ import { CoreModule, AppLanguageService } from "../../core/core.module";
 import { SharedModule } from "../../shared/shared.module";
 
 import { NavigationBarComponent } from "./navigation-bar.component";
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "assets/i18n/", ".json");
@@ -24,7 +27,11 @@ describe("NavigationBarComponent", () => {
     TestBed.configureTestingModule({
       imports: [
         CoreModule.forRoot(),
-        SharedModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+        HttpClientModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
