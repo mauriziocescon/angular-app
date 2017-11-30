@@ -1,10 +1,9 @@
 <div class="container-fluid chart-component">
-  <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [colors]="colors"
-          [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-  </canvas>
+  <ngx-charts-bar-horizontal-2d
+    [view]="barChartData.view"
+    [results]="barChartData.single"
+    [xAxis]="barChartData.showXAxis"
+    [yAxis]="barChartData.showYAxis"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal-2d>
 </div>

@@ -2,8 +2,9 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { ChartsModule } from "ng2-charts/ng2-charts";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { TranslateModule } from "@ngx-translate/core";
 
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
@@ -16,7 +17,8 @@ import { KeyValue } from "./utilities/keyvalue";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ChartsModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
     TranslateModule,
   ],
   declarations: [
@@ -26,7 +28,8 @@ import { KeyValue } from "./utilities/keyvalue";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
     TranslateModule,
     NavigationBarComponent,
   ],
