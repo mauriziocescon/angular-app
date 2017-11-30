@@ -47,7 +47,9 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule {
 }
