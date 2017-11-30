@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 
 import { ChartComponent } from "./chart/chart.module";
 import { UsersComponent } from "./users/users.module";
