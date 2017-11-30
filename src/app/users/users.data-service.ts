@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, RequestOptionsArgs } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
 
@@ -8,11 +8,11 @@ import { User } from "./users.model";
 
 @Injectable()
 export class UsersService {
-  protected http: Http;
+  protected http: HttpClient;
   protected appConstants: AppConstantsService;
   protected utilities: UtilitiesService;
 
-  constructor(http: Http,
+  constructor(http: HttpClient,
               appConstantsService: AppConstantsService,
               utilitiesService: UtilitiesService) {
     this.http = http;
@@ -22,12 +22,12 @@ export class UsersService {
 
   public getUsers(textFilter: string): Observable<User[]> {
     const url = this.appConstants.Api.users;
-    const options: RequestOptionsArgs = {
+    const options = {
       params: {q: textFilter},
     };
 
-    return this.http.get(url, options)
-      .map(response => response.json())
+    return this.http.get<User[]>(url, options)
+      .map(data => data)
       .catch(err => Observable.throw(err.json().error || "Server error"));
   }
 }

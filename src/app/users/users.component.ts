@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 import "rxjs/Rx";
-import { TranslateService } from "ng2-translate";
+import { TranslateService } from "@ngx-translate/core";
 
 import { UsersService } from "./users.data-service";
 import { User } from "./users.model";

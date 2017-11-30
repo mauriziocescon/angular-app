@@ -1,17 +1,18 @@
 import { TestBed, async } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
 
 import { AppComponent } from "./app.component";
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
 }
 
 describe("AppComponent", () => {
@@ -22,9 +23,11 @@ describe("AppComponent", () => {
         RouterTestingModule,
         SharedModule,
         TranslateModule.forRoot({
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [Http],
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient],
+          },
         })
       ],
       declarations: [

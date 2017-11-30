@@ -1,10 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { Http, HttpModule } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 
-import { TranslateModule, TranslateStaticLoader, TranslateLoader } from "ng2-translate";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { appRoutes } from "./app.routes";
 
@@ -17,20 +18,21 @@ import { UsersModule } from "./users/users.module";
 
 import { environment } from "../environments/environment";
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
 }
 
 @NgModule({
   imports: [
     BrowserModule,
     environment.production ? ServiceWorkerModule.register("/ngsw-worker.js") : [],
-    HttpModule,
     RouterModule.forRoot(appRoutes),
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http],
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     CoreModule.forRoot(),
     SharedModule,

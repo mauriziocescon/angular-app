@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { FormBuilder } from "@angular/forms";
 
-import { TranslateModule, TranslateStaticLoader, TranslateLoader, TranslateService } from "ng2-translate";
+import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import "rxjs/Rx";
 
 import { CoreModule } from "../core/core.module";
@@ -14,8 +15,8 @@ import { UsersService } from "./users.data-service";
 import { UsersPostsComponent } from "./users-posts/users-posts.component";
 import { PostCommentsComponent } from "./users-posts/post-comments/post-comments.component";
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, "assets/i18n/", ".json");
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
 }
 
 describe("UsersComponent", () => {
@@ -28,9 +29,11 @@ describe("UsersComponent", () => {
         CoreModule.forRoot(),
         SharedModule,
         TranslateModule.forRoot({
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [Http],
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient],
+          },
         }),
       ],
       declarations: [
