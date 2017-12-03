@@ -17,7 +17,6 @@ import { ChartModule } from "./chart/chart.module";
 import { UsersModule } from "./users/users.module";
 
 import { environment } from "../environments/environment";
-import { CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from "@angular/common";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "assets/i18n/", ".json");
