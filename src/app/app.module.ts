@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
@@ -46,7 +47,12 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    CurrencyPipe,
+    DatePipe,
+    DecimalPipe,
+    PercentPipe,
+  ],
   bootstrap: [
     AppComponent,
   ],
