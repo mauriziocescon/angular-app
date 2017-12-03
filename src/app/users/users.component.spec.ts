@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { FormBuilder } from "@angular/forms";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { CoreModule } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
@@ -12,6 +14,10 @@ import { UsersService } from "./users.data-service";
 import { UsersPostsComponent } from "./users-posts/users-posts.component";
 import { PostCommentsComponent } from "./users-posts/post-comments/post-comments.component";
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
+}
+
 describe("UsersComponent", () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
@@ -19,6 +25,14 @@ describe("UsersComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient],
+          },
+        }),
         CoreModule.forRoot(),
         SharedModule,
       ],

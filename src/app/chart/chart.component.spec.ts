@@ -1,11 +1,18 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TranslateService } from "@ngx-translate/core";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+
+import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { CoreModule, AppConstantsService, CsvParserService } from "../core/core.module";
 import { SharedModule } from "../shared/shared.module";
 
 import { ChartComponent } from "./chart.component";
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
+}
 
 describe("ChartComponent", () => {
   let component: ChartComponent;
@@ -14,6 +21,14 @@ describe("ChartComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient],
+          },
+        }),
         CoreModule.forRoot(),
         SharedModule,
       ],
