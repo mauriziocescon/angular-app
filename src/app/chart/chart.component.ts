@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DecimalPipe } from "@angular/common";
 
 import { TranslateService } from "@ngx-translate/core";
 
@@ -12,13 +13,16 @@ import { AppConstantsService, CsvParserService } from "../core/core.module";
 export class ChartComponent implements OnInit {
   public barChartData: any;
 
+  protected decimalPipe: DecimalPipe;
   protected translate: TranslateService;
   protected appConstants: AppConstantsService;
   protected csvParser: CsvParserService;
 
-  constructor(translateService: TranslateService,
+  constructor(decimalPipe: DecimalPipe,
+              translateService: TranslateService,
               appConstantsService: AppConstantsService,
               csvParserService: CsvParserService) {
+    this.decimalPipe = decimalPipe;
     this.translate = translateService;
     this.appConstants = appConstantsService;
     this.csvParser = csvParserService;
@@ -36,15 +40,23 @@ export class ChartComponent implements OnInit {
   }
 
   protected setupChart(): void {
+
+
     this.barChartData = {
-      single: [
-        {name: "Germany", value: 8940000},
-        {name: "USA", value: 5000000},
-        {name: "France", value: 7200000},
+      data: [
+        {name: "Germany", value: 4500.787},
+        {name: "USA", value: 5000.782},
+        {name: "France", value: 7200.021},
       ],
-      view: [700, 400],
+      xAxisTickFormatting: (value: number) => {
+        return this.decimalPipe.transform(value, "1.0-2");
+      },
+      colorScheme: {
+        domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
+      },
       showXAxis: true,
       showYAxis: true,
+      showLegend: true,
     };
   }
 }

@@ -1,9 +1,27 @@
 <div class="container-fluid chart-component">
-  <ngx-charts-bar-horizontal-2d
-    [view]="barChartData.view"
-    [results]="barChartData.single"
-    [xAxis]="barChartData.showXAxis"
-    [yAxis]="barChartData.showYAxis"
-    (select)="onSelect($event)">
-  </ngx-charts-bar-horizontal-2d>
+  <div class="row">
+    <div class="col-12">
+      <div class="chart">
+        <ngx-charts-bar-horizontal
+          [scheme]="barChartData.colorScheme"
+          [results]="barChartData.data"
+          [xAxis]="barChartData.showXAxis"
+          [yAxis]="barChartData.showYAxis"
+          [legend]="barChartData.showLegend"
+          [showXAxisLabel]="barChartData.showXAxisLabel"
+          [showYAxisLabel]="barChartData.showYAxisLabel"
+          [xAxisLabel]="barChartData.xAxisLabel"
+          [yAxisLabel]="barChartData.yAxisLabel"
+          [xAxisTickFormatting]="barChartData.xAxisTickFormatting"
+          (select)="onSelect($event)">
+          <ng-template #tooltipTemplate let-model="model">
+            <h6>{{ model.name }}</h6>
+            <h5>{{ model.value | number }}</h5>
+          </ng-template>
+        </ngx-charts-bar-horizontal>
+      </div>
+    </div>
+  </div>
 </div>
+
+
