@@ -17,7 +17,6 @@ import { NavigationBarComponent } from "./navigation-bar/navigation-bar.componen
 
 import { Enum } from "./utilities/enum";
 import { KeyValue } from "./utilities/keyvalue";
-import { UIUtilitiesService } from "./modals/ui-utilities.service";
 
 @NgModule({
   imports: [
@@ -31,6 +30,8 @@ import { UIUtilitiesService } from "./modals/ui-utilities.service";
   ],
   declarations: [
     AddContainerDirective,
+    ModalAlertComponent,
+    ModalConfirmerComponent,
     NavigationBarComponent,
   ],
   providers: [
