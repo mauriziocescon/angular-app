@@ -8,13 +8,9 @@ import ParseError = PapaParse.ParseError;
 
 @Injectable()
 export class CsvParserService {
-  protected http: HttpClient;
-  protected appConstants: AppConstantsService;
 
-  constructor(http: HttpClient,
-              appConstantsService: AppConstantsService) {
-    this.http = http;
-    this.appConstants = appConstantsService;
+  constructor(protected http: HttpClient,
+              protected appConstants: AppConstantsService) {
   }
 
   public parse(): void {

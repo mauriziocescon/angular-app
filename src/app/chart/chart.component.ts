@@ -13,19 +13,10 @@ import { AppConstantsService, CsvParserService } from "../core/core.module";
 export class ChartComponent implements OnInit {
   public barChartData: any;
 
-  protected decimalPipe: DecimalPipe;
-  protected translate: TranslateService;
-  protected appConstants: AppConstantsService;
-  protected csvParser: CsvParserService;
-
-  constructor(decimalPipe: DecimalPipe,
-              translateService: TranslateService,
-              appConstantsService: AppConstantsService,
-              csvParserService: CsvParserService) {
-    this.decimalPipe = decimalPipe;
-    this.translate = translateService;
-    this.appConstants = appConstantsService;
-    this.csvParser = csvParserService;
+  constructor(protected decimalPipe: DecimalPipe,
+              protected translate: TranslateService,
+              protected appConstants: AppConstantsService,
+              protected csvParser: CsvParserService) {
   }
 
   public ngOnInit(): void {
