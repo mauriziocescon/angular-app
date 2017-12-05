@@ -91,7 +91,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     this.usersRequest = this.searchControl
       .valueChanges
-      .startWith("")
+      .startWith(this.searchControl.value)
       .debounceTime(400)
       .do(() => this.busy = true)
       .switchMap(textSearch => this.usersService.getUsers(textSearch))
