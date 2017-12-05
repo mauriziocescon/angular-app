@@ -102,7 +102,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.translate
             .get(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"])
             .subscribe((translations: any) => {
-              this.uiUtilities.modalAlert(translations["USERS.ERROR"], err, translations["USERS.CLOSE"]);
+              this.uiUtilities.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], err, translations["USERS.CLOSE"]);
             });
         },
         () => {
