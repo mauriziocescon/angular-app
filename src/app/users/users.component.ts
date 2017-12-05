@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.busy = false;
 
     this.searchForm = this.formBuilder.group({
-      textFilter: this.searchControl = new FormControl(),
+      textFilter: this.searchControl = new FormControl(""),
     });
 
     this.loadDataSource();
@@ -72,11 +72,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public resetTextFilter(): void {
-    if (this.searchControl.value === undefined) {
-      return;
-    }
-
-    this.searchControl.setValue(undefined);
+    this.searchControl.setValue("");
     this.loadDataSource();
   }
 
