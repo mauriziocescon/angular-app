@@ -55,6 +55,7 @@
     "@angular/platform-browser-dynamic": "5.0.5",
     "@angular/router": "5.0.5",
     "@angular/service-worker": "5.0.5",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.6",
     "@ngx-translate/core": "9.0.1",
     "@ngx-translate/http-loader": "2.0.0",
     "@swimlane/ngx-charts": "7.0.1",
