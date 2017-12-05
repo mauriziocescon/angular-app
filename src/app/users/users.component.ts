@@ -85,6 +85,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public loadDataSource(): void {
+    if (this.usersRequest) {
+      this.usersRequest.unsubscribe();
+    }
+
     this.usersRequest = this.searchControl
       .valueChanges
       .startWith("")

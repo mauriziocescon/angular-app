@@ -3,15 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
 
-import { AppConstantsService, UtilitiesService } from "../core/core.module";
+import { AppConstantsService } from "../core/core.module";
 import { User } from "./users.model";
 
 @Injectable()
 export class UsersService {
 
   constructor(protected http: HttpClient,
-              protected appConstants: AppConstantsService,
-              protected utilities: UtilitiesService) {
+              protected appConstants: AppConstantsService) {
   }
 
   public getUsers(textFilter: string): Observable<User[]> {
@@ -22,6 +21,9 @@ export class UsersService {
 
     return this.http.get<User[]>(url, options)
       .map(data => data)
-      .catch(err => Observable.throw(err.json().error || "Server error"));
+      .catch(err => {
+        console.log(`Observable.throw: ${JSON.stringify(err, null, 2)}`);
+        return Observable.throw(err.json().error || "Server error");
+      });
   }
 }
