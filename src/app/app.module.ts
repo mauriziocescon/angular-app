@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
@@ -28,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     environment.production ? ServiceWorkerModule.register("/ngsw-worker.js") : [],
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

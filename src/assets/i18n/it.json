@@ -6,6 +6,8 @@
     "USERS": "Utenti"
   },
   "USERS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
     "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
     "LOAD_COMPLETED": "Caricamento completato",
     "LOADING": "Caricamento...",

@@ -4,6 +4,8 @@ import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 import "rxjs/Rx";
 import { TranslateService } from "@ngx-translate/core";
 
+import { UIUtilitiesService } from "../shared/shared.module";
+
 import { UsersService } from "./users.data-service";
 import { User } from "./users.model";
 
@@ -25,6 +27,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(protected formBuilder: FormBuilder,
               protected translate: TranslateService,
+              protected uiUtilities: UIUtilitiesService,
               protected usersService: UsersService) {
   }
 
@@ -89,18 +92,21 @@ export class UsersComponent implements OnInit, OnDestroy {
       .do(() => this.busy = true)
       .switchMap(textSearch => this.usersService.getUsers(textSearch))
       .do(() => this.busy = false)
-      .subscribe(
-        (users: User[]) => {
+      .subscribe((users: User[]) => {
           this.users = users;
           this.date = new Date();
         },
         (err: string) => {
           this.busy = false;
           this.users = undefined;
-          alert(err);
+          this.translate
+            .get("USERS.ERROR_ACCESS_DATA_COMPONENT", "USERS.CLOSE")
+            .subscribe((translations: any) => {
+              this.uiUtilities.modalAlert(translations["USERS.ERROR"], err, translations["USERS.CLOSE"]);
+            });
         },
         () => {
-          console.log("getUsers Completed");
+          // do nothing
         });
   }
 }
