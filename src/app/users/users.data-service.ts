@@ -23,7 +23,7 @@ export class UsersService {
       .map(data => data)
       .catch(err => {
         console.log(`Observable.throw: ${JSON.stringify(err, null, 2)}`);
-        return Observable.throw(err.json().error || "Server error");
+        return Observable.throw(err.message || "Server error");
       });
   }
 }
