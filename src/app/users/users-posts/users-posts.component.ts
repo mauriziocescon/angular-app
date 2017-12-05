@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-users-posts",
+  selector: "users-posts",
   templateUrl: "./users-posts.component.html",
   styleUrls: ["./users-posts.component.scss"]
 })

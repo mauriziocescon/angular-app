@@ -8,17 +8,14 @@ import { UsersService } from "./users.data-service";
 import { User } from "./users.model";
 
 @Component({
-  selector: "app-users",
+  selector: "users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  protected formBuilder: FormBuilder;
   public searchForm: FormGroup;
   protected searchControl: FormControl;
 
-  protected translate: TranslateService;
-  protected usersService: UsersService;
   protected usersRequest: any;
   protected users: User[] | undefined;
   protected busy: boolean;
@@ -26,12 +23,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   // todo: remove it when you're done
   public date: any;
 
-  constructor(formBuilder: FormBuilder,
-              translateService: TranslateService,
-              usersService: UsersService) {
-    this.formBuilder = formBuilder;
-    this.translate = translateService;
-    this.usersService = usersService;
+  constructor(protected formBuilder: FormBuilder,
+              protected translate: TranslateService,
+              protected usersService: UsersService) {
   }
 
   public get isLoadingData(): boolean {

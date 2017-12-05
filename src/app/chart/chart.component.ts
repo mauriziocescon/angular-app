@@ -6,7 +6,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AppConstantsService, CsvParserService } from "../core/core.module";
 
 @Component({
-  selector: "app-chart",
+  selector: "chart",
   templateUrl: "./chart.component.html",
   styleUrls: ["./chart.component.scss"],
 })

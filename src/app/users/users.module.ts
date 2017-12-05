@@ -14,17 +14,17 @@ import { PostCommentsComponent } from "./users-posts/post-comments/post-comments
   declarations: [
     UsersComponent,
     UsersPostsComponent,
-    PostCommentsComponent
+    PostCommentsComponent,
   ],
   exports: [],
   providers: [
-    UsersService
+    UsersService,
   ],
 })
 export class UsersModule {
 }
 
 export {
-  UsersComponent
+  UsersComponent,
 };
 

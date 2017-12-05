@@ -8,16 +8,10 @@ import { User } from "./users.model";
 
 @Injectable()
 export class UsersService {
-  protected http: HttpClient;
-  protected appConstants: AppConstantsService;
-  protected utilities: UtilitiesService;
 
-  constructor(http: HttpClient,
-              appConstantsService: AppConstantsService,
-              utilitiesService: UtilitiesService) {
-    this.http = http;
-    this.appConstants = appConstantsService;
-    this.utilities = utilitiesService;
+  constructor(protected http: HttpClient,
+              protected appConstants: AppConstantsService,
+              protected utilities: UtilitiesService) {
   }
 
   public getUsers(textFilter: string): Observable<User[]> {
