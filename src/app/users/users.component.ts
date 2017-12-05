@@ -100,7 +100,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.busy = false;
           this.users = undefined;
           this.translate
-            .get(["USERS.ERROR_ACCESS_DATA_COMPONENT", "USERS.CLOSE"])
+            .get(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"])
             .subscribe((translations: any) => {
               this.uiUtilities.modalAlert(translations["USERS.ERROR"], err, translations["USERS.CLOSE"]);
             });
