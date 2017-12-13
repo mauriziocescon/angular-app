@@ -28,7 +28,11 @@ export class NavigationBarComponent implements OnInit {
     }
   }
 
-  public goToDynamicForm(): void {
-    this.router.navigate(["/dyn-forms"]);
+  public goToUsers(): void {
+    this.router.navigate(["/users"]);
+  }
+
+  public goToCharts(): void {
+    this.router.navigate(["/chart"]);
   }
 }
