@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
-import "rxjs/Rx";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/debounceTime";
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/startWith";
+import "rxjs/add/operator/switchMap";
 import { TranslateService } from "@ngx-translate/core";
 
 import { UIUtilitiesService } from "../shared/shared.module";
