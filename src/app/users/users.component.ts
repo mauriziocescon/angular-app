@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   public searchForm: FormGroup;
   protected searchControl: FormControl;
 
-  protected usersRequest: any;
+  protected usersSubscription: any;
   protected users: User[] | undefined;
   protected busy: boolean;
 
@@ -71,8 +71,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    if (this.usersRequest) {
-      this.usersRequest.unsubscribe();
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
     }
   }
 
@@ -86,11 +86,11 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public loadDataSource(): void {
-    if (this.usersRequest) {
-      this.usersRequest.unsubscribe();
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
     }
 
-    this.usersRequest = this.searchControl
+    this.usersSubscription = this.searchControl
       .valueChanges
       .startWith(this.searchControl.value)
       .debounceTime(400)
