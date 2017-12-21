@@ -8,7 +8,7 @@ import { ModalConfirmerComponent } from "./modal-confirmer/modal-confirmer.compo
 @Injectable()
 export class UIUtilitiesService {
 
-  constructor(private modalService: NgbModal) {
+  constructor(protected modalService: NgbModal) {
   }
 
   modalAlert(title: string, message: string, buttonLabel: string): void {
@@ -39,7 +39,7 @@ export class UIUtilitiesService {
     });
   }
 
-  private getDismissReason(reason: any): string {
+  protected getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return "by pressing ESC";
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
