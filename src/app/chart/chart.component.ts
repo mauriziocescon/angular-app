@@ -11,7 +11,7 @@ import { AppConstantsService, CsvParserService } from "../core/core.module";
   styleUrls: ["./chart.component.scss"],
 })
 export class ChartComponent implements OnInit {
-  public barChartData: any;
+  barChartData: any;
 
   constructor(protected decimalPipe: DecimalPipe,
               protected translate: TranslateService,
@@ -19,14 +19,14 @@ export class ChartComponent implements OnInit {
               protected csvParser: CsvParserService) {
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.setupChart();
 
     // parse a local csv
     // this.csvParser.parse();
   }
 
-  public onSelect(event): void {
+  onSelect(event): void {
     console.log(event);
   }
 

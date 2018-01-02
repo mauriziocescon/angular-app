@@ -9,30 +9,30 @@ import { AppLanguageService } from "../../core/core.module";
   styleUrls: ["./navigation-bar.component.scss"],
 })
 export class NavigationBarComponent implements OnInit {
-  public languages: string[];
-  public selectedLanguageId: string;
+  languages: string[];
+  selectedLanguageId: string;
 
   constructor(protected router: Router,
               protected appLanguage: AppLanguageService) {
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.languages = this.appLanguage.getSupportedLanguagesList();
     this.selectedLanguageId = this.appLanguage.getLanguageId();
   }
 
-  public selectLanguage(language: string): void {
+  selectLanguage(language: string): void {
     if (this.appLanguage.getLanguageId() !== language) {
       this.selectedLanguageId = language;
       this.appLanguage.setLanguageId(this.selectedLanguageId);
     }
   }
 
-  public goToUsers(): void {
+  goToUsers(): void {
     this.router.navigate(["/users"]);
   }
 
-  public goToCharts(): void {
+  goToCharts(): void {
     this.router.navigate(["/chart"]);
   }
 }

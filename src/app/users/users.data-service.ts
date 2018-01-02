@@ -15,7 +15,7 @@ export class UsersService {
               protected appConstants: AppConstantsService) {
   }
 
-  public getUsers(textFilter: string): Observable<User[]> {
+  getUsers(textFilter: string): Observable<User[]> {
     const url = this.appConstants.Api.users;
     const options = {
       params: {q: textFilter},

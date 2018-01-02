@@ -13,7 +13,7 @@ export class CsvParserService {
               protected appConstants: AppConstantsService) {
   }
 
-  public parse(): void {
+  parse(): void {
 
     // this.http.get<any>("assets/csv/test.csv")
     //   .switchMap(data => data)

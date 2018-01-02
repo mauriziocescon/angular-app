@@ -20,7 +20,7 @@ import { User } from "./users.model";
   styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  public searchForm: FormGroup;
+  searchForm: FormGroup;
   protected searchControl: FormControl;
 
   protected usersSubscription: any;
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected busy: boolean;
 
   // todo: remove it when you're done
-  public date: any;
+  date: any;
 
   constructor(protected formBuilder: FormBuilder,
               protected translate: TranslateService,
@@ -36,31 +36,31 @@ export class UsersComponent implements OnInit, OnDestroy {
               protected usersService: UsersService) {
   }
 
-  public get isLoadingData(): boolean {
+  get isLoadingData(): boolean {
     return this.busy === true;
   }
 
-  public get hasNoData(): boolean {
+  get hasNoData(): boolean {
     return this.users !== undefined && this.users.length === 0 && this.isLoadingData === false;
   }
 
-  public get shouldRetry(): boolean {
+  get shouldRetry(): boolean {
     return this.users === undefined && this.isLoadingData === false;
   }
 
-  public get showData(): boolean {
+  get showData(): boolean {
     return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
   }
 
-  public get dataSource(): User[] | undefined {
+  get dataSource(): User[] | undefined {
     return this.users;
   }
 
-  public get isTextFilterNotEmpty(): boolean {
+  get isTextFilterNotEmpty(): boolean {
     return this.searchControl.value;
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.busy = false;
 
     this.searchForm = this.formBuilder.group({
@@ -70,22 +70,22 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.loadDataSource();
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
     }
   }
 
-  public resetTextFilter(): void {
+  resetTextFilter(): void {
     this.searchControl.setValue("");
     this.loadDataSource();
   }
 
-  public trackByUser(index: number, user: User): number {
+  trackByUser(index: number, user: User): number {
     return user.id;
   }
 
-  public loadDataSource(): void {
+  loadDataSource(): void {
     if (this.usersSubscription) {
       this.usersSubscription.unsubscribe();
     }
