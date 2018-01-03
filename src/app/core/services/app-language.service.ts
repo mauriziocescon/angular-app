@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
+import { registerLocaleData } from "@angular/common";
 
 import { TranslateService } from "@ngx-translate/core";
 
 import { AppConstantsService } from "./app-constants.service";
 import { LocalStorageService } from "./local-storage.service";
-
-import { registerLocaleData } from "@angular/common";
 
 import localeDe from "@angular/common/locales/de";
 import localeEn from "@angular/common/locales/en";
@@ -35,6 +34,7 @@ export class AppLanguageService {
     } else {
       this.selectedLanguageId = this.appConstants.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
       this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+      this.registerLocale();
     }
   }
 
@@ -49,7 +49,8 @@ export class AppLanguageService {
 
       this.selectedLanguageId = languageId;
       this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
-      this.translate.use(languageId);
+      this.registerLocale();
+      this.translate.use(this.selectedLanguageId);
       location.reload(true);
     }
   }
