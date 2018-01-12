@@ -69,10 +69,10 @@
     "popper.js": "1.12.9",
     "roboto-fontface": "0.8.0",
     "rxjs": "5.5.6",
-    "zone.js": "0.8.19"
+    "zone.js": "0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.3",
+    "@angular/cli": "1.6.4",
     "@angular/compiler-cli": "5.2.0",
     "@angular/language-service": "5.2.0",
     "@types/bootstrap": "3.3.36",
@@ -94,7 +94,7 @@
     "karma-jasmine": "1.1.1",
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-phantomjs-launcher": "1.0.4",
-    "nodemon": "1.14.10",
+    "nodemon": "1.14.11",
     "protractor": "5.2.2",
     "ts-node": "4.1.0",
     "tslint": "5.9.0",
