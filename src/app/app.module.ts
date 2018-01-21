@@ -7,6 +7,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 
 import { appRoutes } from "./app.routes";
 
@@ -36,6 +37,11 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
+    }),
+    LoggerModule.forRoot({
+      serverLoggingUrl: environment.apiUrl + "logs",
+      level: !environment.production ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.LOG,
     }),
     CoreModule.forRoot(),
     SharedModule,

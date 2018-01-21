@@ -65,6 +65,7 @@
     "font-awesome": "4.7.0",
     "intl": "1.2.5",
     "jquery": "3.3.1",
+    "ngx-logger": "1.1.2",
     "papaparse": "4.3.6",
     "popper.js": "1.12.9",
     "roboto-fontface": "0.8.0",
