@@ -39,7 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
     LoggerModule.forRoot({
-      serverLoggingUrl: environment.apiUrl + "logs",
+      serverLoggingUrl: environment.logsUrl,
       level: !environment.production ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.LOG,
     }),
