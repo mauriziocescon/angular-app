@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import * as Papa from "papaparse";
+import { NGXLogger } from "ngx-logger";
 
 import { AppConstantsService } from "./app-constants.service";
 import ParseError = PapaParse.ParseError;
@@ -10,6 +11,7 @@ import ParseError = PapaParse.ParseError;
 export class CsvParserService {
 
   constructor(protected http: HttpClient,
+              protected logger: NGXLogger,
               protected appConstants: AppConstantsService) {
   }
 
@@ -25,18 +27,18 @@ export class CsvParserService {
     //         dynamicTyping: true,
     //         skipEmptyLines: true,
     //         error: (error: ParseError, file?: File) => {
-    //           console.log("Papa.parse error: \n\n", error.message);
+    //           this.logger.log("Papa.parse error: \n\n", error.message);
     //         },
     //         complete: (results) => {
-    //           console.log("Papa.parse finished: \n\n", results.data);
+    //           this.logger.log("Papa.parse finished: \n\n", results.data);
     //         },
     //       });
     //     },
     //     (err) => {
-    //       console.log("test.csv error: " + err);
+    //       this.logger.log("test.csv error: " + err);
     //     },
     //     () => {
-    //       console.log("test.csv request complete");
+    //       this.logger.log("test.csv request complete");
     //     },
     //   );
   }

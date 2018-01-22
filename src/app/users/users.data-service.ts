@@ -24,7 +24,6 @@ export class UsersService {
     return this.http.get<User[]>(url, options)
       .map(data => data)
       .catch(err => {
-        console.log(`Observable.throw: ${JSON.stringify(err, null, 2)}`);
         return Observable.throw(err.message || "Server error");
       });
   }

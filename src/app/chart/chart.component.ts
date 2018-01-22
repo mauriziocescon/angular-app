@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DecimalPipe } from "@angular/common";
 
 import { TranslateService } from "@ngx-translate/core";
+import { NGXLogger } from "ngx-logger";
 
 import { AppConstantsService, CsvParserService } from "../core/core.module";
 
@@ -15,6 +16,7 @@ export class ChartComponent implements OnInit {
 
   constructor(protected decimalPipe: DecimalPipe,
               protected translate: TranslateService,
+              protected logger: NGXLogger,
               protected appConstants: AppConstantsService,
               protected csvParser: CsvParserService) {
   }
@@ -27,7 +29,7 @@ export class ChartComponent implements OnInit {
   }
 
   onSelect(event): void {
-    console.log(event);
+    this.logger.log(event);
   }
 
   protected setupChart(): void {
