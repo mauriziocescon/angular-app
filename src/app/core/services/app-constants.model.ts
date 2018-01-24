@@ -1,5 +1,6 @@
-import { environment } from "../../../environments/environment";
 import { Enum } from "../../shared/utilities/enum";
+
+import { environment } from "../../../environments/environment";
 
 export class Api {
   users = environment.apiUrl + "users";
