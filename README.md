@@ -3,6 +3,10 @@ Demo built on angular 5.x using [Angular CLI](https://github.com/angular/angular
 
 Application currently in beta
 
+## Demo 
+
+1. [Demo](https://mc-angular-app.herokuapp.com) powered by Heroku 
+
 ## Backend implementation 
 
 1. Based on [json-server](https://github.com/typicode/json-server) with mocks from [faker](https://github.com/Marak/faker.js) (APIs available at `http://localhost:5000/api/`)
