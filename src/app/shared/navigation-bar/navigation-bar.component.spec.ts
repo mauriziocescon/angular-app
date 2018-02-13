@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from "ngx-logger";
 
 import { CoreModule, AppLanguageService } from "../../core/core.module";
 
@@ -40,6 +41,11 @@ describe("NavigationBarComponent", () => {
             deps: [HttpClient],
           },
         }),
+        LoggerModule.forRoot({
+          serverLoggingUrl: "",
+          level: NgxLoggerLevel.OFF,
+          serverLogLevel: NgxLoggerLevel.OFF,
+        }),
         CoreModule.forRoot(),
       ],
       declarations: [
@@ -48,6 +54,7 @@ describe("NavigationBarComponent", () => {
       providers: [
         {provide: APP_BASE_HREF, useValue: "/"},
         TranslateService,
+        NGXLogger,
         AppLanguageService,
       ],
     })
