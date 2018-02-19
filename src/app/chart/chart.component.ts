@@ -28,7 +28,7 @@ export class ChartComponent implements OnInit {
     // this.csvParser.parse();
   }
 
-  onSelect(event): void {
+  onSelect(event: any): void {
     this.logger.log(event);
   }
 
