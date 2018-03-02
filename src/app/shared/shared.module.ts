@@ -8,6 +8,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { TranslateModule } from "@ngx-translate/core";
 
 import { AddContainerDirective } from "./directives/add-container.directive";
+import { ScrollToTopDirective } from "./directives/scroll-to-top.directive";
 
 import { UIUtilitiesService } from "./modals/ui-utilities.service";
 import { ModalAlertComponent } from "./modals/modal-alert/modal-alert.component";
@@ -30,6 +31,7 @@ import { KeyValue } from "./utilities/keyvalue";
   ],
   declarations: [
     AddContainerDirective,
+    ScrollToTopDirective,
     ModalAlertComponent,
     ModalConfirmerComponent,
     NavigationBarComponent,
@@ -50,6 +52,7 @@ import { KeyValue } from "./utilities/keyvalue";
     NgxChartsModule,
     TranslateModule,
     AddContainerDirective,
+    ScrollToTopDirective,
     NavigationBarComponent,
   ],
 })
