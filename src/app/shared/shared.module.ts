@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
@@ -24,7 +23,6 @@ import { KeyValue } from "./utilities/keyvalue";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     NgbModule,
     NgxChartsModule,
     TranslateModule,
@@ -47,7 +45,6 @@ import { KeyValue } from "./utilities/keyvalue";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     NgbModule,
     NgxChartsModule,
     TranslateModule,
