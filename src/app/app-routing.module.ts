@@ -5,6 +5,10 @@ import { environment } from "../environments/environment";
 
 export const appRoutes: Routes = [
   {
+    path: "chart",
+    loadChildren: "./chart/chart.module#ChartModule",
+  },
+  {
     path: "",
     redirectTo: "/users",
     pathMatch: "full",
