@@ -1,6 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 
@@ -9,7 +8,7 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
 
-import { appRoutes } from "./app.routes";
+import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
@@ -29,7 +28,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     environment.production ? ServiceWorkerModule.register("/ngsw-worker.js") : [],
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -47,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     ChartModule,
     UsersModule,
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,
