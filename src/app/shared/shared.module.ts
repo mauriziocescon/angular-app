@@ -6,7 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { TranslateModule } from "@ngx-translate/core";
 
-import { AddContainerDirective } from "./directives/add-container.directive";
+import { AddContainerDirective } from "./directives/add-component.directive";
 import { ScrollToTopDirective } from "./directives/scroll-to-top.directive";
 
 import { UIUtilitiesService } from "./modals/ui-utilities.service";
