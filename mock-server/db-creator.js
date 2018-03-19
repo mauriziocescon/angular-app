@@ -1,119 +1,70 @@
-const faker = require("faker");
-
+const dataCreator = require("./data-creator");
 const utils = require("./utils");
 
 const dbUrl = "./mock-server/db.json";
 
 function main() {
-  utils.deleteDb(dbUrl, (err) => {
-    if (err) {
-      throw err;
-    }
+    utils.deleteDb(dbUrl, (err) => {
+        if (err) {
+            throw err;
+        }
 
-    // db creation
-    const data = {
-      albums: [],
-      comments: [],
-      photos: [],
-      posts: [],
-      todos: [],
-      users: [],
-      logs: [],
-    };
+        // db creation
+        const data = {
+            albums: [],
+            comments: [],
+            photos: [],
+            posts: [],
+            todos: [],
+            users: [],
+            logs: [],
+        };
 
-    // do items
-    const numberOfAlbums = 100;
-    const numberOfComments = 500;
-    const numberOfPhotos = 5000;
-    const numberOfPosts = 100;
-    const numberOfTodos = 200;
-    const numberOfUsers = 10;
+        // do items
+        const numberOfAlbums = 100;
+        const numberOfComments = 500;
+        const numberOfPhotos = 5000;
+        const numberOfPosts = 100;
+        const numberOfTodos = 200;
+        const numberOfUsers = 10;
 
-    // albums
-    for (let i = 0; i < numberOfAlbums; i++) {
-      data.albums.push({
-        userId: parseInt(i / 10) + 1,
-        id: i + 1,
-        title: faker.lorem.text(),
-      });
-    }
+        // albums
+        for (let i = 0; i < numberOfAlbums; i++) {
+            data.albums.push(dataCreator.getAlbum(i));
+        }
 
-    // comments
-    for (let i = 0; i < numberOfComments; i++) {
-      data.comments.push({
-        postId: parseInt(i / 5) + 1,
-        id: i + 1,
-        name: faker.lorem.text(),
-        email: faker.internet.email(),
-        body: faker.lorem.text(),
-      });
-    }
+        // comments
+        for (let i = 0; i < numberOfComments; i++) {
+            data.comments.push(dataCreator.getComment(i));
+        }
 
-    // photos
-    for (let i = 0; i < numberOfPhotos; i++) {
-      data.photos.push({
-        albumId: parseInt(i / 50) + 1,
-        id: i + 1,
-        title: faker.lorem.text(),
-        url: faker.image.imageUrl(),
-        thumbnailUrl: faker.image.imageUrl(250, 250),
-      });
-    }
+        // photos
+        for (let i = 0; i < numberOfPhotos; i++) {
+            data.photos.push(dataCreator.getPhoto(i));
+        }
 
-    // posts
-    for (let i = 0; i < numberOfPosts; i++) {
-      data.posts.push({
-        userId: parseInt(i / 10) + 1,
-        id: i + 1,
-        title: faker.lorem.text(),
-        body: faker.lorem.text(),
-      });
-    }
+        // posts
+        for (let i = 0; i < numberOfPosts; i++) {
+            data.posts.push(dataCreator.getPost(i));
+        }
 
-    // todos
-    for (let i = 0; i < numberOfTodos; i++) {
-      data.todos.push({
-        userId: parseInt(i / 20) + 1,
-        id: i + 1,
-        title: faker.lorem.text(),
-        completed: faker.random.boolean(),
-      });
-    }
+        // todos
+        for (let i = 0; i < numberOfTodos; i++) {
+            data.todos.push(dataCreator.getTodo(i));
+        }
 
-    // users
-    for (let i = 0; i < numberOfUsers; i++) {
-      data.users.push({
-        id: i + 1,
-        name: faker.name.findName(),
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
-        address: {
-          street: faker.address.streetName(),
-          suite: faker.address.streetSuffix(),
-          city: faker.address.city(),
-          zipcode: faker.address.zipCode(),
-          geo: {
-            lat: faker.address.latitude(),
-            lng: faker.address.longitude(),
-          },
-        },
-        phone: faker.phone.phoneNumber(),
-        website: faker.internet.url(),
-        company: {
-          name: faker.company.companyName(),
-          catchPhrase: faker.company.catchPhraseDescriptor(),
-          bs: faker.company.bsNoun(),
-        },
-      });
-    }
+        // users
+        for (let i = 0; i < numberOfUsers; i++) {
+            data.users.push(dataCreator.getUser(i));
+        }
 
-    utils.saveDb(dbUrl, data, (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log('Json db created');
+        utils.saveDb(dbUrl, data, (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log('Json db created');
+        });
     });
-  });
 }
 
 main();
