@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import { NGXLogger } from "ngx-logger";
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NGXLogger } from 'ngx-logger';
 
-import { ModalAlertComponent } from "./modal-alert/modal-alert.component";
-import { ModalConfirmerComponent } from "./modal-confirmer/modal-confirmer.component";
+import { ModalAlertComponent } from './modal-alert/modal-alert.component';
+import { ModalConfirmerComponent } from './modal-confirmer/modal-confirmer.component';
 
 @Injectable()
 export class UIUtilitiesService {
@@ -43,9 +43,9 @@ export class UIUtilitiesService {
 
   protected getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
+      return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
+      return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
     }

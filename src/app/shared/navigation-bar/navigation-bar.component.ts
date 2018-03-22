@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AppLanguageService } from "../../core/core.module";
+import { AppLanguageService } from '../../core/core.module';
 
 @Component({
-  selector: "navigation-bar",
-  templateUrl: "./navigation-bar.component.html",
-  styleUrls: ["./navigation-bar.component.scss"],
+  selector: 'navigation-bar',
+  templateUrl: './navigation-bar.component.html',
+  styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent implements OnInit {
   languages: string[];
@@ -29,10 +29,10 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goToUsers(): void {
-    this.router.navigate(["/users"]);
+    this.router.navigate(['/users']);
   }
 
   goToCharts(): void {
-    this.router.navigate(["/chart"]);
+    this.router.navigate(['/chart']);
   }
 }

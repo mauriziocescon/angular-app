@@ -1,11 +1,11 @@
-import { NgModule, Optional, SkipSelf, ModuleWithProviders, LOCALE_ID } from "@angular/core";
-import { CommonModule, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from "@angular/common";
+import { NgModule, Optional, SkipSelf, ModuleWithProviders, LOCALE_ID } from '@angular/core';
+import { CommonModule, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '@angular/common';
 
-import { AppConstantsService } from "./services/app-constants.service";
-import { AppLanguageService } from "./services/app-language.service";
-import { CsvParserService } from "./services/csv-parser.service";
-import { LocalStorageService } from "./services/local-storage.service";
-import { UtilitiesService } from "./services/utilities.service";
+import { AppConstantsService } from './services/app-constants.service';
+import { AppLanguageService } from './services/app-language.service';
+import { CsvParserService } from './services/csv-parser.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { UtilitiesService } from './services/utilities.service';
 
 export function createLanguageIdLoader(appLanguageService: AppLanguageService) {
   return appLanguageService.getLanguageId();
@@ -21,7 +21,7 @@ export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
       throw new Error(
-        "CoreModule is already loaded. Import it in the AppModule only");
+        'CoreModule is already loaded. Import it in the AppModule only');
     }
   }
 
@@ -42,9 +42,9 @@ export class CoreModule {
         {
           provide: LOCALE_ID,
           useFactory: (createLanguageIdLoader),
-          deps: [AppLanguageService]
+          deps: [AppLanguageService],
         },
-      ]
+      ],
     };
   }
 }
@@ -54,5 +54,5 @@ export {
   AppLanguageService,
   CsvParserService,
   LocalStorageService,
-  UtilitiesService
+  UtilitiesService,
 };

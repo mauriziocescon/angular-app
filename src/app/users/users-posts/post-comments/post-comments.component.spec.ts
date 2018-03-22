@@ -1,23 +1,23 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBuilder } from "@angular/forms";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { FormBuilder } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { LoggerModule, NGXLogger, NgxLoggerLevel } from "ngx-logger";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 
-import { CoreModule } from "../../../core/core.module";
-import { SharedModule } from "../../../shared/shared.module";
+import { CoreModule } from '../../../core/core.module';
+import { SharedModule } from '../../../shared/shared.module';
 
-import { PostCommentsComponent } from "./post-comments.component";
+import { PostCommentsComponent } from './post-comments.component';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
-describe("PostCommentsComponent", () => {
+describe('PostCommentsComponent', () => {
   let component: PostCommentsComponent;
   let fixture: ComponentFixture<PostCommentsComponent>;
 
@@ -34,7 +34,7 @@ describe("PostCommentsComponent", () => {
           },
         }),
         LoggerModule.forRoot({
-          serverLoggingUrl: "",
+          serverLoggingUrl: '',
           level: NgxLoggerLevel.OFF,
           serverLogLevel: NgxLoggerLevel.OFF,
         }),
@@ -42,7 +42,7 @@ describe("PostCommentsComponent", () => {
         SharedModule,
       ],
       declarations: [
-        PostCommentsComponent
+        PostCommentsComponent,
       ],
       providers: [
         FormBuilder,
@@ -59,7 +59,7 @@ describe("PostCommentsComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });

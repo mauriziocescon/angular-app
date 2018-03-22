@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { ChartComponent } from "./chart.component";
+import { ChartComponent } from './chart.component';
 
 export const chartRoutes: Routes = [
   {
-    path: "",
+    path: '',
     component: ChartComponent,
   },
 ];

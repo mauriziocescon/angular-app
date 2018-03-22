@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import * as Papa from "papaparse";
-import { NGXLogger } from "ngx-logger";
+import * as Papa from 'papaparse';
+import { NGXLogger } from 'ngx-logger';
 
-import { AppConstantsService } from "./app-constants.service";
+import { AppConstantsService } from './app-constants.service';
 import ParseError = PapaParse.ParseError;
 
 @Injectable()

@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { UsersComponent } from "./users.component";
+import { UsersComponent } from './users.component';
 
 export const usersRoutes: Routes = [
   {
-    path: "users",
+    path: 'users',
     component: UsersComponent,
   },
 ];

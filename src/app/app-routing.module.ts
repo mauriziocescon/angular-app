@@ -1,17 +1,17 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { environment } from "../environments/environment";
+import { environment } from '../environments/environment';
 
 export const appRoutes: Routes = [
   {
-    path: "chart",
-    loadChildren: "./chart/chart.module#ChartModule",
+    path: 'chart',
+    loadChildren: './chart/chart.module#ChartModule',
   },
   {
-    path: "",
-    redirectTo: "/users",
-    pathMatch: "full",
+    path: '',
+    redirectTo: '/users',
+    pathMatch: 'full',
   },
 ];
 

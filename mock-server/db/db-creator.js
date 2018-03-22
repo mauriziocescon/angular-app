@@ -1,6 +1,6 @@
-const dataCreator = require("./data-creators");
-const utils = require("./db-utils");
-const dbUrl = require("./constants").dbUrl;
+const dataCreator = require('./data-creators');
+const utils = require('./db-utils');
+const dbUrl = require('./constants').dbUrl;
 
 function main() {
   utils.deleteDb(dbUrl, (err) => {

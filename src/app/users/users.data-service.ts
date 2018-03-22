@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
-import { AppConstantsService } from "../core/core.module";
-import { User } from "./users.model";
+import { AppConstantsService } from '../core/core.module';
+import { User } from './users.model';
 
 @Injectable()
 export class UsersService {
@@ -18,13 +18,13 @@ export class UsersService {
   getUsers(textFilter: string): Observable<User[]> {
     const url = this.appConstants.Api.users;
     const options = {
-      params: {q: textFilter},
+      params: { q: textFilter },
     };
 
     return this.http.get<User[]>(url, options)
       .map(data => data)
       .catch(err => {
-        return Observable.throw(err.message || "Server error");
+        return Observable.throw(err.message || 'Server error');
       });
   }
 }

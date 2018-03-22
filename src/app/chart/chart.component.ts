@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { DecimalPipe } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 
-import { TranslateService } from "@ngx-translate/core";
-import { NGXLogger } from "ngx-logger";
+import { TranslateService } from '@ngx-translate/core';
+import { NGXLogger } from 'ngx-logger';
 
-import { AppConstantsService, CsvParserService } from "../core/core.module";
+import { AppConstantsService, CsvParserService } from '../core/core.module';
 
 @Component({
-  selector: "chart",
-  templateUrl: "./chart.component.html",
-  styleUrls: ["./chart.component.scss"],
+  selector: 'chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
   barChartData: any;
@@ -37,15 +37,15 @@ export class ChartComponent implements OnInit {
 
     this.barChartData = {
       data: [
-        {name: "Germany", value: 4500.787},
-        {name: "USA", value: 5000.782},
-        {name: "France", value: 7200.021},
+        { name: 'Germany', value: 4500.787 },
+        { name: 'USA', value: 5000.782 },
+        { name: 'France', value: 7200.021 },
       ],
       xAxisTickFormatting: (value: number) => {
-        return this.decimalPipe.transform(value, "1.0-2");
+        return this.decimalPipe.transform(value, '1.0-2');
       },
       colorScheme: {
-        domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"]
+        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
       },
       showXAxis: true,
       showYAxis: true,

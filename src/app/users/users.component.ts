@@ -1,23 +1,23 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/startWith";
-import "rxjs/add/operator/switchMap";
-import { TranslateService } from "@ngx-translate/core";
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/switchMap';
+import { TranslateService } from '@ngx-translate/core';
 
-import { UIUtilitiesService } from "../shared/shared.module";
+import { UIUtilitiesService } from '../shared/shared.module';
 
-import { UsersService } from "./users.data-service";
-import { User } from "./users.model";
+import { UsersService } from './users.data-service';
+import { User } from './users.model';
 
 @Component({
-  selector: "users",
-  templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.scss"],
+  selector: 'users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
@@ -64,7 +64,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.busy = false;
 
     this.searchForm = this.formBuilder.group({
-      textFilter: this.searchControl = new FormControl(""),
+      textFilter: this.searchControl = new FormControl(''),
     });
 
     this.loadDataSource();
@@ -77,7 +77,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   resetTextFilter(): void {
-    this.searchControl.setValue("");
+    this.searchControl.setValue('');
     this.loadDataSource();
   }
 
@@ -105,9 +105,9 @@ export class UsersComponent implements OnInit, OnDestroy {
           this.busy = false;
           this.users = undefined;
           this.translate
-            .get(["USERS.ERROR_ACCESS_DATA", "USERS.CLOSE"])
+            .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
             .subscribe((translations: any) => {
-              this.uiUtilities.modalAlert(translations["USERS.ERROR_ACCESS_DATA"], err, translations["USERS.CLOSE"]);
+              this.uiUtilities.modalAlert(translations['USERS.ERROR_ACCESS_DATA'], err, translations['USERS.CLOSE']);
             });
         },
         () => {

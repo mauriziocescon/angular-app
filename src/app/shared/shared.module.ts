@@ -1,22 +1,22 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { TranslateModule } from "@ngx-translate/core";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { AddContainerDirective } from "./directives/add-component.directive";
-import { ScrollToTopDirective } from "./directives/scroll-to-top.directive";
+import { AddContainerDirective } from './directives/add-component.directive';
+import { ScrollToTopDirective } from './directives/scroll-to-top.directive';
 
-import { UIUtilitiesService } from "./modals/ui-utilities.service";
-import { ModalAlertComponent } from "./modals/modal-alert/modal-alert.component";
-import { ModalConfirmerComponent } from "./modals/modal-confirmer/modal-confirmer.component";
+import { UIUtilitiesService } from './modals/ui-utilities.service';
+import { ModalAlertComponent } from './modals/modal-alert/modal-alert.component';
+import { ModalConfirmerComponent } from './modals/modal-confirmer/modal-confirmer.component';
 
-import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
-import { Enum } from "./utilities/enum";
-import { KeyValue } from "./utilities/keyvalue";
+import { Enum } from './utilities/enum';
+import { KeyValue } from './utilities/keyvalue';
 
 @NgModule({
   imports: [
@@ -61,5 +61,5 @@ export {
   AddContainerDirective,
   NavigationBarComponent,
   Enum,
-  KeyValue
+  KeyValue,
 };

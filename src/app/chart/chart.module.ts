@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from '../shared/shared.module';
 
-import { ChartRoutingModule } from "./chart-routing.module";
+import { ChartRoutingModule } from './chart-routing.module';
 
-import { ChartComponent } from "./chart.component";
+import { ChartComponent } from './chart.component';
 
 @NgModule({
   imports: [
