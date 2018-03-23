@@ -83,10 +83,12 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.loadDataSource();
   }
 
-  ngOnDestroy(): void {
-    if (this.paramsSubscription) {
-      this.paramsSubscription.unsubscribe();
-    }
+  resetTextFilter(): void {
+    this.searchControl.setValue('');
+  }
+
+  trackByUser(index: number, user: User): number {
+    return user.id;
   }
 
   setupParamsObservable(): void {
@@ -103,20 +105,12 @@ export class UsersComponent implements OnInit, OnDestroy {
         .do(() => this.busy = true));
   }
 
-  resetTextFilter(): void {
-    this.searchControl.setValue('');
-  }
-
-  trackByUser(index: number, user: User): number {
-    return user.id;
+  onScroll(): void {
+    this.pageSubject$.next(this.pageNumber);
   }
 
   loadDataSource(): void {
-    if (this.paramsSubscription) {
-      this.paramsSubscription.unsubscribe();
-    }
-
-    this.retry = false;
+    this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
       .debounceTime(50)
@@ -128,7 +122,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
       .do(() => this.busy = false)
       .subscribe((data: { users: User[], lastPage: boolean }) => {
-          this.users = this.users === undefined ? data.users : this.users.concat(data.users ? data.users : []);
+          this.users = this.users === undefined ? data.users : [];
           this.loadCompleted = data.lastPage;
 
           if (!this.loadCompleted) {
@@ -151,7 +145,18 @@ export class UsersComponent implements OnInit, OnDestroy {
         });
   }
 
-  onScroll(): void {
-    this.pageSubject$.next(this.pageNumber);
+  retryLoadingDataSource(): void {
+    this.retry = false;
+    this.loadDataSource();
+  }
+
+  unsubscribeAll(): void {
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll();
   }
 }
