@@ -4,7 +4,6 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -122,27 +121,23 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
       .do(() => this.busy = false)
       .subscribe((data: { users: User[], lastPage: boolean }) => {
-          this.users = this.users === undefined ? data.users : [];
-          this.loadCompleted = data.lastPage;
+        this.users = this.users === undefined ? data.users : this.users.concat(data.users);
+        this.loadCompleted = data.lastPage;
 
-          if (!this.loadCompleted) {
-            this.pageNumber++;
-          }
+        if (!this.loadCompleted) {
+          this.pageNumber++;
+        }
 
-          this.date = new Date();
-        },
-        (err: string) => {
-          this.busy = false;
-          this.retry = true;
-          this.translate
-            .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
-            .subscribe((translations: any) => {
-              this.uiUtilities.modalAlert(translations['USERS.ERROR_ACCESS_DATA'], err, translations['USERS.CLOSE']);
-            });
-        },
-        () => {
-          // do nothing
-        });
+        this.date = new Date();
+      }, err => {
+        this.busy = false;
+        this.retry = true;
+        this.translate
+          .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
+          .subscribe((translations: any) => {
+            this.uiUtilities.modalAlert(translations['USERS.ERROR_ACCESS_DATA'], err, translations['USERS.CLOSE']);
+          });
+      });
   }
 
   retryLoadingDataSource(): void {

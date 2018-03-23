@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { Observable } from 'rxjs/Observable';
 
 import { AppConstantsService, UtilitiesService } from '../core/core.module';
 
@@ -40,8 +41,16 @@ export class UsersService {
         const lastPage = parseInt(this.utilities.parseQueryString(info.last)._page, 10) === page;
         return { users: response.body, lastPage: lastPage };
       })
-      .catch(err => {
-        return Observable.throw(err.message || 'Server error');
-      });
+      .catch((err: HttpErrorResponse) => this.handleError(err));
+  }
+
+  protected handleError(err: HttpErrorResponse) {
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred
+      return new ErrorObservable(err.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      return new ErrorObservable(`Code ${err.status}, body: ${err.message}` || 'Server error');
+    }
   }
 }
