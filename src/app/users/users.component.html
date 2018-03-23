@@ -16,11 +16,11 @@
     </div>
   </div>
 
-  <div class="row" [hidden]="!showData">
+  <div class="row" infiniteScroll (scrolled)="onScroll()">
     <div class="col-12 col-sm-6 user" *ngFor="let user of dataSource; trackBy: trackByUser">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">{{ user.name }}</h4>
+          <h4 class="card-title">{{ user.id }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
           <p class="card-text">{{ user.website }} <users-posts [date]="date"></users-posts></p>
           <a href="#" class="card-link">{{ user.address.street }}</a>
@@ -28,9 +28,9 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
-    </div>
+    <!--<div class="col-12">-->
+      <!--<div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>-->
+    <!--</div>-->
   </div>
 
   <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>

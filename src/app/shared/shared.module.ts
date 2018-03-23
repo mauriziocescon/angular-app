@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -24,6 +25,7 @@ import { KeyValue } from './utilities/keyvalue';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    InfiniteScrollModule,
     NgxChartsModule,
     TranslateModule,
   ],
@@ -46,6 +48,7 @@ import { KeyValue } from './utilities/keyvalue';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    InfiniteScrollModule,
     NgxChartsModule,
     TranslateModule,
     AddContainerDirective,

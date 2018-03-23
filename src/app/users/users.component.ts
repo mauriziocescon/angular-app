@@ -1,12 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
+
 import { TranslateService } from '@ngx-translate/core';
 
 import { UIUtilitiesService } from '../shared/shared.module';
@@ -23,8 +27,16 @@ export class UsersComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   protected searchControl: FormControl;
 
-  protected usersSubscription: any;
+  protected pageSubject$: Subject<number>;
+  protected pageObservable$: Observable<number>;
+
+  protected paramsObservable$: Observable<[string, number]>;
+  protected paramsSubscription: any;
+
   protected users: User[] | undefined;
+  protected pageNumber: number;
+  protected loadCompleted: boolean;
+  protected retry: boolean;
   protected busy: boolean;
 
   // todo: remove it when you're done
@@ -45,11 +57,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   get shouldRetry(): boolean {
-    return this.users === undefined && this.isLoadingData === false;
-  }
-
-  get showData(): boolean {
-    return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
+    return this.retry === true && this.isLoadingData === false;
   }
 
   get dataSource(): User[] | undefined {
@@ -62,23 +70,41 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.busy = false;
+    this.pageNumber = 1;
+
+    this.pageSubject$ = new Subject();
+    this.pageObservable$ = this.pageSubject$.asObservable();
 
     this.searchForm = this.formBuilder.group({
       textFilter: this.searchControl = new FormControl(''),
     });
 
+    this.setupParamsObservable();
     this.loadDataSource();
   }
 
   ngOnDestroy(): void {
-    if (this.usersSubscription) {
-      this.usersSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
     }
+  }
+
+  setupParamsObservable(): void {
+    this.paramsObservable$ = Observable.combineLatest(
+      this.searchControl
+        .valueChanges
+        .startWith(this.searchControl.value)
+        .do(() => this.busy = true)
+        .do(() => this.users = undefined)
+        .debounceTime(400)
+        .do(() => this.pageSubject$.next(this.pageNumber = 1)),
+      this.pageObservable$
+        .startWith(this.pageNumber)
+        .do(() => this.busy = true));
   }
 
   resetTextFilter(): void {
     this.searchControl.setValue('');
-    this.loadDataSource();
   }
 
   trackByUser(index: number, user: User): number {
@@ -86,24 +112,34 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   loadDataSource(): void {
-    if (this.usersSubscription) {
-      this.usersSubscription.unsubscribe();
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
     }
 
-    this.usersSubscription = this.searchControl
-      .valueChanges
-      .startWith(this.searchControl.value)
-      .debounceTime(400)
-      .do(() => this.busy = true)
-      .switchMap(textSearch => this.usersService.getUsers(textSearch))
+    this.retry = false;
+
+    this.paramsSubscription = this.paramsObservable$
+      .debounceTime(50)
+      .switchMap((parameters: [string, number]) => {
+        const textSearch = parameters[0];
+        const pageNumber = parameters[1];
+        console.log(`this.usersService.getUsers: ${textSearch}, ${pageNumber}`);
+        return this.usersService.getUsers(textSearch, pageNumber);
+      })
       .do(() => this.busy = false)
-      .subscribe((users: User[]) => {
-          this.users = users;
+      .subscribe((data: { users: User[], lastPage: boolean }) => {
+          this.users = this.users === undefined ? data.users : this.users.concat(data.users ? data.users : []);
+          this.loadCompleted = data.lastPage;
+
+          if (!this.loadCompleted) {
+            this.pageNumber++;
+          }
+
           this.date = new Date();
         },
         (err: string) => {
           this.busy = false;
-          this.users = undefined;
+          this.retry = true;
           this.translate
             .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
             .subscribe((translations: any) => {
@@ -113,5 +149,9 @@ export class UsersComponent implements OnInit, OnDestroy {
         () => {
           // do nothing
         });
+  }
+
+  onScroll(): void {
+    this.pageSubject$.next(this.pageNumber);
   }
 }

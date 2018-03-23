@@ -5,7 +5,6 @@ import * as Papa from 'papaparse';
 import { NGXLogger } from 'ngx-logger';
 
 import { AppConstantsService } from './app-constants.service';
-import ParseError = PapaParse.ParseError;
 
 @Injectable()
 export class CsvParserService {

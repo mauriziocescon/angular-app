@@ -65,6 +65,7 @@
     "font-awesome": "4.7.0",
     "intl": "1.2.5",
     "jquery": "3.3.1",
+    "ngx-infinite-scroll": "0.8.3",
     "ngx-logger": "2.0.5",
     "papaparse": "4.3.7",
     "popper.js": "1.14.1",
