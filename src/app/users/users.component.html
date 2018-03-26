@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="row" infiniteScroll (scrolled)="onScroll()">
+  <div class="row" [hidden]="!showData">
     <div class="col-12 col-sm-6 user" *ngFor="let user of dataSource; trackBy: trackByUser">
       <div class="card">
         <div class="card-body">
@@ -20,11 +20,13 @@
         </div>
       </div>
     </div>
+    <div class="col-12">
+      <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
+    </div>
   </div>
 
   <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
   <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
-  <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
   <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}</div>
   <div class="go-up" scrollToTop></div>
 </div>

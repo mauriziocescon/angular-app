@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { AppConstantsService, UtilitiesService } from '../core/core.module';
+import { AppConstantsService } from '../core/core.module';
 
 import { User } from './user.model';
 
@@ -14,21 +14,15 @@ import { User } from './user.model';
 export class UsersService {
 
   constructor(protected http: HttpClient,
-              protected appConstants: AppConstantsService,
-              protected utilities: UtilitiesService) {
+              protected appConstants: AppConstantsService) {
   }
 
-  getUsers(textFilter: string | undefined, page: number): Observable<{ users: User[], lastPage: boolean }> {
+  getUsers(textFilter: string | undefined): Observable<User[]> {
     const url = this.appConstants.Api.users;
-    const params = { q: textFilter || '', _page: page.toString() };
+    const params = { q: textFilter || '' };
 
-    return this.http.get<User[]>(url, { params: params, observe: 'response' })
-      .map(response => {
-        const info = this.utilities.parseLinkHeaders(response.headers);
-
-        const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
-        return { users: response.body, lastPage: lastPage };
-      })
+    return this.http.get<User[]>(url, { params: params })
+      .map(data => data)
       .catch((err: HttpErrorResponse) => this.handleError(err));
   }
 
