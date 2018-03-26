@@ -15,6 +15,7 @@ import { ModalAlertComponent } from './modals/modal-alert/modal-alert.component'
 import { ModalConfirmerComponent } from './modals/modal-confirmer/modal-confirmer.component';
 
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { TextFilterComponent } from './text-filter/text-filter.component';
 
 import { Enum } from './utilities/enum';
 import { KeyValue } from './utilities/keyvalue';
@@ -35,6 +36,7 @@ import { KeyValue } from './utilities/keyvalue';
     ModalAlertComponent,
     ModalConfirmerComponent,
     NavigationBarComponent,
+    TextFilterComponent,
   ],
   providers: [
     UIUtilitiesService,
@@ -54,6 +56,7 @@ import { KeyValue } from './utilities/keyvalue';
     AddContainerDirective,
     ScrollToTopDirective,
     NavigationBarComponent,
+    TextFilterComponent,
   ],
 })
 export class SharedModule {

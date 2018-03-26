@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -23,16 +22,12 @@ import { User } from './users.model';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  searchForm: FormGroup;
-  protected searchControl: FormControl;
-
-  protected pageSubject$: Subject<number>;
-  protected pageObservable$: Observable<number>;
-
-  protected paramsObservable$: Observable<[string, number]>;
+  protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
+  protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
   protected paramsSubscription: any;
 
   protected users: User[] | undefined;
+  protected textSearch: string;
   protected pageNumber: number;
   protected loadCompleted: boolean;
   protected retry: boolean;
@@ -41,14 +36,17 @@ export class UsersComponent implements OnInit, OnDestroy {
   // todo: remove it when you're done
   date: any;
 
-  constructor(protected formBuilder: FormBuilder,
-              protected translate: TranslateService,
+  constructor(protected translate: TranslateService,
               protected uiUtilities: UIUtilitiesService,
               protected usersService: UsersService) {
   }
 
   get isLoadingData(): boolean {
     return this.busy === true;
+  }
+
+  public get isLoadCompleted(): boolean {
+    return this.isLoadingData === false && this.users !== undefined && this.users.length > 0 && this.loadCompleted === true;
   }
 
   get hasNoData(): boolean {
@@ -63,61 +61,55 @@ export class UsersComponent implements OnInit, OnDestroy {
     return this.users;
   }
 
-  get isTextFilterNotEmpty(): boolean {
-    return this.searchControl.value;
-  }
-
   ngOnInit(): void {
     this.busy = false;
     this.pageNumber = 1;
+    this.loadCompleted = false;
 
-    this.pageSubject$ = new Subject();
-    this.pageObservable$ = this.pageSubject$.asObservable();
+    this.paramsSubject$ = new Subject();
+    this.paramsObservable$ = this.paramsSubject$.asObservable();
 
-    this.searchForm = this.formBuilder.group({
-      textFilter: this.searchControl = new FormControl(''),
-    });
-
-    this.setupParamsObservable();
     this.loadDataSource();
-  }
-
-  resetTextFilter(): void {
-    this.searchControl.setValue('');
   }
 
   trackByUser(index: number, user: User): number {
     return user.id;
   }
 
-  setupParamsObservable(): void {
-    this.paramsObservable$ = Observable.combineLatest(
-      this.searchControl
-        .valueChanges
-        .startWith(this.searchControl.value)
-        .do(() => this.busy = true)
-        .do(() => this.users = undefined)
-        .debounceTime(400)
-        .do(() => this.pageSubject$.next(this.pageNumber = 1)),
-      this.pageObservable$
-        .startWith(this.pageNumber)
-        .do(() => this.busy = true));
+  textSearchValueDidChange(value: string): void {
+    this.textSearch = value;
+    this.pageNumber = 1;
+    this.users = undefined;
+
+    const params = {
+      textSearch: value,
+      pageNumber: this.pageNumber,
+    };
+
+    this.paramsSubject$.next(params);
   }
 
   onScroll(): void {
-    this.pageSubject$.next(this.pageNumber);
+    if (this.loadCompleted === false) {
+      const params = {
+        textSearch: this.textSearch,
+        pageNumber: this.pageNumber,
+      };
+
+      this.paramsSubject$.next(params);
+    }
   }
 
   loadDataSource(): void {
     this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
+      .startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber })
+      .do(() => this.busy = true)
       .debounceTime(50)
-      .switchMap((parameters: [string, number]) => {
-        const textSearch = parameters[0];
-        const pageNumber = parameters[1];
-        console.log(`this.usersService.getUsers: ${textSearch}, ${pageNumber}`);
-        return this.usersService.getUsers(textSearch, pageNumber);
+      .switchMap((params: { textSearch: string, pageNumber: number }) => {
+        console.log(`this.usersService.getUsers: ${params.textSearch}, ${params.pageNumber}`);
+        return this.usersService.getUsers(params.textSearch, params.pageNumber);
       })
       .do(() => this.busy = false)
       .subscribe((data: { users: User[], lastPage: boolean }) => {

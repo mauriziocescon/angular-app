@@ -25,7 +25,7 @@ function main() {
     const numberOfPhotos = 5000;
     const numberOfPosts = 100;
     const numberOfTodos = 200;
-    const numberOfUsers = 1000;
+    const numberOfUsers = 10;
 
     // albums
     for (let i = 0; i < numberOfAlbums; i++) {

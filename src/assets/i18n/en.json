@@ -5,10 +5,12 @@
     "SELECT_LANGUAGE": "Select the language",
     "USERS": "Users"
   },
+  "TEXT_FILTER": {
+    "PLACEHOLDER": "Type some text"
+  },
   "USERS": {
     "CLOSE": "Close",
     "ERROR_ACCESS_DATA": "Error access data",
-    "INPUT_TEXT_PLACEHOLDER": "Type some text",
     "LOAD_COMPLETED": "Loading completed",
     "LOADING": "Loading...",
     "NO_RESULT": "Empty",

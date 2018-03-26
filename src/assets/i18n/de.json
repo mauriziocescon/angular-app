@@ -5,10 +5,12 @@
     "SELECT_LANGUAGE": "Sprache ӓndern",
     "USERS": "Benutzer"
   },
+  "TEXT_FILTER": {
+    "PLACEHOLDER": "Text eingeben"
+  },
   "USERS": {
     "CLOSE": "Schließen",
     "ERROR_ACCESS_DATA": "Fehler beim Datenzugriff",
-    "INPUT_TEXT_PLACEHOLDER": "Text eingeben",
     "LOAD_COMPLETED": "Ladevorgang abgeschlossen",
     "LOADING": "Daten werden geladen",
     "NO_RESULT": "Leer",

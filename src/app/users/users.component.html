@@ -2,17 +2,7 @@
 
   <div class="row">
     <div class="col-12">
-      <form [formGroup]="searchForm">
-        <div class="input-group">
-          <input type="text" class="form-control" formControlName="textFilter" placeholder="{{ 'USERS.INPUT_TEXT_PLACEHOLDER' | translate }}">
-          <div class="input-group-append" (click)="resetTextFilter()">
-            <span class="input-group-text addon">
-              <span class="fa fa-search" [hidden]="isTextFilterNotEmpty"></span>
-              <span class="fa fa-remove" [hidden]="!isTextFilterNotEmpty"></span>
-            </span>
-        </div>
-        </div>
-      </form>
+      <text-filter (valueDidChange)="textSearchValueDidChange($event)"></text-filter>
     </div>
   </div>
 
@@ -22,19 +12,19 @@
         <div class="card-body">
           <h4 class="card-title">{{ user.id }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
-          <p class="card-text">{{ user.website }} <users-posts [date]="date"></users-posts></p>
+          <p class="card-text">{{ user.website }}
+            <users-posts [date]="date"></users-posts>
+          </p>
           <a href="#" class="card-link">{{ user.address.street }}</a>
           <a href="#" class="card-link">{{ user.company.name }}</a>
         </div>
       </div>
     </div>
-    <!--<div class="col-12">-->
-      <!--<div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>-->
-    <!--</div>-->
   </div>
 
   <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
   <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
   <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}</div>
   <div class="go-up" scrollToTop></div>
 </div>

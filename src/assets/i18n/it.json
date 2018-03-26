@@ -5,10 +5,12 @@
     "SELECT_LANGUAGE": "Cambia lingua",
     "USERS": "Utenti"
   },
+  "TEXT_FILTER": {
+    "PLACEHOLDER": "Inserisci testo"
+  },
   "USERS": {
     "CLOSE": "Chiudi",
     "ERROR_ACCESS_DATA": "Errore accesso ai dati",
-    "INPUT_TEXT_PLACEHOLDER": "Inserisci testo",
     "LOAD_COMPLETED": "Caricamento completato",
     "LOADING": "Caricamento...",
     "NO_RESULT": "Vuoto",
