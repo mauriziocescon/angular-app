@@ -10,8 +10,6 @@ import { AppConstantsService, UtilitiesService } from '../core/core.module';
 
 import { User } from './users.model';
 
-import { environment } from '../../environments/environment';
-
 @Injectable()
 export class UsersService {
 
@@ -26,19 +24,9 @@ export class UsersService {
 
     return this.http.get<User[]>(url, { params: params, observe: 'response' })
       .map(response => {
-        let info = this.utilities.parseLinkHeaders(response.headers);
+        const info = this.utilities.parseLinkHeaders(response.headers);
 
-        if (!info.last) {
-          // default value: when there are no
-          // pages, info is empty
-          info = {
-            first: environment.apiUrl + 'users?_page=1',
-            last: environment.apiUrl + 'users?_page=1',
-            next: environment.apiUrl + 'users?_page=1',
-          };
-        }
-
-        const lastPage = parseInt(this.utilities.parseQueryString(info.last)._page, 10) === page;
+        const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
         return { users: response.body, lastPage: lastPage };
       })
       .catch((err: HttpErrorResponse) => this.handleError(err));
