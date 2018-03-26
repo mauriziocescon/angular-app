@@ -41,7 +41,7 @@ export class TextFilterComponent implements OnInit, OnDestroy {
 
     this.searchControlSubscription = this.searchControl
       .valueChanges
-      .debounceTime(500)
+      .debounceTime(1000)
       .subscribe((value: string) => {
           this.valueDidChange.emit(value);
         },
