@@ -3,6 +3,7 @@ import { Enum } from '../../shared/utilities/enum';
 import { environment } from '../../../environments/environment';
 
 export class Api {
+  albums = environment.apiUrl + 'albums';
   users = environment.apiUrl + 'users';
 }
 

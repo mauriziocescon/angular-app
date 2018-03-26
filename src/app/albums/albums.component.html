@@ -1,0 +1,25 @@
+<div class="container-fluid albums-component">
+
+  <div class="row">
+    <div class="col-12">
+      <text-filter (valueDidChange)="textSearchValueDidChange($event)"></text-filter>
+    </div>
+  </div>
+
+  <div class="row" infiniteScroll (scrolled)="onScroll()">
+    <div class="col-12 col-sm-6 album" *ngFor="let album of dataSource; trackBy: trackByAlbum">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ album.id }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{ album.title }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
+  <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
+  <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
+  <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}</div>
+  <div class="go-up" scrollToTop></div>
+</div>

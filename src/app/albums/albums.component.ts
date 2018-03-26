@@ -13,32 +13,29 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UIUtilitiesService } from '../shared/shared.module';
 
-import { UsersService } from './users.data-service';
-import { User } from './user.model';
+import { AlbumsService } from './albums.data-service';
+import { Album } from './album.model';
 
 @Component({
-  selector: 'users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'albums',
+  templateUrl: './albums.component.html',
+  styleUrls: ['./albums.component.scss'],
 })
-export class UsersComponent implements OnInit, OnDestroy {
+export class AlbumsComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
   protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
   protected paramsSubscription: any;
 
-  protected users: User[] | undefined;
+  protected albums: Album[] | undefined;
   protected textSearch: string;
   protected pageNumber: number;
   protected loadCompleted: boolean;
   protected retry: boolean;
   protected busy: boolean;
 
-  // todo: remove it when you're done
-  date: any;
-
   constructor(protected translate: TranslateService,
               protected uiUtilities: UIUtilitiesService,
-              protected usersService: UsersService) {
+              protected albumsService: AlbumsService) {
   }
 
   get isLoadingData(): boolean {
@@ -46,19 +43,19 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   public get isLoadCompleted(): boolean {
-    return this.isLoadingData === false && this.users !== undefined && this.users.length > 0 && this.loadCompleted === true;
+    return this.isLoadingData === false && this.albums !== undefined && this.albums.length > 0 && this.loadCompleted === true;
   }
 
   get hasNoData(): boolean {
-    return this.users !== undefined && this.users.length === 0 && this.isLoadingData === false;
+    return this.albums !== undefined && this.albums.length === 0 && this.isLoadingData === false;
   }
 
   get shouldRetry(): boolean {
     return this.retry === true && this.isLoadingData === false;
   }
 
-  get dataSource(): User[] | undefined {
-    return this.users;
+  get dataSource(): Album[] | undefined {
+    return this.albums;
   }
 
   ngOnInit(): void {
@@ -72,14 +69,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.loadDataSource();
   }
 
-  trackByUser(index: number, user: User): number {
-    return user.id;
+  trackByAlbum(index: number, album: Album): number {
+    return album.id;
   }
 
   textSearchValueDidChange(value: string): void {
     this.textSearch = value;
     this.pageNumber = 1;
-    this.users = undefined;
+    this.albums = undefined;
 
     const params = {
       textSearch: value,
@@ -108,26 +105,23 @@ export class UsersComponent implements OnInit, OnDestroy {
       .do(() => this.busy = true)
       .debounceTime(50)
       .switchMap((params: { textSearch: string, pageNumber: number }) => {
-        console.log(`this.usersService.getUsers: ${params.textSearch}, ${params.pageNumber}`);
-        return this.usersService.getUsers(params.textSearch, params.pageNumber);
+        return this.albumsService.getAlbums(params.textSearch, params.pageNumber);
       })
       .do(() => this.busy = false)
-      .subscribe((data: { users: User[], lastPage: boolean }) => {
-        this.users = this.users === undefined ? data.users : this.users.concat(data.users);
+      .subscribe((data: { albums: Album[], lastPage: boolean }) => {
+        this.albums = this.albums === undefined ? data.albums : this.albums.concat(data.albums);
         this.loadCompleted = data.lastPage;
 
         if (!this.loadCompleted) {
           this.pageNumber++;
         }
-
-        this.date = new Date();
       }, err => {
         this.busy = false;
         this.retry = true;
         this.translate
-          .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
+          .get(['ALBUMS.ERROR_ACCESS_DATA', 'ALBUMS.CLOSE'])
           .subscribe((translations: any) => {
-            this.uiUtilities.modalAlert(translations['USERS.ERROR_ACCESS_DATA'], err, translations['USERS.CLOSE']);
+            this.uiUtilities.modalAlert(translations['ALBUMS.ERROR_ACCESS_DATA'], err, translations['ALBUMS.CLOSE']);
           });
       });
   }

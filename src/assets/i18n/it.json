@@ -1,5 +1,6 @@
 {
   "NAVIGATION_BAR": {
+    "ALBUMS": "Albums",
     "CHARTS": "Grafici",
     "NAME": "Nome",
     "SELECT_LANGUAGE": "Cambia lingua",
@@ -7,6 +8,14 @@
   },
   "TEXT_FILTER": {
     "PLACEHOLDER": "Inserisci testo"
+  },
+  "ALBUMS": {
+    "CLOSE": "Chiudi",
+    "ERROR_ACCESS_DATA": "Errore accesso ai dati",
+    "LOAD_COMPLETED": "Caricamento completato",
+    "LOADING": "Caricamento...",
+    "NO_RESULT": "Vuoto",
+    "RETRY": "Riprova"
   },
   "USERS": {
     "CLOSE": "Chiudi",

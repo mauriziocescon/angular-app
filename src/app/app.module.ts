@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
+import { AlbumsModule } from './albums/albums.module';
 import { ChartModule } from './chart/chart.module';
 import { UsersModule } from './users/users.module';
 
@@ -45,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     CoreModule.forRoot(),
     SharedModule,
+    AlbumsModule,
     ChartModule,
     UsersModule,
     AppRoutingModule,

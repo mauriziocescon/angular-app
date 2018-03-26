@@ -1,5 +1,6 @@
 {
   "NAVIGATION_BAR": {
+    "ALBUMS": "Albums",
     "CHARTS": "Charts",
     "NAME": "Name",
     "SELECT_LANGUAGE": "Select the language",
@@ -7,6 +8,14 @@
   },
   "TEXT_FILTER": {
     "PLACEHOLDER": "Type some text"
+  },
+  "ALBUMS": {
+    "CLOSE": "Close",
+    "ERROR_ACCESS_DATA": "Error access data",
+    "LOAD_COMPLETED": "Loading completed",
+    "LOADING": "Loading...",
+    "NO_RESULT": "Empty",
+    "RETRY": "Retry"
   },
   "USERS": {
     "CLOSE": "Close",

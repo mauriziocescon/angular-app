@@ -8,26 +8,26 @@ import 'rxjs/add/operator/map';
 
 import { AppConstantsService, UtilitiesService } from '../core/core.module';
 
-import { User } from './user.model';
+import { Album } from './album.model';
 
 @Injectable()
-export class UsersService {
+export class AlbumsService {
 
   constructor(protected http: HttpClient,
               protected appConstants: AppConstantsService,
               protected utilities: UtilitiesService) {
   }
 
-  getUsers(textFilter: string | undefined, page: number): Observable<{ users: User[], lastPage: boolean }> {
-    const url = this.appConstants.Api.users;
+  getAlbums(textFilter: string | undefined, page: number): Observable<{ albums: Album[], lastPage: boolean }> {
+    const url = this.appConstants.Api.albums;
     const params = { q: textFilter || '', _page: page.toString() };
 
-    return this.http.get<User[]>(url, { params: params, observe: 'response' })
+    return this.http.get<Album[]>(url, { params: params, observe: 'response' })
       .map(response => {
         const info = this.utilities.parseLinkHeaders(response.headers);
 
         const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
-        return { users: response.body, lastPage: lastPage };
+        return { albums: response.body, lastPage: lastPage };
       })
       .catch((err: HttpErrorResponse) => this.handleError(err));
   }
