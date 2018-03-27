@@ -60,7 +60,7 @@
     "@ngx-translate/http-loader": "2.0.1",
     "@swimlane/ngx-charts": "7.1.1",
     "bootstrap": "4.0.0",
-    "core-js": "2.5.3",
+    "core-js": "2.5.4",
     "d3": "5.0.0",
     "font-awesome": "4.7.0",
     "intl": "1.2.5",
