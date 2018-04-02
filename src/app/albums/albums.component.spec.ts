@@ -30,7 +30,7 @@ describe('AlbumsComponent', () => {
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
-            useFactory: createTranslateLoader,
+            useFactory: (createTranslateLoader),
             deps: [HttpClient],
           },
         }),
