@@ -11,6 +11,7 @@ import { AppLanguageService } from '../../core/core.module';
 export class NavigationBarComponent implements OnInit {
   languages: string[];
   selectedLanguageId: string;
+  isCollapsed: boolean;
 
   constructor(protected router: Router,
               protected appLanguage: AppLanguageService) {
@@ -19,6 +20,7 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
     this.languages = this.appLanguage.getSupportedLanguagesList();
     this.selectedLanguageId = this.appLanguage.getLanguageId();
+    this.isCollapsed = true;
   }
 
   selectLanguage(language: string): void {
