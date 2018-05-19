@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +24,7 @@ describe('ChartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         HttpClientModule,
         NgbModule.forRoot(),
         TranslateModule.forRoot({
