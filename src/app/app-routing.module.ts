@@ -5,8 +5,16 @@ import { environment } from '../environments/environment';
 
 export const appRoutes: Routes = [
   {
+    path: 'albums',
+    loadChildren: './albums/albums.module#AlbumsModule',
+  },
+  {
     path: 'chart',
     loadChildren: './chart/chart.module#ChartModule',
+  },
+  {
+    path: 'users',
+    loadChildren: './users/users.module#UsersModule',
   },
   {
     path: '',
