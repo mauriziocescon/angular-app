@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +24,6 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     HttpClientModule,
     NgbModule.forRoot(),
     TranslateModule.forRoot({
@@ -45,11 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
   ],
   declarations: [
-    AppComponent,
-  ],
-  exports: [
-    AppComponent,
-    SharedModule,
+    AppComponent
   ],
   providers: [],
   bootstrap: [

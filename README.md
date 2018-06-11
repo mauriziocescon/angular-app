@@ -1,4 +1,4 @@
-Demo built on angular 5.x using [Angular CLI](https://github.com/angular/angular-cli)
+Demo built on angular 6.x using [Angular CLI](https://github.com/angular/angular-cli)
 =========
 
 Application currently in beta

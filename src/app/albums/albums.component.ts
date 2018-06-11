@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/switchMap';
+import { Observable, Subject } from 'rxjs';
+import {
+  combineLatest,
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -101,13 +102,15 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
-      .startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber })
-      .do(() => this.busy = true)
-      .debounceTime(50)
-      .switchMap((params: { textSearch: string, pageNumber: number }) => {
-        return this.albumsService.getAlbums(params.textSearch, params.pageNumber);
-      })
-      .do(() => this.busy = false)
+      .pipe(
+        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber }),
+        tap(() => this.busy = true),
+        debounceTime(50),
+        switchMap((params: { textSearch: string, pageNumber: number }) => {
+          return this.albumsService.getAlbums(params.textSearch, params.pageNumber);
+        }),
+        tap(() => this.busy = false),
+      )
       .subscribe((data: { albums: Album[], lastPage: boolean }) => {
         this.albums = this.albums === undefined ? data.albums : this.albums.concat(data.albums);
         this.loadCompleted = data.lastPage;

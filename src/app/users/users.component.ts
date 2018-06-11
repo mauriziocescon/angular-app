@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/switchMap';
+import { Observable, Subject } from 'rxjs';
+import {
+  combineLatest,
+  debounceTime,
+  map,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -86,13 +87,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
-      .startWith({ textSearch: this.textSearch })
-      .do(() => this.busy = true)
-      .debounceTime(50)
-      .switchMap((params: { textSearch: string }) => {
-        return this.usersService.getUsers(params.textSearch);
-      })
-      .do(() => this.busy = false)
+      .pipe(
+        startWith({ textSearch: this.textSearch }),
+        tap(() => this.busy = true),
+        debounceTime(50),
+        switchMap((params: { textSearch: string }) => {
+          return this.usersService.getUsers(params.textSearch);
+        }),
+        tap(() => this.busy = false),
+      )
       .subscribe((users: User[]) => {
         this.users = users;
         this.date = new Date();
