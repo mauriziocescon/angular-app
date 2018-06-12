@@ -1,7 +1,7 @@
 {
   "name": "angular-app",
   "version": "1.0.0",
-  "description": "A demo application built on angular 5.x components, Typescript, ES2017",
+  "description": "A demo application built on angular 6.x components, Typescript, ES2017",
   "author": "Maurizio Cescon <maurizio.cescon@gmail.com> (http://www.mauriziocescon.com)",
   "homepage": "http://www.mauriziocescon.com",
   "private": false,
