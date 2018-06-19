@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strict": true,
-    "strictFunctionTypes": false,
+    "strict": false,
+    "strictPropertyInitialization": false,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
