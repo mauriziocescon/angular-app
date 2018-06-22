@@ -35,7 +35,7 @@ export class AlbumsService {
       );
   }
 
-  protected handleError(err: HttpErrorResponse) {
+  protected handleError(err: HttpErrorResponse): Observable<never> {
     if (err.error instanceof ErrorEvent) {
       // A client-side or network error occurred
       return throwError(err.error.message);
