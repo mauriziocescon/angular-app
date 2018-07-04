@@ -21,7 +21,7 @@ Run `npm run serve` for a dev server. Navigate to `http://localhost:4200/`. The 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build. Run `npm run bundle-analyzer` run analyze the bundle. 
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build. Run `npm run bundle-analyzer` to analyze the bundle. 
 
 ## Running unit tests
 
