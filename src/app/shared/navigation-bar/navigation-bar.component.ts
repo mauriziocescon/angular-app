@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppLanguageService } from '../../core/core.module';
+import { AppConstantsService, AppLanguageService } from '../../core/core.module';
 
 @Component({
   selector: 'navigation-bar',
@@ -14,7 +14,12 @@ export class NavigationBarComponent implements OnInit {
   isCollapsed: boolean;
 
   constructor(protected router: Router,
+              protected appConstants: AppConstantsService,
               protected appLanguage: AppLanguageService) {
+  }
+
+  get canOpenJsonServer(): boolean {
+    return this.appConstants.Application.SHOW_JSON_SERVER_API === true;
   }
 
   ngOnInit(): void {
@@ -40,5 +45,9 @@ export class NavigationBarComponent implements OnInit {
 
   goToCharts(): void {
     this.router.navigate(['/chart']);
+  }
+
+  openJsonServer(): void {
+    window.open(this.appConstants.Application.JSON_SERVER_API_URL);
   }
 }
