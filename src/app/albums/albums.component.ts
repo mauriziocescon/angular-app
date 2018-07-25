@@ -30,6 +30,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   protected albums: Album[] | undefined;
   protected textSearch: string;
   protected pageNumber: number;
+  protected limit: number;
   protected loadCompleted: boolean;
   protected retry: boolean;
   protected busy: boolean;
@@ -37,6 +38,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   constructor(protected translate: TranslateService,
               protected uiUtilities: UIUtilitiesService,
               protected albumsService: AlbumsService) {
+    this.limit = 20;
   }
 
   get isLoadingData(): boolean {
@@ -82,6 +84,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     const params = {
       textSearch: value,
       pageNumber: this.pageNumber,
+      limit: this.limit,
     };
 
     this.paramsSubject$.next(params);
@@ -92,6 +95,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
       const params = {
         textSearch: this.textSearch,
         pageNumber: this.pageNumber,
+        limit: this.limit,
       };
 
       this.paramsSubject$.next(params);
@@ -103,11 +107,11 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
     this.paramsSubscription = this.paramsObservable$
       .pipe(
-        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber }),
+        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber, limit: this.limit }),
         tap(() => this.busy = true),
         debounceTime(50),
-        switchMap((params: { textSearch: string, pageNumber: number }) => {
-          return this.albumsService.getAlbums(params.textSearch, params.pageNumber);
+        switchMap((params: { textSearch: string, pageNumber: number, limit: number }) => {
+          return this.albumsService.getAlbums(params.textSearch, params.pageNumber, params.limit);
         }),
         tap(() => this.busy = false),
       )

@@ -19,9 +19,9 @@ export class AlbumsService {
               protected utilities: UtilitiesService) {
   }
 
-  getAlbums(textFilter: string | undefined, page: number): Observable<{ albums: Album[], lastPage: boolean }> {
+  getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{ albums: Album[], lastPage: boolean }> {
     const url = this.appConstants.Api.albums;
-    const params = { q: textFilter || '', _page: page.toString(), _limit: "20", };
+    const params = { q: textFilter || '', _page: page.toString(), _limit: limit.toString(), };
 
     return this.http.get<Album[]>(url, { params: params, observe: 'response' })
       .pipe(
