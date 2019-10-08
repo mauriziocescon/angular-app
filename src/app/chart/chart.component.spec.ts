@@ -26,7 +26,7 @@ describe('ChartComponent', () => {
       imports: [
         NoopAnimationsModule,
         HttpClientModule,
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

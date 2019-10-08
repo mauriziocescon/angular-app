@@ -27,7 +27,7 @@ describe('TextFilterComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

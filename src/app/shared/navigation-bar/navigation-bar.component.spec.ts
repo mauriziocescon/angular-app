@@ -33,7 +33,7 @@ describe('NavigationBarComponent', () => {
         BrowserAnimationsModule,
         RouterTestingModule,
         HttpClientModule,
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,

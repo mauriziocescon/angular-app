@@ -24,7 +24,7 @@ describe('AppComponent', () => {
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
