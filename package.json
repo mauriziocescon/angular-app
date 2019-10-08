@@ -17,7 +17,7 @@
     "ng": "ng",
     "serve": "ng serve --open | npm run json-server-watch",
     "build": "ng lint && ng build --prod --stats-json",
-    "test": "ng test --browsers ChromeHeadless",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-analyzer": "webpack-bundle-analyzer ./dist/angular-app/stats.json"
