@@ -17,7 +17,7 @@
     "ng": "ng",
     "serve": "ng serve --open | npm run json-server-watch",
     "build": "ng lint && ng build --prod --stats-json",
-    "test": "ng test",
+    "test": "ng test --browsers ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "bundle-analyzer": "webpack-bundle-analyzer ./dist/angular-app/stats.json"
@@ -93,7 +93,6 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "karma-phantomjs-launcher": "1.0.4",
     "nodemon": "1.19.3",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
