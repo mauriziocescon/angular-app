@@ -2,8 +2,8 @@ language: node_js
 
 # test on different versions of node.js
 node_js:
-    - 10.16.3
-    - 12.9.1
+  - 10.16.3
+  - 12.9.1
 
 # addition of chrome for testing
 addons:
@@ -11,8 +11,8 @@ addons:
 
 # configure notifications
 notifications:
-    email:
-        recipients:
-          - maurizio.cescon@gmail.com
-        on_success: change # default: change
-        on_failure: always # default: always
+  email:
+    recipients:
+      - maurizio.cescon@gmail.com
+    on_success: change # default: change
+    on_failure: always # default: always
