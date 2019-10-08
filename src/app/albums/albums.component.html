@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-12">
-      <text-filter (valueDidChange)="textSearchValueDidChange($event)"></text-filter>
+      <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
     </div>
   </div>
 
@@ -21,5 +21,5 @@
   <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
   <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
   <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}</div>
-  <div class="go-up" scrollToTop></div>
+  <div class="go-up" appScrollToTop></div>
 </div>

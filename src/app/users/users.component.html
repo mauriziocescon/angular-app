@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-12">
-      <text-filter (valueDidChange)="textSearchValueDidChange($event)"></text-filter>
+      <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
     </div>
   </div>
 
@@ -13,7 +13,7 @@
           <h4 class="card-title">{{ user.id }}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
           <p class="card-text">{{ user.website }}
-            <users-posts [date]="date"></users-posts>
+            <app-users-posts [date]="date"></app-users-posts>
           </p>
           <a href="#" class="card-link">{{ user.address.street }}</a>
           <a href="#" class="card-link">{{ user.company.name }}</a>
@@ -28,5 +28,5 @@
   <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
   <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
   <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}</div>
-  <div class="go-up" scrollToTop></div>
+  <div class="go-up" appScrollToTop></div>
 </div>

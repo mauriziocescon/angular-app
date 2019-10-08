@@ -14,7 +14,7 @@ export class UtilitiesService {
    * Parse link property
    * inside headers
    *
-   * @param headers
+   * @param headers http headers
    */
   parseLinkHeaders(headers: any): any {
     if (headers && headers.get('link') && headers.get('link').length === 0) {

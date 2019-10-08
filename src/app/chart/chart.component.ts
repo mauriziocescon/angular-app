@@ -7,7 +7,7 @@ import { NGXLogger } from 'ngx-logger';
 import { AppConstantsService, CsvParserService } from '../core/core.module';
 
 @Component({
-  selector: 'chart',
+  selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })

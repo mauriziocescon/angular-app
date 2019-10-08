@@ -23,13 +23,13 @@ export class AlbumsService {
     const url = this.appConstants.Api.albums;
     const params = { q: textFilter || '', _page: page.toString(), _limit: limit.toString(), };
 
-    return this.http.get<Album[]>(url, { params: params, observe: 'response' })
+    return this.http.get<Album[]>(url, { params, observe: 'response' })
       .pipe(
         map(response => {
           const info = this.utilities.parseLinkHeaders(response.headers);
 
           const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
-          return { albums: response.body, lastPage: lastPage };
+          return { albums: response.body, lastPage };
         }),
         catchError((err: HttpErrorResponse) => this.handleError(err)),
       );

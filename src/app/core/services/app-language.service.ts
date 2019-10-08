@@ -50,7 +50,7 @@ export class AppLanguageService {
       this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
       this.registerLocale();
       this.translate.use(this.selectedLanguageId);
-      location.reload(true);
+      location.reload();
     }
   }
 

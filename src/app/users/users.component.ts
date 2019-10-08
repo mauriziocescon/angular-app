@@ -18,7 +18,7 @@ import { UsersService } from './users.data-service';
 import { User } from './user.model';
 
 @Component({
-  selector: 'users',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
 })

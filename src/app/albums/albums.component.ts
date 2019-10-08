@@ -18,7 +18,7 @@ import { AlbumsService } from './albums.data-service';
 import { Album } from './album.model';
 
 @Component({
-  selector: 'albums',
+  selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.scss'],
 })

@@ -22,7 +22,7 @@ export class UsersService {
     const url = this.appConstants.Api.users;
     const params = { q: textFilter || '' };
 
-    return this.http.get<User[]>(url, { params: params })
+    return this.http.get<User[]>(url, { params })
       .pipe(
         map(data => data),
         catchError((err: HttpErrorResponse) => this.handleError(err)),
