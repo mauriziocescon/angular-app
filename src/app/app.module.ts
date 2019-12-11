@@ -8,11 +8,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
-import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from '../environments/environment';
 
