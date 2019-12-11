@@ -6,15 +6,15 @@ import { environment } from '../environments/environment';
 export const appRoutes: Routes = [
   {
     path: 'albums',
-    loadChildren: './albums/albums.module#AlbumsModule',
+    loadChildren: () => import('./albums/albums.module').then(mod => mod.AlbumsModule),
   },
   {
     path: 'chart',
-    loadChildren: './chart/chart.module#ChartModule',
+    loadChildren: () => import('./chart/chart.module').then(mod => mod.ChartModule),
   },
   {
     path: 'users',
-    loadChildren: './users/users.module#UsersModule',
+    loadChildren: () => import('./users/users.module').then(mod => mod.UsersModule),
   },
   {
     path: '',
