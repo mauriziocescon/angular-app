@@ -7,7 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -32,11 +32,7 @@ describe('AppComponent', () => {
             deps: [HttpClient],
           },
         }),
-        LoggerModule.forRoot({
-          serverLoggingUrl: '',
-          level: NgxLoggerLevel.OFF,
-          serverLogLevel: NgxLoggerLevel.OFF,
-        }),
+        LoggerTestingModule,
         CoreModule.forRoot(),
         SharedModule,
       ],

@@ -6,7 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { CoreModule } from '../../core/core.module';
 
@@ -35,11 +35,7 @@ describe('TextFilterComponent', () => {
             deps: [HttpClient],
           },
         }),
-        LoggerModule.forRoot({
-          serverLoggingUrl: '',
-          level: NgxLoggerLevel.OFF,
-          serverLogLevel: NgxLoggerLevel.OFF,
-        }),
+        LoggerTestingModule,
         CoreModule.forRoot(),
       ],
       declarations: [
@@ -48,7 +44,6 @@ describe('TextFilterComponent', () => {
       providers: [
         FormBuilder,
         TranslateService,
-        NGXLogger,
       ],
     })
     .compileComponents();
