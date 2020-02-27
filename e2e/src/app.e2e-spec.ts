@@ -11,7 +11,7 @@ describe('workspace-project App', () => {
   it('should display welcome message', () => {
     page.navigateTo();
     browser.getTitle().then((title: string) => {
-      expect(title).toEqual('Demo');
+      expect(title).toEqual('AngularApp');
     });
   });
 
