@@ -58,7 +58,7 @@
     "@ng-bootstrap/ng-bootstrap": "6.0.0",
     "@ngx-translate/core": "12.1.1",
     "@ngx-translate/http-loader": "4.0.0",
-    "@swimlane/ngx-charts": "13.0.2",
+    "@swimlane/ngx-charts": "12.1.0",
     "bootstrap": "4.4.1",
     "d3": "5.15.0",
     "font-awesome": "4.7.0",
@@ -99,6 +99,5 @@
     "tslint": "~5.18.0",
     "typescript": "~3.7.5",
     "webpack-bundle-analyzer": "3.6.0"
-
   }
 }
