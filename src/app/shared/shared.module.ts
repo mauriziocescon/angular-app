@@ -25,7 +25,6 @@ import { KeyValue } from './utilities/keyvalue';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     NgbModule,
     InfiniteScrollModule,
     NgxChartsModule,
