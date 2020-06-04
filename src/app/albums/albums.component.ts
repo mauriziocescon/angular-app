@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import {
+  catchError,
   debounceTime,
   startWith,
   switchMap,
@@ -112,6 +113,16 @@ export class AlbumsComponent implements OnInit, OnDestroy {
           return this.albumsService.getAlbums(params.textSearch, params.pageNumber, params.limit);
         }),
         tap(() => this.busy = false),
+        catchError(err => {
+          this.busy = false;
+          this.retry = true;
+          this.uiUtilities.modalAlert(
+            this.translate.instant('ALBUMS.ERROR_ACCESS_DATA'),
+            err,
+            this.translate.instant('ALBUMS.CLOSE'),
+          );
+          return throwError(err);
+        }),
       )
       .subscribe((data: { albums: Album[], lastPage: boolean }) => {
         this.albums = this.albums === undefined ? data.albums : this.albums.concat(data.albums);
@@ -120,14 +131,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
         if (!this.loadCompleted) {
           this.pageNumber++;
         }
-      }, err => {
-        this.busy = false;
-        this.retry = true;
-        this.translate
-          .get(['ALBUMS.ERROR_ACCESS_DATA', 'ALBUMS.CLOSE'])
-          .subscribe((translations: any) => {
-            this.uiUtilities.modalAlert(translations['ALBUMS.ERROR_ACCESS_DATA'], err, translations['ALBUMS.CLOSE']);
-          });
       });
   }
 

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import {
-  combineLatest,
+  catchError,
   debounceTime,
-  map,
   startWith,
   switchMap,
   tap,
@@ -95,17 +94,19 @@ export class UsersComponent implements OnInit, OnDestroy {
           return this.usersService.getUsers(params.textSearch);
         }),
         tap(() => this.busy = false),
+        catchError(err => {
+          this.busy = false;
+          this.uiUtilities.modalAlert(
+            this.translate.instant('USERS.ERROR_ACCESS_DATA'),
+            err,
+            this.translate.instant('USERS.CLOSE'),
+          );
+          return throwError(err);
+        }),
       )
       .subscribe((users: User[]) => {
         this.users = users;
         this.date = new Date();
-      }, err => {
-        this.busy = false;
-        this.translate
-          .get(['USERS.ERROR_ACCESS_DATA', 'USERS.CLOSE'])
-          .subscribe((translations: any) => {
-            this.uiUtilities.modalAlert(translations['USERS.ERROR_ACCESS_DATA'], err, translations['USERS.CLOSE']);
-          });
       });
   }
 
