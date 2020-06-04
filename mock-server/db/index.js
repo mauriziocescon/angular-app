@@ -16,7 +16,7 @@ const mocks = {
   logs: [],
 };
 
-// do items
+// #items
 const numberOfAlbums = 100;
 const numberOfComments = 500;
 const numberOfPhotos = 5000;
