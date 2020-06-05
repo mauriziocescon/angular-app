@@ -11,6 +11,8 @@ import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 
+import { User } from '../user.model';
+
 import { UserComponent } from './user.component';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -56,6 +58,7 @@ describe('UserComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
+    component.user = {} as User;
     fixture.detectChanges();
   });
 

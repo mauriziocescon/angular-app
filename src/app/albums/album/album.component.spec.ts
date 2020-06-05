@@ -11,6 +11,8 @@ import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 
+import { Album } from '../album.model';
+
 import { AlbumComponent } from './album.component';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -56,6 +58,7 @@ describe('AlbumComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlbumComponent);
     component = fixture.componentInstance;
+    component.album = {} as Album;
     fixture.detectChanges();
   });
 
