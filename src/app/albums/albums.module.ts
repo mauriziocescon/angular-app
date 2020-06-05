@@ -4,6 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AlbumsRoutingModule } from './albums-routing.module';
 
+import { AlbumModule } from './album/album.module';
+
 import { AlbumsComponent } from './albums.component';
 import { AlbumsService } from './albums.data-service';
 
@@ -11,14 +13,15 @@ import { AlbumsService } from './albums.data-service';
   imports: [
     SharedModule,
     AlbumsRoutingModule,
+    AlbumModule,
   ],
   declarations: [
     AlbumsComponent,
   ],
-  exports: [],
   providers: [
     AlbumsService,
   ],
+  exports: [],
 })
 export class AlbumsModule {
 }

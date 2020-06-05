@@ -3,7 +3,6 @@ import { CommonModule, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '
 
 import { AppConstantsService } from './services/app-constants.service';
 import { AppLanguageService } from './services/app-language.service';
-import { CsvParserService } from './services/csv-parser.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { UtilitiesService } from './services/utilities.service';
 
@@ -36,7 +35,6 @@ export class CoreModule {
 
         AppConstantsService,
         AppLanguageService,
-        CsvParserService,
         LocalStorageService,
         UtilitiesService,
         {
@@ -52,7 +50,6 @@ export class CoreModule {
 export {
   AppConstantsService,
   AppLanguageService,
-  CsvParserService,
   LocalStorageService,
   UtilitiesService,
 };

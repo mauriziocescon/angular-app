@@ -14,8 +14,8 @@ import { ChartComponent } from './chart.component';
   declarations: [
     ChartComponent,
   ],
-  exports: [],
   providers: [],
+  exports: [],
 })
 export class ChartModule {
 }

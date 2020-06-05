@@ -11,16 +11,15 @@ import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { UsersPostsComponent } from './users-posts.component';
-import { PostCommentsComponent } from './post-comments/post-comments.component';
+import { AlbumComponent } from './album.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
-describe('UsersPostsComponent', () => {
-  let component: UsersPostsComponent;
-  let fixture: ComponentFixture<UsersPostsComponent>;
+describe('AlbumComponent', () => {
+  let component: AlbumComponent;
+  let fixture: ComponentFixture<AlbumComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,8 +42,7 @@ describe('UsersPostsComponent', () => {
         SharedModule,
       ],
       declarations: [
-        UsersPostsComponent,
-        PostCommentsComponent,
+        AlbumComponent,
       ],
       providers: [
         FormBuilder,
@@ -56,7 +54,7 @@ describe('UsersPostsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersPostsComponent);
+    fixture = TestBed.createComponent(AlbumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

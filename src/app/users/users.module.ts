@@ -4,25 +4,24 @@ import { SharedModule } from '../shared/shared.module';
 
 import { UserRoutingModule } from './users-routing.module';
 
+import { UserModule } from './user/user.module';
+
 import { UsersComponent } from './users.component';
 import { UsersService } from './users.data-service';
-import { UsersPostsComponent } from './users-posts/users-posts.component';
-import { PostCommentsComponent } from './users-posts/post-comments/post-comments.component';
 
 @NgModule({
   imports: [
     SharedModule,
     UserRoutingModule,
+    UserModule,
   ],
   declarations: [
     UsersComponent,
-    UsersPostsComponent,
-    PostCommentsComponent,
   ],
-  exports: [],
   providers: [
     UsersService,
   ],
+  exports: [],
 })
 export class UsersModule {
 }

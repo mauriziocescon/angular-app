@@ -8,12 +8,7 @@
 
   <div class="row">
     <div class="col-12 col-sm-6 album" *ngFor="let album of dataSource; trackBy: trackByAlbum">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">{{ album.id }}</h4>
-          <h6 class="card-subtitle mb-2 text-muted">{{ album.title }}</h6>
-        </div>
-      </div>
+      <app-album [album]="album"></app-album>
     </div>
   </div>
 

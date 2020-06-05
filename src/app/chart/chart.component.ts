@@ -4,7 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { NGXLogger } from 'ngx-logger';
 
-import { AppConstantsService, CsvParserService } from '../core/core.module';
+import { AppConstantsService } from '../core/core.module';
 
 @Component({
   selector: 'app-chart',
@@ -17,15 +17,11 @@ export class ChartComponent implements OnInit {
   constructor(protected decimalPipe: DecimalPipe,
               protected translate: TranslateService,
               protected logger: NGXLogger,
-              protected appConstants: AppConstantsService,
-              protected csvParser: CsvParserService) {
+              protected appConstants: AppConstantsService) {
   }
 
   ngOnInit(): void {
     this.setupChart();
-
-    // parse a local csv
-    // this.csvParser.parse();
   }
 
   onSelect(event: any): void {

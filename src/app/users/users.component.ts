@@ -30,9 +30,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected textSearch: string;
   protected busy: boolean;
 
-  // todo: remove it when you're done
-  date: any;
-
   constructor(protected translate: TranslateService,
               protected uiUtilities: UIUtilitiesService,
               protected usersService: UsersService) {
@@ -106,7 +103,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       )
       .subscribe((users: User[]) => {
         this.users = users;
-        this.date = new Date();
       });
   }
 

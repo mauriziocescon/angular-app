@@ -8,18 +8,18 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 
-import { CoreModule } from '../../../core/core.module';
-import { SharedModule } from '../../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
+import { SharedModule } from '../../shared/shared.module';
 
-import { PostCommentsComponent } from './post-comments.component';
+import { UserComponent } from './user.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
-describe('PostCommentsComponent', () => {
-  let component: PostCommentsComponent;
-  let fixture: ComponentFixture<PostCommentsComponent>;
+describe('UserComponent', () => {
+  let component: UserComponent;
+  let fixture: ComponentFixture<UserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -42,7 +42,7 @@ describe('PostCommentsComponent', () => {
         SharedModule,
       ],
       declarations: [
-        PostCommentsComponent,
+        UserComponent,
       ],
       providers: [
         FormBuilder,
@@ -54,7 +54,7 @@ describe('PostCommentsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostCommentsComponent);
+    fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
