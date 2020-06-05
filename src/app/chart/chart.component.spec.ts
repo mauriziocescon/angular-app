@@ -8,7 +8,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 
-import { CoreModule, AppConstantsService, CsvParserService } from '../core/core.module';
+import { CoreModule, AppConstantsService } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { ChartComponent } from './chart.component';
@@ -49,7 +49,6 @@ describe('ChartComponent', () => {
         TranslateService,
         NGXLogger,
         AppConstantsService,
-        CsvParserService,
       ],
     })
       .compileComponents();

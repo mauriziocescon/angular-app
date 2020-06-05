@@ -11,6 +11,8 @@ import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { AlbumModule } from './album/album.module';
+
 import { AlbumsComponent } from './albums.component';
 import { AlbumsService } from './albums.data-service';
 
@@ -41,6 +43,7 @@ describe('AlbumsComponent', () => {
         }),
         CoreModule.forRoot(),
         SharedModule,
+        AlbumModule,
       ],
       declarations: [
         AlbumsComponent,

@@ -11,10 +11,10 @@ import { LoggerModule, NGXLogger, NgxLoggerLevel } from 'ngx-logger';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { UserModule } from './user/user.module';
+
 import { UsersComponent } from './users.component';
 import { UsersService } from './users.data-service';
-import { UsersPostsComponent } from './users-posts/users-posts.component';
-import { PostCommentsComponent } from './users-posts/post-comments/post-comments.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -43,11 +43,10 @@ describe('UsersComponent', () => {
         }),
         CoreModule.forRoot(),
         SharedModule,
+        UserModule,
       ],
       declarations: [
         UsersComponent,
-        UsersPostsComponent,
-        PostCommentsComponent,
       ],
       providers: [
         FormBuilder,
