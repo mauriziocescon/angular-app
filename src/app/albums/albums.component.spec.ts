@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { Observable, of } from 'rxjs';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -13,11 +15,20 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AlbumModule } from './album/album.module';
 
+import { Album } from './album.model';
 import { AlbumsComponent } from './albums.component';
 import { AlbumsService } from './albums.data-service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+// Stub AlbumsService
+class AlbumsStubService {
+
+  getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{ albums: Album[], lastPage: boolean }> {
+    return of({ albums: [], lastPage: true });
+  }
 }
 
 describe('AlbumsComponent', () => {
@@ -52,7 +63,7 @@ describe('AlbumsComponent', () => {
         FormBuilder,
         TranslateService,
         NGXLogger,
-        { provide: AlbumsService, useValue: {} }, // todo: Provide a test-double service
+        { provide: AlbumsService, useValue: AlbumsStubService },
       ],
     })
       .compileComponents();

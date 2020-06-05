@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { Observable, of } from 'rxjs';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -13,11 +15,20 @@ import { SharedModule } from '../shared/shared.module';
 
 import { UserModule } from './user/user.module';
 
+import { User } from './user.model';
 import { UsersComponent } from './users.component';
 import { UsersService } from './users.data-service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+// Stub UsersService
+class UsersStubService {
+
+  getUsers(textFilter: string | undefined): Observable<User[]> {
+    return of([]);
+  }
 }
 
 describe('UsersComponent', () => {
@@ -52,7 +63,7 @@ describe('UsersComponent', () => {
         FormBuilder,
         TranslateService,
         NGXLogger,
-        { provide: UsersService, useValue: {} }, // todo: Provide a test-double service
+        { provide: UsersService, useValue: UsersStubService },
       ],
     })
       .compileComponents();
