@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -24,7 +24,7 @@ import { Album } from './album.model';
 export class AlbumsComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
   protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
-  protected paramsSubscription: any;
+  protected paramsSubscription: Subscription;
 
   protected albums: Album[] | undefined;
   protected textSearch: string;

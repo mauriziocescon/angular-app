@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
   catchError,
   debounceTime,
@@ -24,7 +24,7 @@ import { User } from './user.model';
 export class UsersComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string }>;
   protected paramsObservable$: Observable<{ textSearch: string }>;
-  protected paramsSubscription: any;
+  protected paramsSubscription: Subscription;
 
   protected users: User[] | undefined;
   protected textSearch: string;
