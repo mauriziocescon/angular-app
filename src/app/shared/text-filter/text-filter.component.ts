@@ -28,12 +28,20 @@ export class TextFilterComponent implements OnInit, OnDestroy {
     return this.searchControl.value;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       textFilter: this.searchControl = new FormControl(''),
     });
 
     this.subscribeToSearchControlValueChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeToSearchControlValueChanges();
+  }
+
+  resetTextFilter(): void {
+    this.searchControl.setValue('');
   }
 
   protected subscribeToSearchControlValueChanges(): void {
@@ -52,17 +60,9 @@ export class TextFilterComponent implements OnInit, OnDestroy {
         });
   }
 
-  resetTextFilter(): void {
-    this.searchControl.setValue('');
-  }
-
   protected unsubscribeToSearchControlValueChanges(): void {
     if (this.searchControlSubscription) {
       this.searchControlSubscription.unsubscribe();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeToSearchControlValueChanges();
   }
 }

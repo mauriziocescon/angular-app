@@ -6,7 +6,7 @@ import { AppLanguageService } from './services/app-language.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { UtilitiesService } from './services/utilities.service';
 
-export function createLanguageIdLoader(appLanguageService: AppLanguageService) {
+export function createLanguageIdLoader(appLanguageService: AppLanguageService): string {
   return appLanguageService.getLanguageId();
 }
 
@@ -24,7 +24,7 @@ export class CoreModule {
     }
   }
 
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [
