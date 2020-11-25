@@ -46,7 +46,7 @@ describe('TextFilterComponent', () => {
         TranslateService,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
