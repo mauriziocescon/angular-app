@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -20,7 +20,7 @@ describe('TextFilterComponent', () => {
   let component: TextFilterComponent;
   let fixture: ComponentFixture<TextFilterComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
@@ -47,12 +47,16 @@ describe('TextFilterComponent', () => {
       ],
     })
     .compileComponents();
-  }));
+  });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(TextFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  afterEach(async () => {
+    fixture.destroy();
   });
 
   it('should create', () => {

@@ -1,4 +1,4 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -19,7 +19,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 }
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
@@ -43,17 +46,19 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue: '/' },
       ],
     }).compileComponents();
-  }));
+  });
 
-  it('should create the app', waitForAsync(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  beforeEach(async () => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  // it(`should have as title "Demo"`, waitForAsync(() => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual("Demo");
-  // }));
+  afterEach(async () => {
+    fixture.destroy();
+  });
+
+  it('should create the app', async () => {
+    expect(component).toBeTruthy();
+  });
 });
