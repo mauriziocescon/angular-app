@@ -23,8 +23,8 @@ describe('AlbumComponent', () => {
   let component: AlbumComponent;
   let fixture: ComponentFixture<AlbumComponent>;
 
-  beforeEach(async() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         NgbModule,
@@ -55,14 +55,14 @@ describe('AlbumComponent', () => {
       .compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(AlbumComponent);
     component = fixture.componentInstance;
     component.album = {} as Album;
     fixture.detectChanges();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     fixture.destroy();
   });
 

@@ -25,7 +25,7 @@ describe('NavigationBarComponent', () => {
   let fixture: ComponentFixture<NavigationBarComponent>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         CommonModule,
         FormsModule,
@@ -61,13 +61,13 @@ describe('NavigationBarComponent', () => {
       .compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(NavigationBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     fixture.destroy();
   });
 

@@ -36,7 +36,7 @@ describe('UsersComponent', () => {
   let fixture: ComponentFixture<UsersComponent>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         NgbModule,
@@ -69,13 +69,13 @@ describe('UsersComponent', () => {
       .compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     fixture.destroy();
   });
 

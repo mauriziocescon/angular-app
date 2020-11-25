@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         RouterTestingModule,
@@ -48,17 +48,17 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     fixture.destroy();
   });
 
-  it('should create the app', async () => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
   });
 });

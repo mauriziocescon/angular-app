@@ -20,8 +20,8 @@ describe('TextFilterComponent', () => {
   let component: TextFilterComponent;
   let fixture: ComponentFixture<TextFilterComponent>;
 
-  beforeEach(async() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         CommonModule,
         FormsModule,
@@ -49,13 +49,13 @@ describe('TextFilterComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(TextFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  afterEach(async () => {
+  afterEach(() => {
     fixture.destroy();
   });
 
