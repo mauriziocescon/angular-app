@@ -67,7 +67,7 @@
     "font-awesome": "4.7.0",
     "ngx-infinite-scroll": "10.0.1",
     "ngx-logger": "4.2.2",
-    "parse-link-header": "1.0.1",
+    "parse-link-header": "2.0.0",
     "roboto-fontface": "0.10.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
