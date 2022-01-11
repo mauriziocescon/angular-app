@@ -10,7 +10,7 @@ import { User } from '../user.model';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit, OnDestroy {
-  @Input() user: User | undefined;
+  @Input() user: User;
 
   constructor(protected translate: TranslateService) {
   }

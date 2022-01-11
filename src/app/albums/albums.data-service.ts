@@ -29,7 +29,7 @@ export class AlbumsService {
           const info = this.utilities.parseLinkHeaders(response.headers);
 
           const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
-          return { albums: response.body, lastPage };
+          return { albums: response.body as Album[], lastPage };
         }),
         catchError((err: HttpErrorResponse) => this.handleError(err)),
       );

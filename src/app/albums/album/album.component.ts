@@ -10,7 +10,7 @@ import { Album } from '../album.model';
   styleUrls: ['./album.component.scss'],
 })
 export class AlbumComponent implements OnInit, OnDestroy {
-  @Input() album: Album | undefined;
+  @Input() album: Album;
 
   constructor(protected translate: TranslateService) {
   }

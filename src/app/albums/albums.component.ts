@@ -22,8 +22,8 @@ import { Album } from './album.model';
   styleUrls: ['./albums.component.scss'],
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
-  protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
-  protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
+  protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;
+  protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number, limit: number }>;
   protected paramsSubscription: Subscription;
 
   protected albums: Album[] | undefined;
