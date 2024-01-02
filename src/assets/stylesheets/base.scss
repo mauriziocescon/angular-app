@@ -91,17 +91,3 @@ $input-group-addon-bg: $primary-color;
   transform: translateX(-50%);
   z-index: 200;
 }
-
-input.ng-invalid,
-select.ng-invalid,
-textarea.ng-invalid {
-  color: $danger-color;
-  border-color: $danger-color;
-}
-
-input.ng-invalid-mc-custom-validator-error,
-select.ng-invalid-mc-custom-validator-error,
-textarea.ng-invalid-mc-custom-validator-error {
-  color: $danger-color;
-  border-color: $danger-color;
-}

@@ -8,8 +8,22 @@ import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-text-filter',
-  templateUrl: './text-filter.component.html',
-  styleUrls: ['./text-filter.component.scss'],
+  template: `
+    <form [formGroup]="searchForm">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="{{ 'TEXT_FILTER.PLACEHOLDER' | translate }}"
+               formControlName="textFilter">
+        <span class="input-group-text addon" (click)="resetTextFilter()">
+          <span class="fas fa-search" [hidden]="isTextFilterNotEmpty"></span>
+          <span class="fas fa-times" [hidden]="!isTextFilterNotEmpty"></span>
+        </span>
+      </div>
+    </form>`,
+  styles: [`
+    .addon {
+      color: var(--accent-color);
+    }
+  `],
 })
 export class TextFilterComponent implements OnInit, OnDestroy {
   @Output() valueDidChange: EventEmitter<string>;
@@ -49,20 +63,14 @@ export class TextFilterComponent implements OnInit, OnDestroy {
 
     this.searchControlSubscription = this.searchControl
       .valueChanges
-      .pipe(
-        debounceTime(1000),
-      )
-      .subscribe((value: string) => {
-          this.valueDidChange.emit(value);
-        },
-        (e) => {
-          this.logger.error(e.toString());
-        });
+      .pipe(debounceTime(1000))
+      .subscribe({
+        next: value => this.valueDidChange.emit(value),
+        error: e => this.logger.error(e.toString()),
+      });
   }
 
   protected unsubscribeToSearchControlValueChanges(): void {
-    if (this.searchControlSubscription) {
-      this.searchControlSubscription.unsubscribe();
-    }
+    this.searchControlSubscription?.unsubscribe();
   }
 }

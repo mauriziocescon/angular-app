@@ -8,8 +8,37 @@ import { AppConstantsService } from '../core/core.module';
 
 @Component({
   selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  template: `
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="chart">
+            <ngx-charts-bar-horizontal
+              [scheme]="barChartData.colorScheme"
+              [results]="barChartData.data"
+              [xAxis]="barChartData.showXAxis"
+              [yAxis]="barChartData.showYAxis"
+              [legend]="barChartData.showLegend"
+              [showXAxisLabel]="barChartData.showXAxisLabel"
+              [showYAxisLabel]="barChartData.showYAxisLabel"
+              [xAxisLabel]="barChartData.xAxisLabel"
+              [yAxisLabel]="barChartData.yAxisLabel"
+              [xAxisTickFormatting]="barChartData.xAxisTickFormatting"
+              (select)="onSelect($event)">
+              <ng-template #tooltipTemplate let-model="model">
+                <h6>{{ model.name }}</h6>
+                <h5>{{ model.value | number }}</h5>
+              </ng-template>
+            </ngx-charts-bar-horizontal>
+          </div>
+        </div>
+      </div>
+    </div>`,
+  styles: [`
+    .chart {
+      height: 200px;
+    }
+  `],
 })
 export class ChartComponent implements OnInit {
   barChartData: any;

@@ -18,8 +18,39 @@ import { User } from './user.model';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  template: `
+    <div class="container-fluid users-component">
+
+      <div class="row">
+        <div class="col-12">
+          <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showData">
+        <div class="col-12 col-sm-6 user" *ngFor="let user of dataSource; trackBy: trackByUser">
+          <app-user [user]="user"></app-user>
+        </div>
+        <div class="col-12">
+          <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
+        </div>
+      </div>
+
+      <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}</div>
+      <div class="go-up" appScrollToTop></div>
+    </div>`,
+  styles: [`
+    .users-component {
+      padding-top: 10px;
+
+      .user {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  `],
 })
 export class UsersComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string }>;
@@ -87,9 +118,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         startWith({ textSearch: this.textSearch }),
         tap(() => this.busy = true),
         debounceTime(50),
-        switchMap((params: { textSearch: string }) => {
-          return this.usersService.getUsers(params.textSearch);
-        }),
+        switchMap(({ textSearch }) => this.usersService.getUsers(textSearch)),
         tap(() => this.busy = false),
         catchError(err => {
           this.busy = false;
@@ -101,9 +130,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           return throwError(err);
         }),
       )
-      .subscribe((users: User[]) => {
-        this.users = users;
-      });
+      .subscribe(users => this.users = users);
   }
 
   retryLoadingDataSource(): void {
@@ -111,9 +138,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   unsubscribeAll(): void {
-    if (this.paramsSubscription) {
-      this.paramsSubscription.unsubscribe();
-    }
+    this.paramsSubscription?.unsubscribe();
   }
 
   ngOnDestroy(): void {

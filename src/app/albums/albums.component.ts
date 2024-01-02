@@ -18,8 +18,37 @@ import { Album } from './album.model';
 
 @Component({
   selector: 'app-albums',
-  templateUrl: './albums.component.html',
-  styleUrls: ['./albums.component.scss'],
+  template: `
+    <div class="container-fluid albums-component" infiniteScroll (scrolled)="onScroll()">
+
+      <div class="row">
+        <div class="col-12">
+          <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 album" *ngFor="let album of dataSource; trackBy: trackByAlbum">
+          <app-album [album]="album"></app-album>
+        </div>
+      </div>
+
+      <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
+      <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}</div>
+      <div class="go-up" appScrollToTop></div>
+    </div>`,
+  styles: [`
+    .albums-component {
+      padding-top: 10px;
+
+      .album {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  `],
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;
@@ -109,8 +138,8 @@ export class AlbumsComponent implements OnInit, OnDestroy {
         startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber, limit: this.limit }),
         tap(() => this.busy = true),
         debounceTime(50),
-        switchMap((params: { textSearch: string, pageNumber: number, limit: number }) => {
-          return this.albumsService.getAlbums(params.textSearch, params.pageNumber, params.limit);
+        switchMap(({ textSearch, pageNumber, limit }) => {
+          return this.albumsService.getAlbums(textSearch, pageNumber, limit);
         }),
         tap(() => this.busy = false),
         catchError(err => {
@@ -124,7 +153,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
           return throwError(err);
         }),
       )
-      .subscribe((data: { albums: Album[], lastPage: boolean }) => {
+      .subscribe(data => {
         this.albums = this.albums === undefined ? data.albums : this.albums.concat(data.albums);
         this.loadCompleted = data.lastPage;
 
@@ -140,9 +169,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   }
 
   unsubscribeAll(): void {
-    if (this.paramsSubscription) {
-      this.paramsSubscription.unsubscribe();
-    }
+    this.paramsSubscription?.unsubscribe();
   }
 
   ngOnDestroy(): void {
