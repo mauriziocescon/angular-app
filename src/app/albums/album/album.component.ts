@@ -7,7 +7,6 @@ import { Album } from '../album.model';
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
-  styleUrls: ['./album.component.scss'],
 })
 export class AlbumComponent implements OnInit, OnDestroy {
   @Input() album: Album;
