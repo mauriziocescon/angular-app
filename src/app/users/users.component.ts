@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
@@ -78,10 +78,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected textSearch: string;
   protected busy: boolean;
 
-  constructor(protected translate: TranslateService,
-              protected uiUtilities: UIUtilitiesService,
-              protected usersService: UsersService) {
-  }
+  protected translate = inject(TranslateService);
+  protected uiUtilities = inject(UIUtilitiesService);
+  protected usersService = inject(UsersService);
 
   get isLoadingData(): boolean {
     return this.busy === true;
