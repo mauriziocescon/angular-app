@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Input } from '@angular/core';
 
 import { Album } from '../album.model';
 
 @Component({
   selector: 'app-album',
+  standalone: true,
   template: `
     <div class="card">
       <div class="card-body">
@@ -14,15 +13,6 @@ import { Album } from '../album.model';
       </div>
     </div>`,
 })
-export class AlbumComponent implements OnInit, OnDestroy {
+export class AlbumComponent {
   @Input() album: Album;
-
-  constructor(protected translate: TranslateService) {
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-  }
 }

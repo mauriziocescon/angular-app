@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import * as parseLinkHeader from 'parse-link-header';
+import parseLinkHeader from 'parse-link-header';
 
-import { AppConstantsService } from './app-constants.service';
-
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UtilitiesService {
-
-  constructor(protected appConstants: AppConstantsService) {
-  }
-
   /**
    * Parse link property
    * inside headers

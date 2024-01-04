@@ -1,10 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { AppConstantsService, AppLanguageService } from '../../core/core.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { AppConstantsService, AppLanguageService } from '../../core';
 
 @Component({
   selector: 'app-navigation-bar',
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    TranslateModule,
+    NgbCollapseModule,
+    NgbDropdownModule,
+  ],
   template: `
     <nav class="navbar navbar-expand-lg bg-primary navbar-light fixed-top">
       <div class="container-fluid">
@@ -43,14 +55,13 @@ import { AppConstantsService, AppLanguageService } from '../../core/core.module'
     </nav>`,
 })
 export class NavigationBarComponent implements OnInit {
-  languages: string[];
-  selectedLanguageId: string;
-  isCollapsed: boolean;
+  languages: string[] = [];
+  selectedLanguageId: string | undefined;
+  isCollapsed: boolean = false;
 
-  constructor(protected router: Router,
-              protected appConstants: AppConstantsService,
-              protected appLanguage: AppLanguageService) {
-  }
+  protected router = inject(Router);
+  protected appConstants = inject(AppConstantsService);
+  protected appLanguage = inject(AppLanguageService);
 
   get canOpenJsonServer(): boolean {
     return this.appConstants.Application.SHOW_JSON_SERVER_API === true;
@@ -70,15 +81,15 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goToAlbums(): void {
-    this.router.navigate(['/albums']);
+    this.router.navigateByUrl('/albums');
   }
 
   goToUsers(): void {
-    this.router.navigate(['/users']);
+    this.router.navigateByUrl('/users');
   }
 
   goToCharts(): void {
-    this.router.navigate(['/chart']);
+    this.router.navigateByUrl('/chart');
   }
 
   openJsonServer(): void {

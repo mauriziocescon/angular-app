@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-
-import { TranslateService } from '@ngx-translate/core';
+import { Component, Input } from '@angular/core';
 
 import { User } from '../user.model';
 
 @Component({
   selector: 'app-user',
+  standalone: true,
   template: `
     <div class="card">
       <div class="card-body">
@@ -15,15 +14,6 @@ import { User } from '../user.model';
       </div>
     </div>`,
 })
-export class UserComponent implements OnInit, OnDestroy {
+export class UserComponent {
   @Input() user: User;
-
-  constructor(protected translate: TranslateService) {
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-  }
 }

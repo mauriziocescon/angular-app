@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
@@ -9,15 +9,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppConstantsService } from './app-constants.service';
 import { LocalStorageService } from './local-storage.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AppLanguageService {
   protected selectedLanguageId: string;
 
-  constructor(protected translate: TranslateService,
-              protected appConstants: AppConstantsService,
-              protected localStorage: LocalStorageService) {
+  protected translate = inject(TranslateService);
+  protected appConstants = inject(AppConstantsService);
+  protected localStorage = inject(LocalStorageService);
+
+  constructor() {
     this.start();
 
+    this.selectedLanguageId = this.appConstants.Languages.DEFAULT_LANGUAGE;
     this.translate.setDefaultLang(this.appConstants.Languages.DEFAULT_LANGUAGE);
     this.translate.use(this.getLanguageId());
   }

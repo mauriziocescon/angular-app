@@ -1,14 +1,16 @@
-import { Directive, ElementRef, HostListener, Inject, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[appScrollToTop]',
+  standalone: true,
 })
 export class ScrollToTopDirective {
+  protected el = inject(ElementRef);
+  protected renderer = inject(Renderer2);
+  protected document = inject(DOCUMENT);
 
-  constructor(private el: ElementRef,
-              private renderer: Renderer2,
-              @Inject(DOCUMENT) private document: Document) {
+  constructor() {
     this.renderer.setStyle(this.el.nativeElement, 'visibility', 'hidden');
   }
 

@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NGXLogger } from 'ngx-logger';
 
-import { ModalAlertComponent } from './modal-alert/modal-alert.component';
-import { ModalConfirmerComponent } from './modal-confirmer/modal-confirmer.component';
+import { ModalAlertComponent } from './modal-alert.component';
+import { ModalConfirmerComponent } from './modal-confirmer.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UIUtilitiesService {
-
-  constructor(protected modalService: NgbModal,
-              protected logger: NGXLogger) {
-  }
+  protected modalService = inject(NgbModal);
+  protected logger = inject(NGXLogger);
 
   modalAlert(title: string, message: string, buttonLabel: string): void {
     const modalRef = this.modalService.open(ModalAlertComponent);
@@ -19,11 +19,9 @@ export class UIUtilitiesService {
     modalRef.componentInstance.message = message;
     modalRef.componentInstance.buttonLabel = buttonLabel;
 
-    modalRef.result.then((result) => {
-      this.logger.log(`Closed with: ${result}`);
-    }, (reason) => {
-      this.logger.log(`Dismissed ${this.getDismissReason(reason)}`);
-    });
+    modalRef.result
+      .then(result => this.logger.log(`Closed with: ${result}`))
+      .catch(reason => this.logger.log(`Dismissed ${this.getDismissReason(reason)}`));
   }
 
   modalConfirmer(title: string, message: string, yesButtonLabel: string, noButtonLabel: string, callback: (result: boolean) => void): void {
@@ -33,12 +31,12 @@ export class UIUtilitiesService {
     modalRef.componentInstance.yesButtonLabel = yesButtonLabel;
     modalRef.componentInstance.noButtonLabel = noButtonLabel;
 
-    modalRef.result.then((result) => {
-      this.logger.log(`Closed with: ${result}`);
-      callback(result);
-    }, (reason) => {
-      this.logger.log(`Dismissed ${this.getDismissReason(reason)}`);
-    });
+    modalRef.result
+      .then(result => {
+        this.logger.log(`Closed with: ${result}`);
+        callback(result);
+      })
+      .catch(reason => this.logger.log(`Dismissed ${this.getDismissReason(reason)}`));
   }
 
   protected getDismissReason(reason: any): string {

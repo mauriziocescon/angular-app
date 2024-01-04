@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
@@ -7,16 +7,14 @@ import {
   map,
 } from 'rxjs/operators';
 
-import { AppConstantsService } from '../core/core.module';
+import { AppConstantsService } from '../core';
 
 import { User } from './user.model';
 
 @Injectable()
 export class UsersService {
-
-  constructor(protected http: HttpClient,
-              protected appConstants: AppConstantsService) {
-  }
+  protected http = inject(HttpClient);
+  protected appConstants = inject(AppConstantsService);
 
   getUsers(textFilter: string | undefined): Observable<User[]> {
     const url = this.appConstants.Api.users;
@@ -29,13 +27,13 @@ export class UsersService {
       );
   }
 
-  protected handleError(err: HttpErrorResponse): Observable<never> {
-    if (err.error instanceof ErrorEvent) {
+  private handleError(err: HttpErrorResponse): Observable<never> {
+    if (err.status === 0) {
       // A client-side or network error occurred
-      return throwError(err.error.message);
+      return throwError(() => err.error.message);
     } else {
       // The backend returned an unsuccessful response code.
-      return throwError(`Code ${err.status}, body: ${err.message}` || 'Server error');
+      return throwError(() => `Code ${err.status}, body: ${err.message}`);
     }
   }
 }

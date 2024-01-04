@@ -1,13 +1,19 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, OnDestroy, Output, inject } from '@angular/core';
+import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-text-filter',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+  ],
   template: `
     <form [formGroup]="searchForm">
       <div class="input-group">
@@ -26,20 +32,22 @@ import { NGXLogger } from 'ngx-logger';
   `],
 })
 export class TextFilterComponent implements OnInit, OnDestroy {
-  @Output() valueDidChange: EventEmitter<string>;
+  @Output() valueDidChange: EventEmitter<string | null>;
 
   searchForm: FormGroup;
-  protected searchControl: FormControl;
+  protected searchControl: FormControl<string | null>;
 
   protected searchControlSubscription: Subscription;
 
-  constructor(protected formBuilder: FormBuilder,
-              protected logger: NGXLogger) {
-    this.valueDidChange = new EventEmitter<string>();
+  protected formBuilder = inject(FormBuilder);
+  protected logger = inject(NGXLogger);
+
+  constructor() {
+    this.valueDidChange = new EventEmitter();
   }
 
   get isTextFilterNotEmpty(): boolean {
-    return this.searchControl.value;
+    return !!this.searchControl?.value;
   }
 
   ngOnInit(): void {
@@ -55,14 +63,14 @@ export class TextFilterComponent implements OnInit, OnDestroy {
   }
 
   resetTextFilter(): void {
-    this.searchControl.setValue('');
+    this.searchControl?.setValue('');
   }
 
   protected subscribeToSearchControlValueChanges(): void {
     this.unsubscribeToSearchControlValueChanges();
 
     this.searchControlSubscription = this.searchControl
-      .valueChanges
+      ?.valueChanges
       .pipe(debounceTime(1000))
       .subscribe({
         next: value => this.valueDidChange.emit(value),

@@ -1,6 +1,6 @@
-import { Enum } from '../../shared/utilities/enum';
+import { Enum } from '../shared/utilities/enum';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 export class Api {
   albums = environment.apiUrl + 'albums';

@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -9,15 +10,30 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { TranslateService } from '@ngx-translate/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { UIUtilitiesService } from '../shared/shared.module';
+import { ScrollToTopDirective, TextFilterComponent, UIUtilitiesService } from '../shared';
+
+import { AlbumComponent } from './album/album.component';
 
 import { AlbumsService } from './albums.data-service';
 import { Album } from './album.model';
 
 @Component({
   selector: 'app-albums',
+  standalone: true,
+  imports: [
+    NgFor,
+    InfiniteScrollModule,
+    TranslateModule,
+    ScrollToTopDirective,
+    TextFilterComponent,
+    AlbumComponent,
+  ],
+  providers: [
+    AlbumsService,
+  ],
   template: `
     <div class="container-fluid albums-component" infiniteScroll (scrolled)="onScroll()">
 
@@ -36,7 +52,9 @@ import { Album } from './album.model';
       <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
       <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
       <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry"
+           (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}
+      </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
   styles: [`
@@ -63,9 +81,11 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   protected retry: boolean;
   protected busy: boolean;
 
-  constructor(protected translate: TranslateService,
-              protected uiUtilities: UIUtilitiesService,
-              protected albumsService: AlbumsService) {
+  protected translate = inject(TranslateService);
+  protected uiUtilities = inject(UIUtilitiesService);
+  protected albumsService = inject(AlbumsService);
+
+  constructor() {
     this.limit = 20;
   }
 

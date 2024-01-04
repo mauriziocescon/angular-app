@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
@@ -7,21 +7,22 @@ import {
   map,
 } from 'rxjs/operators';
 
-import { AppConstantsService, UtilitiesService } from '../core/core.module';
+import { AppConstantsService, UtilitiesService } from '../core';
 
 import { Album } from './album.model';
 
 @Injectable()
 export class AlbumsService {
+  protected http = inject(HttpClient);
+  protected appConstants = inject(AppConstantsService);
+  protected utilities = inject(UtilitiesService);
 
-  constructor(protected http: HttpClient,
-              protected appConstants: AppConstantsService,
-              protected utilities: UtilitiesService) {
-  }
-
-  getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{ albums: Album[], lastPage: boolean }> {
+  getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{
+    albums: Album[],
+    lastPage: boolean
+  }> {
     const url = this.appConstants.Api.albums;
-    const params = { q: textFilter || '', _page: page.toString(), _limit: limit.toString(), };
+    const params = { q: textFilter || '', _page: page.toString(), _limit: limit.toString() };
 
     return this.http.get<Album[]>(url, { params, observe: 'response' })
       .pipe(
@@ -35,13 +36,13 @@ export class AlbumsService {
       );
   }
 
-  protected handleError(err: HttpErrorResponse): Observable<never> {
-    if (err.error instanceof ErrorEvent) {
+  private handleError(err: HttpErrorResponse): Observable<never> {
+    if (err.status === 0) {
       // A client-side or network error occurred
-      return throwError(err.error.message);
+      return throwError(() => err.error.message);
     } else {
       // The backend returned an unsuccessful response code.
-      return throwError(`Code ${err.status}, body: ${err.message}` || 'Server error');
+      return throwError(() => `Code ${err.status}, body: ${err.message}`);
     }
   }
 }

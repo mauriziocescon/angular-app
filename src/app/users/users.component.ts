@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -9,15 +10,29 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-import { UIUtilitiesService } from '../shared/shared.module';
+import { ScrollToTopDirective, TextFilterComponent, UIUtilitiesService } from '../shared';
+
+import { UserComponent } from './user/user.component';
 
 import { UsersService } from './users.data-service';
 import { User } from './user.model';
 
 @Component({
   selector: 'app-users',
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    TranslateModule,
+    ScrollToTopDirective,
+    TextFilterComponent,
+    UserComponent,
+  ],
+  providers: [
+    UsersService,
+  ],
   template: `
     <div class="container-fluid users-component">
 
@@ -38,7 +53,9 @@ import { User } from './user.model';
 
       <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
       <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry"
+           (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}
+      </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
   styles: [`

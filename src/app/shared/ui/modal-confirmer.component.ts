@@ -1,9 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-confirmer',
+  standalone: true,
+  imports: [
+    NgbModalModule,
+  ],
   template: `
     <div class="modal-header">
       <h4 class="modal-title">{{ title }}</h4>
@@ -18,13 +22,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     </div>`,
 })
 export class ModalConfirmerComponent {
-  @Input() title: string;
-  @Input() message: string;
-  @Input() yesButtonLabel: string;
-  @Input() noButtonLabel: string;
+  @Input() title: string | undefined;
+  @Input() message: string | undefined;
+  @Input() yesButtonLabel: string | undefined;
+  @Input() noButtonLabel: string | undefined;
 
-  constructor(protected activeModal: NgbActiveModal) {
-  }
+  protected activeModal = inject(NgbActiveModal);
 
   yes(): void {
     this.activeModal.close(true);
