@@ -29,7 +29,7 @@ app.use(isProduction ? '/api' : '/', router);
 // Fallback on frontend routes
 app.get('*', (req, res, next) => {
   // load index.html (frontend will handle page changes)
-  isProduction ? res.sendFile(path.join(__dirname, '../dist/angular-app/index.html')) : next();
+  isProduction ? res.sendFile(path.join(__dirname, '../dist/angular-app/browser/index.html')) : next();
 });
 
 // Start listening
