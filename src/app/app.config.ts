@@ -1,5 +1,4 @@
 import { ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 
@@ -24,7 +23,6 @@ function createLanguageIdLoader(appLanguageService: AppLanguageService): string 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideAnimations(),
     provideHttpClient(),
     provideRouter(routes),
     importProvidersFrom(

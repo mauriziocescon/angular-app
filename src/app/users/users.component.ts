@@ -1,5 +1,4 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -23,8 +22,6 @@ import { User } from './user.model';
   selector: 'app-users',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     TranslateModule,
     ScrollToTopDirective,
     TextFilterComponent,
@@ -42,14 +39,18 @@ import { User } from './user.model';
         </div>
       </div>
 
-      <div class="row" *ngIf="showData">
-        <div class="col-12 col-sm-6 user" *ngFor="let user of dataSource; trackBy: trackByUser">
-          <app-user [user]="user"></app-user>
+      @if (showData) {
+        <div class="row">
+          @for (user of dataSource; track user.id) {
+            <div class="col-12 col-sm-6 user">
+              <app-user [user]="user"></app-user>
+            </div>
+          }
+          <div class="col-12">
+            <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
+          </div>
         </div>
-        <div class="col-12">
-          <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
-        </div>
-      </div>
+      }
 
       <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
       <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
@@ -109,10 +110,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.paramsObservable$ = this.paramsSubject$.asObservable();
 
     this.loadDataSource();
-  }
-
-  trackByUser(index: number, user: User): number {
-    return user.id;
   }
 
   textSearchValueDidChange(value: string): void {

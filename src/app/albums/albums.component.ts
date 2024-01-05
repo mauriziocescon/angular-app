@@ -1,5 +1,4 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { NgFor } from '@angular/common';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -24,7 +23,6 @@ import { Album } from './album.model';
   selector: 'app-albums',
   standalone: true,
   imports: [
-    NgFor,
     InfiniteScrollModule,
     TranslateModule,
     ScrollToTopDirective,
@@ -44,9 +42,11 @@ import { Album } from './album.model';
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-6 album" *ngFor="let album of dataSource; trackBy: trackByAlbum">
-          <app-album [album]="album"></app-album>
-        </div>
+        @for (album of dataSource; track album.id) {
+          <div class="col-12 col-sm-6 album">
+            <app-album [album]="album"></app-album>
+          </div>
+        }
       </div>
 
       <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
@@ -118,10 +118,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.paramsObservable$ = this.paramsSubject$.asObservable();
 
     this.loadDataSource();
-  }
-
-  trackByAlbum(index: number, album: Album): number {
-    return album.id;
   }
 
   textSearchValueDidChange(value: string): void {

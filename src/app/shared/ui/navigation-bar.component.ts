@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,8 +10,6 @@ import { AppConstantsService, AppLanguageService } from '../../core';
   selector: 'app-navigation-bar',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     TranslateModule,
     NgbCollapseModule,
     NgbDropdownModule,
@@ -38,15 +35,19 @@ import { AppConstantsService, AppLanguageService } from '../../core';
             </li>
           </ul>
           <ul class="navbar-nav">
-            <li class="nav-item" *ngIf="canOpenJsonServer">
-              <a class="nav-link" (click)="openJsonServer()"><span class="fas fa-server"></span></a>
-            </li>
+            @if (canOpenJsonServer) {
+              <li class="nav-item">
+                <a class="nav-link" (click)="openJsonServer()"><span class="fas fa-server"></span></a>
+              </li>
+            }
             <li class="nav-item dropdown" ngbDropdown>
               <a class="nav-link dropdown-toggle" ngbDropdownToggle>{{ selectedLanguageId }}</a>
               <div class="dropdown-menu" ngbDropdownMenu>
-                <a class="dropdown-item" *ngFor="let language of languages" (click)="selectLanguage(language)">
-                  {{ language }}
-                </a>
+                @for (language of languages; track language) {
+                  <a class="dropdown-item" (click)="selectLanguage(language)">
+                    {{ language }}
+                  </a>
+                }
               </div>
             </li>
           </ul>
