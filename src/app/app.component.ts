@@ -15,11 +15,11 @@ import { NavigationBarComponent } from './shared';
     <div class="main-view">
       <router-outlet></router-outlet>
     </div>`,
-  styles: [`
+  styles: `
     .main-view {
       padding-top: 4.25rem;
     }
-  `],
+  `,
 })
 export class AppComponent {
 }

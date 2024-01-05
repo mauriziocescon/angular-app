@@ -57,7 +57,7 @@ import { Album } from './album.model';
       </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
-  styles: [`
+  styles: `
     .albums-component {
       padding-top: 10px;
 
@@ -66,7 +66,7 @@ import { Album } from './album.model';
         padding-bottom: 10px;
       }
     }
-  `],
+  `,
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;

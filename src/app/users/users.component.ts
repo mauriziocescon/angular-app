@@ -59,7 +59,7 @@ import { User } from './user.model';
       </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
-  styles: [`
+  styles: `
     .users-component {
       padding-top: 10px;
 
@@ -68,7 +68,7 @@ import { User } from './user.model';
         padding-bottom: 10px;
       }
     }
-  `],
+  `,
 })
 export class UsersComponent implements OnInit, OnDestroy {
   protected paramsSubject$: Subject<{ textSearch: string }>;

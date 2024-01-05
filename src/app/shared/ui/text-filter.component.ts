@@ -25,11 +25,11 @@ import { NGXLogger } from 'ngx-logger';
         </span>
       </div>
     </form>`,
-  styles: [`
+  styles: `
     .addon {
       color: var(--accent-color);
     }
-  `],
+  `,
 })
 export class TextFilterComponent implements OnInit, OnDestroy {
   @Output() valueDidChange: EventEmitter<string | null>;
