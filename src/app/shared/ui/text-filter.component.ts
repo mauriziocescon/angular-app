@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-text-filter',
@@ -40,7 +39,6 @@ export class TextFilterComponent implements OnInit, OnDestroy {
   protected searchControlSubscription: Subscription;
 
   protected formBuilder = inject(FormBuilder);
-  protected logger = inject(NGXLogger);
 
   constructor() {
     this.valueDidChange = new EventEmitter();
@@ -72,10 +70,7 @@ export class TextFilterComponent implements OnInit, OnDestroy {
     this.searchControlSubscription = this.searchControl
       ?.valueChanges
       .pipe(debounceTime(1000))
-      .subscribe({
-        next: value => this.valueDidChange.emit(value),
-        error: e => this.logger.error(e.toString()),
-      });
+      .subscribe(value => this.valueDidChange.emit(value));
   }
 
   protected unsubscribeToSearchControlValueChanges(): void {

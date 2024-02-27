@@ -1,7 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 
-import { NGXLogger } from 'ngx-logger';
-
 import { Enum } from '../shared';
 
 import { AppConstantsService } from './app-constants.service';
@@ -17,7 +15,6 @@ import { AppConstantsService } from './app-constants.service';
 export class LocalStorageService {
   protected prefix: string;
 
-  protected logger = inject(NGXLogger);
   protected appConstants = inject(AppConstantsService);
 
   constructor() {
@@ -29,7 +26,7 @@ export class LocalStorageService {
       const result = localStorage.getItem(this.prefix + '_' + key.toString());
       return result !== null ? JSON.parse(result) : undefined;
     } catch (e) {
-      // this.logger.warn(e.toString());
+      console.warn(e.toString());
       return undefined;
     }
   }
@@ -43,7 +40,7 @@ export class LocalStorageService {
         localStorage.setItem(this.prefix + '_' + key.toString(), result);
       }
     } catch (e) {
-      // this.logger.warn(e.toString());
+      console.warn(e.toString());
     }
   }
 
@@ -51,7 +48,7 @@ export class LocalStorageService {
     try {
       localStorage.removeItem(this.prefix + '_' + key.toString());
     } catch (e) {
-      // this.logger.warn(e.toString());
+      console.warn(e.toString());
     }
   }
 
@@ -63,7 +60,7 @@ export class LocalStorageService {
         }
       }
     } catch (e) {
-      // this.logger.warn(e.toString());
+      console.warn(e.toString());
     }
   }
 }

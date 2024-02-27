@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { NGXLogger } from 'ngx-logger';
 
 import { ModalAlertComponent } from './modal-alert.component';
 import { ModalConfirmerComponent } from './modal-confirmer.component';
@@ -11,7 +10,6 @@ import { ModalConfirmerComponent } from './modal-confirmer.component';
 })
 export class UIUtilitiesService {
   protected modalService = inject(NgbModal);
-  protected logger = inject(NGXLogger);
 
   modalAlert(title: string, message: string, buttonLabel: string): void {
     const modalRef = this.modalService.open(ModalAlertComponent);
@@ -20,8 +18,8 @@ export class UIUtilitiesService {
     modalRef.componentInstance.buttonLabel = buttonLabel;
 
     modalRef.result
-      .then(result => this.logger.log(`Closed with: ${result}`))
-      .catch(reason => this.logger.log(`Dismissed ${this.getDismissReason(reason)}`));
+      .then(result => console.log(`Closed with: ${result}`))
+      .catch(reason => console.log(`Dismissed ${this.getDismissReason(reason)}`));
   }
 
   modalConfirmer(title: string, message: string, yesButtonLabel: string, noButtonLabel: string, callback: (result: boolean) => void): void {
@@ -33,10 +31,10 @@ export class UIUtilitiesService {
 
     modalRef.result
       .then(result => {
-        this.logger.log(`Closed with: ${result}`);
+        console.log(`Closed with: ${result}`);
         callback(result);
       })
-      .catch(reason => this.logger.log(`Dismissed ${this.getDismissReason(reason)}`));
+      .catch(reason => console.log(`Dismissed ${this.getDismissReason(reason)}`));
   }
 
   protected getDismissReason(reason: any): string {
