@@ -89,10 +89,6 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigateByUrl('/users');
   }
 
-  goToCharts(): void {
-    this.router.navigateByUrl('/chart');
-  }
-
   openJsonServer(): void {
     window.open(this.appConstants.Application.JSON_SERVER_API_URL);
   }

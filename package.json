@@ -62,7 +62,6 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.2",
     "ngx-infinite-scroll": "^17.0.0",
-    "ngx-logger": "^5.0.12",
     "parse-link-header": "^2.0.0",
     "querystring": "^0.2.1",
     "roboto-fontface": "0.10.0",

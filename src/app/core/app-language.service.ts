@@ -20,26 +20,9 @@ export class AppLanguageService {
   protected localStorage = inject(LocalStorageService);
 
   constructor() {
-    this.start();
-
-    this.selectedLanguageId = this.appConstants.Languages.DEFAULT_LANGUAGE;
+    this.setup();
     this.translate.setDefaultLang(this.appConstants.Languages.DEFAULT_LANGUAGE);
     this.translate.use(this.getLanguageId());
-  }
-
-  start(): void {
-    const localStorageLang = this.localStorage.getData<string>(this.appConstants.LocalStorageKey.LANGUAGE_ID);
-    const browserLang = this.getBrowserLang();
-    const defaultLang = this.getDefaultLanguageId();
-
-    if (localStorageLang && this.appConstants.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
-      this.selectedLanguageId = localStorageLang;
-      this.registerLocale();
-    } else {
-      this.selectedLanguageId = this.appConstants.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
-      this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
-      this.registerLocale();
-    }
   }
 
   getLanguageId(): string {
@@ -63,8 +46,23 @@ export class AppLanguageService {
     return this.appConstants.Languages.SUPPORTED_LANG;
   }
 
-  getDefaultLanguageId(): string {
+  protected getDefaultLanguageId(): string {
     return this.appConstants.Languages.DEFAULT_LANGUAGE;
+  }
+
+  protected setup(): void {
+    const localStorageLang = this.localStorage.getData<string>(this.appConstants.LocalStorageKey.LANGUAGE_ID);
+    const browserLang = this.getBrowserLang();
+    const defaultLang = this.getDefaultLanguageId();
+
+    if (localStorageLang && this.appConstants.Languages.SUPPORTED_LANG.indexOf(localStorageLang) !== -1) {
+      this.selectedLanguageId = localStorageLang;
+      this.registerLocale();
+    } else {
+      this.selectedLanguageId = this.appConstants.Languages.SUPPORTED_LANG.indexOf(browserLang) === -1 ? defaultLang : browserLang;
+      this.localStorage.setData(this.appConstants.LocalStorageKey.LANGUAGE_ID, this.selectedLanguageId);
+      this.registerLocale();
+    }
   }
 
   protected getBrowserLang(): string {
