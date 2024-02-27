@@ -25,7 +25,7 @@ export class ModalAlertComponent {
   @Input() message: string | undefined;
   @Input() buttonLabel: string | undefined;
 
-  protected activeModal = inject(NgbActiveModal);
+  private activeModal = inject(NgbActiveModal);
 
   close(): void {
     this.activeModal.close('Close click');

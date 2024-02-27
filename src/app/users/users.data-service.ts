@@ -13,8 +13,8 @@ import { User } from './user.model';
 
 @Injectable()
 export class UsersService {
-  protected http = inject(HttpClient);
-  protected appConstants = inject(AppConstantsService);
+  private http = inject(HttpClient);
+  private appConstants = inject(AppConstantsService);
 
   getUsers(textFilter: string | undefined): Observable<User[]> {
     const url = this.appConstants.Api.users;

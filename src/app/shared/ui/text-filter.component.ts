@@ -34,11 +34,11 @@ export class TextFilterComponent implements OnInit, OnDestroy {
   @Output() valueDidChange: EventEmitter<string | null>;
 
   searchForm: FormGroup;
-  protected searchControl: FormControl<string | null>;
+  private searchControl: FormControl<string | null>;
 
-  protected searchControlSubscription: Subscription;
+  private searchControlSubscription: Subscription;
 
-  protected formBuilder = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
 
   constructor() {
     this.valueDidChange = new EventEmitter();
@@ -64,7 +64,7 @@ export class TextFilterComponent implements OnInit, OnDestroy {
     this.searchControl?.setValue('');
   }
 
-  protected subscribeToSearchControlValueChanges(): void {
+  private subscribeToSearchControlValueChanges(): void {
     this.unsubscribeToSearchControlValueChanges();
 
     this.searchControlSubscription = this.searchControl
@@ -73,7 +73,7 @@ export class TextFilterComponent implements OnInit, OnDestroy {
       .subscribe(value => this.valueDidChange.emit(value));
   }
 
-  protected unsubscribeToSearchControlValueChanges(): void {
+  private unsubscribeToSearchControlValueChanges(): void {
     this.searchControlSubscription?.unsubscribe();
   }
 }

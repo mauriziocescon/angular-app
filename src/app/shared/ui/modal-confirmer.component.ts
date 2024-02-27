@@ -27,7 +27,7 @@ export class ModalConfirmerComponent {
   @Input() yesButtonLabel: string | undefined;
   @Input() noButtonLabel: string | undefined;
 
-  protected activeModal = inject(NgbActiveModal);
+  private activeModal = inject(NgbActiveModal);
 
   yes(): void {
     this.activeModal.close(true);

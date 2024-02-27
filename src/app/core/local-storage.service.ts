@@ -13,9 +13,9 @@ import { AppConstantsService } from './app-constants.service';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  protected prefix: string;
+  private prefix: string;
 
-  protected appConstants = inject(AppConstantsService);
+  private appConstants = inject(AppConstantsService);
 
   constructor() {
     this.prefix = this.appConstants.Application.APP_NAME;

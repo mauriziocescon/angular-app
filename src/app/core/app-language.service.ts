@@ -13,11 +13,11 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class AppLanguageService {
-  protected selectedLanguageId: string;
+  private selectedLanguageId: string;
 
-  protected translate = inject(TranslateService);
-  protected appConstants = inject(AppConstantsService);
-  protected localStorage = inject(LocalStorageService);
+  private translate = inject(TranslateService);
+  private appConstants = inject(AppConstantsService);
+  private localStorage = inject(LocalStorageService);
 
   constructor() {
     this.setup();
@@ -46,11 +46,11 @@ export class AppLanguageService {
     return this.appConstants.Languages.SUPPORTED_LANG;
   }
 
-  protected getDefaultLanguageId(): string {
+  private getDefaultLanguageId(): string {
     return this.appConstants.Languages.DEFAULT_LANGUAGE;
   }
 
-  protected setup(): void {
+  private setup(): void {
     const localStorageLang = this.localStorage.getData<string>(this.appConstants.LocalStorageKey.LANGUAGE_ID);
     const browserLang = this.getBrowserLang();
     const defaultLang = this.getDefaultLanguageId();
@@ -65,7 +65,7 @@ export class AppLanguageService {
     }
   }
 
-  protected getBrowserLang(): string {
+  private getBrowserLang(): string {
     let lang: string = navigator.language;
 
     if (lang.length > 0) {
@@ -79,7 +79,7 @@ export class AppLanguageService {
     return lang;
   }
 
-  protected registerLocale(): void {
+  private registerLocale(): void {
     switch (this.selectedLanguageId) {
       case this.appConstants.Languages.DE: {
         registerLocaleData(localeDe);

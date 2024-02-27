@@ -6,9 +6,9 @@ import { DOCUMENT } from '@angular/common';
   standalone: true,
 })
 export class ScrollToTopDirective {
-  protected el = inject(ElementRef);
-  protected renderer = inject(Renderer2);
-  protected document = inject(DOCUMENT);
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  private document = inject(DOCUMENT);
 
   constructor() {
     this.renderer.setStyle(this.el.nativeElement, 'visibility', 'hidden');

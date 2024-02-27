@@ -9,7 +9,7 @@ import { ModalConfirmerComponent } from './modal-confirmer.component';
   providedIn: 'root',
 })
 export class UIUtilitiesService {
-  protected modalService = inject(NgbModal);
+  private modalService = inject(NgbModal);
 
   modalAlert(title: string, message: string, buttonLabel: string): void {
     const modalRef = this.modalService.open(ModalAlertComponent);
@@ -37,7 +37,7 @@ export class UIUtilitiesService {
       .catch(reason => console.log(`Dismissed ${this.getDismissReason(reason)}`));
   }
 
-  protected getDismissReason(reason: any): string {
+  private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {

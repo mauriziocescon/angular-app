@@ -13,9 +13,9 @@ import { Album } from './album.model';
 
 @Injectable()
 export class AlbumsService {
-  protected http = inject(HttpClient);
-  protected appConstants = inject(AppConstantsService);
-  protected utilities = inject(UtilitiesService);
+  private http = inject(HttpClient);
+  private appConstants = inject(AppConstantsService);
+  private utilities = inject(UtilitiesService);
 
   getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{
     albums: Album[],

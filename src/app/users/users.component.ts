@@ -71,17 +71,17 @@ import { User } from './user.model';
   `,
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  protected paramsSubject$: Subject<{ textSearch: string }>;
-  protected paramsObservable$: Observable<{ textSearch: string }>;
-  protected paramsSubscription: Subscription;
+  private paramsSubject$: Subject<{ textSearch: string }>;
+  private paramsObservable$: Observable<{ textSearch: string }>;
+  private paramsSubscription: Subscription;
 
-  protected users: User[] | undefined;
-  protected textSearch: string;
-  protected busy: boolean;
+  private users: User[] | undefined;
+  private textSearch: string;
+  private busy: boolean;
 
-  protected translate = inject(TranslateService);
-  protected uiUtilities = inject(UIUtilitiesService);
-  protected usersService = inject(UsersService);
+  private translate = inject(TranslateService);
+  private uiUtilities = inject(UIUtilitiesService);
+  private usersService = inject(UsersService);
 
   get isLoadingData(): boolean {
     return this.busy === true;

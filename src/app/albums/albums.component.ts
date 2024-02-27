@@ -69,21 +69,21 @@ import { Album } from './album.model';
   `,
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
-  protected paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;
-  protected paramsObservable$: Observable<{ textSearch: string, pageNumber: number, limit: number }>;
-  protected paramsSubscription: Subscription;
+  private paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;
+  private paramsObservable$: Observable<{ textSearch: string, pageNumber: number, limit: number }>;
+  private paramsSubscription: Subscription;
 
-  protected albums: Album[] | undefined;
-  protected textSearch: string;
-  protected pageNumber: number;
-  protected limit: number;
-  protected loadCompleted: boolean;
-  protected retry: boolean;
-  protected busy: boolean;
+  private albums: Album[] | undefined;
+  private textSearch: string;
+  private pageNumber: number;
+  private limit: number;
+  private loadCompleted: boolean;
+  private retry: boolean;
+  private busy: boolean;
 
-  protected translate = inject(TranslateService);
-  protected uiUtilities = inject(UIUtilitiesService);
-  protected albumsService = inject(AlbumsService);
+  private translate = inject(TranslateService);
+  private uiUtilities = inject(UIUtilitiesService);
+  private albumsService = inject(AlbumsService);
 
   constructor() {
     this.limit = 20;

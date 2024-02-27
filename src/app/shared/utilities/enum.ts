@@ -1,13 +1,13 @@
 export class Enum {
 
-  protected value: string;
-
-  static toEnum(val: string): Enum {
-    return new Enum(val);
-  }
+  private value: string;
 
   constructor(value: string) {
     this.value = value;
+  }
+
+  static toEnum(val: string): Enum {
+    return new Enum(val);
   }
 
   toString(): string {

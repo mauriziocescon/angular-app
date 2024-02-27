@@ -30,9 +30,6 @@ import { AppConstantsService, AppLanguageService } from '../../core';
             <li class="nav-item">
               <a class="nav-link" (click)="goToUsers()">{{ "NAVIGATION_BAR.USERS" | translate }}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="goToCharts()">{{ "NAVIGATION_BAR.CHARTS" | translate }}</a>
-            </li>
           </ul>
           <ul class="navbar-nav">
             @if (canOpenJsonServer) {
@@ -60,9 +57,9 @@ export class NavigationBarComponent implements OnInit {
   selectedLanguageId: string | undefined;
   isCollapsed: boolean = false;
 
-  protected router = inject(Router);
-  protected appConstants = inject(AppConstantsService);
-  protected appLanguage = inject(AppLanguageService);
+  private router = inject(Router);
+  private appConstants = inject(AppConstantsService);
+  private appLanguage = inject(AppLanguageService);
 
   get canOpenJsonServer(): boolean {
     return this.appConstants.Application.SHOW_JSON_SERVER_API === true;
