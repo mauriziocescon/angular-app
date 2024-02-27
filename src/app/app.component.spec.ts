@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
+import { TranslocoTestingModule } from '@ngneat/transloco';
+
 import { NavigationBarComponent } from './shared';
 
 import { AppComponent } from './app.component';
@@ -8,6 +10,14 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        TranslocoTestingModule.forRoot({
+          langs: { de: {}, en: {}, it: {} },
+          translocoConfig: {
+            availableLangs: ['de', 'en', 'it'],
+            defaultLang: 'en',
+          },
+          preloadLangs: true,
+        }),
         NavigationBarComponent,
         AppComponent,
       ],
