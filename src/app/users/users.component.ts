@@ -9,7 +9,7 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 
 import { ScrollToTopDirective, TextFilterComponent, UIUtilitiesService } from '../shared';
 
@@ -22,7 +22,7 @@ import { User } from './user.model';
   selector: 'app-users',
   standalone: true,
   imports: [
-    TranslateModule,
+    TranslocoPipe,
     ScrollToTopDirective,
     TextFilterComponent,
     UserComponent,
@@ -47,15 +47,15 @@ import { User } from './user.model';
             </div>
           }
           <div class="col-12">
-            <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | translate }}</div>
+            <div class="full-width-message">{{ "USERS.LOAD_COMPLETED" | transloco }}</div>
           </div>
         </div>
       }
 
-      <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | translate }}</div>
-      <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | translate }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry"
-           (click)="retryLoadingDataSource()">{{ "USERS.RETRY" | translate }}
+      <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">
+        {{ "USERS.RETRY" | transloco }}
       </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
@@ -79,7 +79,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   private textSearch: string;
   private busy: boolean;
 
-  private translate = inject(TranslateService);
+  private transloco = inject(TranslocoService);
   private uiUtilities = inject(UIUtilitiesService);
   private usersService = inject(UsersService);
 
@@ -136,9 +136,9 @@ export class UsersComponent implements OnInit, OnDestroy {
         catchError(err => {
           this.busy = false;
           this.uiUtilities.modalAlert(
-            this.translate.instant('USERS.ERROR_ACCESS_DATA'),
+            this.transloco.translate('USERS.ERROR_ACCESS_DATA'),
             err,
-            this.translate.instant('USERS.CLOSE'),
+            this.transloco.translate('USERS.CLOSE'),
           );
           return throwError(err);
         }),

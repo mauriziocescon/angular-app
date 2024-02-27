@@ -9,8 +9,8 @@ import {
   tap,
 } from 'rxjs/operators';
 
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { ScrollToTopDirective, TextFilterComponent, UIUtilitiesService } from '../shared';
 
@@ -23,8 +23,8 @@ import { Album } from './album.model';
   selector: 'app-albums',
   standalone: true,
   imports: [
+    TranslocoPipe,
     InfiniteScrollModule,
-    TranslateModule,
     ScrollToTopDirective,
     TextFilterComponent,
     AlbumComponent,
@@ -49,11 +49,11 @@ import { Album } from './album.model';
         }
       </div>
 
-      <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | translate }}</div>
-      <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | translate }}</div>
-      <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | translate }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry"
-           (click)="retryLoadingDataSource()">{{ "ALBUMS.RETRY" | translate }}
+      <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">
+        {{ "ALBUMS.RETRY" | transloco }}
       </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
@@ -81,7 +81,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   private retry: boolean;
   private busy: boolean;
 
-  private translate = inject(TranslateService);
+  private transloco = inject(TranslocoService);
   private uiUtilities = inject(UIUtilitiesService);
   private albumsService = inject(AlbumsService);
 
@@ -162,9 +162,9 @@ export class AlbumsComponent implements OnInit, OnDestroy {
           this.busy = false;
           this.retry = true;
           this.uiUtilities.modalAlert(
-            this.translate.instant('ALBUMS.ERROR_ACCESS_DATA'),
+            this.transloco.translate('ALBUMS.ERROR_ACCESS_DATA'),
             err,
-            this.translate.instant('ALBUMS.CLOSE'),
+            this.transloco.translate('ALBUMS.CLOSE'),
           );
           return throwError(err);
         }),

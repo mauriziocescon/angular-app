@@ -4,19 +4,19 @@ import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup } from '@angul
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-text-filter',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    TranslateModule,
+    TranslocoPipe,
   ],
   template: `
     <form [formGroup]="searchForm">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="{{ 'TEXT_FILTER.PLACEHOLDER' | translate }}"
+        <input type="text" class="form-control" placeholder="{{ 'TEXT_FILTER.PLACEHOLDER' | transloco }}"
                formControlName="textFilter">
         <span class="input-group-text addon" (click)="resetTextFilter()">
           <span class="fas fa-search" [hidden]="isTextFilterNotEmpty"></span>

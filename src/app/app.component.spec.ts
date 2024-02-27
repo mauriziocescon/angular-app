@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TranslateModule } from '@ngx-translate/core';
-
 import { NavigationBarComponent } from './shared';
 
 import { AppComponent } from './app.component';
@@ -10,7 +8,6 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TranslateModule.forRoot(),
         NavigationBarComponent,
         AppComponent,
       ],

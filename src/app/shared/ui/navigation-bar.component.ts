@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoPipe } from '@ngneat/transloco';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppConstantsService, AppLanguageService } from '../../core';
@@ -10,14 +10,14 @@ import { AppConstantsService, AppLanguageService } from '../../core';
   selector: 'app-navigation-bar',
   standalone: true,
   imports: [
-    TranslateModule,
+    TranslocoPipe,
     NgbCollapseModule,
     NgbDropdownModule,
   ],
   template: `
     <nav class="navbar navbar-expand-lg bg-primary navbar-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">{{ "NAVIGATION_BAR.NAME" | translate }}</a>
+        <a class="navbar-brand" href="#">{{ "NAVIGATION_BAR.NAME" | transloco }}</a>
         <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,10 +25,10 @@ import { AppConstantsService, AppLanguageService } from '../../core';
         <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="goToAlbums()">{{ "NAVIGATION_BAR.ALBUMS" | translate }}</a>
+              <a class="nav-link" (click)="goToAlbums()">{{ "NAVIGATION_BAR.ALBUMS" | transloco }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="goToUsers()">{{ "NAVIGATION_BAR.USERS" | translate }}</a>
+              <a class="nav-link" (click)="goToUsers()">{{ "NAVIGATION_BAR.USERS" | transloco }}</a>
             </li>
           </ul>
           <ul class="navbar-nav">
