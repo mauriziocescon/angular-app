@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  inject,
   isDevMode,
   LOCALE_ID,
   provideZoneChangeDetection,
@@ -12,10 +13,6 @@ import { provideTransloco } from '@ngneat/transloco';
 import { AppLanguageService, TranslocoHttpLoader } from './core';
 
 import { routes } from './app.routes';
-
-function createLanguageIdLoader(appLanguageService: AppLanguageService): string {
-  return appLanguageService.getLanguageId();
-}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,8 +27,7 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: LOCALE_ID,
-      useFactory: (createLanguageIdLoader),
-      deps: [AppLanguageService],
+      useFactory: () => inject(AppLanguageService).getLanguageId(),
     },
   ],
 };
