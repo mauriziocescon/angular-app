@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TranslocoPipe } from '@ngneat/transloco';
@@ -18,11 +18,11 @@ import { AppConstantsService, AppLanguageService } from '../../core';
     <nav class="navbar navbar-expand-lg bg-primary navbar-light fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">{{ "NAVIGATION_BAR.NAME" | transloco }}</a>
-        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+        <button class="navbar-toggler" type="button" (click)="toggleCollapsed()">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed">
+        <div class="collapse navbar-collapse" [ngbCollapse]="isCollapsed()">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <a class="nav-link" (click)="goToAlbums()">{{ "NAVIGATION_BAR.ALBUMS" | transloco }}</a>
@@ -38,9 +38,9 @@ import { AppConstantsService, AppLanguageService } from '../../core';
               </li>
             }
             <li class="nav-item dropdown" ngbDropdown>
-              <a class="nav-link dropdown-toggle" ngbDropdownToggle>{{ selectedLanguageId }}</a>
+              <a class="nav-link dropdown-toggle" ngbDropdownToggle>{{ selectedLanguageId() }}</a>
               <div class="dropdown-menu" ngbDropdownMenu>
-                @for (language of languages; track language) {
+                @for (language of languages(); track language) {
                   <a class="dropdown-item" (click)="selectLanguage(language)">
                     {{ language }}
                   </a>
@@ -53,9 +53,9 @@ import { AppConstantsService, AppLanguageService } from '../../core';
     </nav>`,
 })
 export class NavigationBarComponent implements OnInit {
-  languages: string[] = [];
-  selectedLanguageId: string | undefined;
-  isCollapsed: boolean = false;
+  languages = signal<string[]>([]);
+  selectedLanguageId = signal<string | undefined>(undefined);
+  isCollapsed = signal<boolean>(false);
 
   private router = inject(Router);
   private appConstants = inject(AppConstantsService);
@@ -66,16 +66,20 @@ export class NavigationBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.languages = this.appLanguage.getSupportedLanguagesList();
-    this.selectedLanguageId = this.appLanguage.getLanguageId();
-    this.isCollapsed = true;
+    this.languages.set(this.appLanguage.getSupportedLanguagesList());
+    this.selectedLanguageId.set(this.appLanguage.getLanguageId());
+    this.isCollapsed.set(true);
   }
 
   selectLanguage(language: string): void {
     if (this.appLanguage.getLanguageId() !== language) {
-      this.selectedLanguageId = language;
-      this.appLanguage.setLanguageId(this.selectedLanguageId);
+      this.selectedLanguageId.set(language);
+      this.appLanguage.setLanguageId(this.selectedLanguageId());
     }
+  }
+
+  toggleCollapsed(): void {
+    this.isCollapsed.update(v => !v);
   }
 
   goToAlbums(): void {

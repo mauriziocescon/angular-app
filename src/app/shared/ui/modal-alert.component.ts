@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,20 +10,20 @@ import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   ],
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">{{ title }}</h4>
+      <h4 class="modal-title">{{ title() }}</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button>
     </div>
     <div class="modal-body">
-      <p>{{ message }}</p>
+      <p>{{ message() }}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="close()">{{ buttonLabel }}</button>
+      <button type="button" class="btn btn-primary" (click)="close()">{{ buttonLabel() }}</button>
     </div>`,
 })
 export class ModalAlertComponent {
-  @Input() title: string | undefined;
-  @Input() message: string | undefined;
-  @Input() buttonLabel: string | undefined;
+  title = signal<string | undefined>(undefined);
+  message = signal<string | undefined>(undefined);
+  buttonLabel = signal<string | undefined>(undefined);
 
   private activeModal = inject(NgbActiveModal);
 
@@ -32,6 +32,6 @@ export class ModalAlertComponent {
   }
 
   dismiss(): void {
-    this.activeModal.dismiss('Close click');
+    this.activeModal.dismiss('Dismiss click');
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,22 +10,22 @@ import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   ],
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">{{ title }}</h4>
+      <h4 class="modal-title">{{ title() }}</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button>
     </div>
     <div class="modal-body">
-      <p>{{ message }}</p>
+      <p>{{ message() }}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="yes()">{{ yesButtonLabel }}</button>
-      <button type="button" class="btn btn-default" (click)="no()">{{ noButtonLabel }}</button>
+      <button type="button" class="btn btn-primary" (click)="yes()">{{ yesButtonLabel() }}</button>
+      <button type="button" class="btn btn-default" (click)="no()">{{ noButtonLabel() }}</button>
     </div>`,
 })
 export class ModalConfirmerComponent {
-  @Input() title: string | undefined;
-  @Input() message: string | undefined;
-  @Input() yesButtonLabel: string | undefined;
-  @Input() noButtonLabel: string | undefined;
+  title = signal<string | undefined>(undefined);
+  message = signal<string | undefined>(undefined);
+  yesButtonLabel = signal<string | undefined>(undefined);
+  noButtonLabel = signal<string | undefined>(undefined);
 
   private activeModal = inject(NgbActiveModal);
 
@@ -38,6 +38,6 @@ export class ModalConfirmerComponent {
   }
 
   dismiss(): void {
-    this.activeModal.dismiss('Close click');
+    this.activeModal.dismiss('Dismiss click');
   }
 }

@@ -13,9 +13,9 @@ export class UIUtilitiesService {
 
   modalAlert(title: string, message: string, buttonLabel: string): void {
     const modalRef = this.modalService.open(ModalAlertComponent);
-    modalRef.componentInstance.title = title;
-    modalRef.componentInstance.message = message;
-    modalRef.componentInstance.buttonLabel = buttonLabel;
+    modalRef.componentInstance.title.set(title);
+    modalRef.componentInstance.message.set(message);
+    modalRef.componentInstance.buttonLabel.set(buttonLabel);
 
     modalRef.result
       .then(result => console.log(`Closed with: ${result}`))
@@ -24,10 +24,10 @@ export class UIUtilitiesService {
 
   modalConfirmer(title: string, message: string, yesButtonLabel: string, noButtonLabel: string, callback: (result: boolean) => void): void {
     const modalRef = this.modalService.open(ModalConfirmerComponent);
-    modalRef.componentInstance.title = title;
-    modalRef.componentInstance.message = message;
-    modalRef.componentInstance.yesButtonLabel = yesButtonLabel;
-    modalRef.componentInstance.noButtonLabel = noButtonLabel;
+    modalRef.componentInstance.title.set(title);
+    modalRef.componentInstance.message.set(message);
+    modalRef.componentInstance.yesButtonLabel.set(yesButtonLabel);
+    modalRef.componentInstance.noButtonLabel.set(noButtonLabel);
 
     modalRef.result
       .then(result => {
