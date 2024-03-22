@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   shouldRetry = computed(() => this.users() === undefined && this.isLoading() === false);
   showData = computed(() => this.isLoading() === false && this.hasNoData() === false && this.shouldRetry() === false);
 
-  private paramsSubject$: Subject<{ textSearch: string }>;
+  private paramsSubject$ = new Subject<{ textSearch: string }>();
   private paramsObservable$: Observable<{ textSearch: string }>;
   private paramsSubscription: Subscription;
 
@@ -84,10 +84,13 @@ export class UsersComponent implements OnInit, OnDestroy {
   private usersService = inject(UsersService);
 
   ngOnInit(): void {
-    this.paramsSubject$ = new Subject();
-    this.paramsObservable$ = this.paramsSubject$.asObservable();
     this.isLoading.set(false);
+    this.paramsObservable$ = this.paramsSubject$.asObservable();
     this.loadData();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll();
   }
 
   textSearchDidChange(textSearch: string): void {
@@ -124,9 +127,5 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   unsubscribeAll(): void {
     this.paramsSubscription?.unsubscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeAll();
   }
 }

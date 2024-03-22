@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -37,23 +37,22 @@ import { Album } from './album.model';
 
       <div class="row">
         <div class="col-12">
-          <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
+          <app-text-filter (valueDidChange)="textSearchDidChange($event)"></app-text-filter>
         </div>
       </div>
 
       <div class="row">
-        @for (album of dataSource; track album.id) {
+        @for (album of this.albums(); track album.id) {
           <div class="col-12 col-sm-6 album">
             <app-album [album]="album"></app-album>
           </div>
         }
       </div>
 
-      <div class="full-width-message" [hidden]="!isLoadingData">{{ "ALBUMS.LOADING" | transloco }}</div>
-      <div class="full-width-message" [hidden]="!hasNoData">{{ "ALBUMS.NO_RESULT" | transloco }}</div>
-      <div class="full-width-message" [hidden]="!isLoadCompleted">{{ "ALBUMS.LOAD_COMPLETED" | transloco }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">
-        {{ "ALBUMS.RETRY" | transloco }}
+      <div class="full-width-message" [hidden]="!isLoading()">{{ "ALBUMS.LOADING" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData()">{{ "ALBUMS.NO_RESULT" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!isLoadCompleted()">{{ "ALBUMS.LOAD_COMPLETED" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry()" (click)="retry()"> {{ "ALBUMS.RETRY" | transloco }}
       </div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
@@ -69,91 +68,65 @@ import { Album } from './album.model';
   `,
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
-  private paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
+  params = signal<{ textSearch: string | undefined, pageNumber: number }>({ textSearch: undefined, pageNumber: 1 });
+  albums = signal<Album[]>([]);
+  isLoading = signal<boolean>(false);
+  error = signal<string | undefined>(undefined);
+  loadCompleted = signal<boolean>(false);
+  isLoadCompleted = computed<boolean>(() => this.isLoading() === false && this.albums()?.length > 0 && this.loadCompleted() === true);
+  hasNoData = computed(() => this.albums()?.length === 0 && this.isLoading() === false && this.error() === undefined);
+  shouldRetry = computed(() => this.isLoading() === false && this.error() !== undefined);
+
+  private paramsSubject$ = new Subject<{ textSearch: string, pageNumber: number }>();
   private paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
   private paramsSubscription: Subscription;
-
-  private albums: Album[] | undefined;
-  private textSearch: string;
-  private pageNumber: number;
-  private loadCompleted: boolean;
-  private retry: boolean;
-  private busy: boolean;
 
   private transloco = inject(TranslocoService);
   private uiUtilities = inject(UIUtilitiesService);
   private albumsService = inject(AlbumsService);
 
-  get isLoadingData(): boolean {
-    return this.busy === true;
-  }
-
-  public get isLoadCompleted(): boolean {
-    return this.isLoadingData === false && this.albums !== undefined && this.albums.length > 0 && this.loadCompleted === true;
-  }
-
-  get hasNoData(): boolean {
-    return this.albums !== undefined && this.albums.length === 0 && this.isLoadingData === false;
-  }
-
-  get shouldRetry(): boolean {
-    return this.retry === true && this.isLoadingData === false;
-  }
-
-  get dataSource(): Album[] | undefined {
-    return this.albums;
-  }
-
   ngOnInit(): void {
-    this.busy = false;
-    this.pageNumber = 1;
-    this.loadCompleted = false;
-
-    this.paramsSubject$ = new Subject();
+    this.params.set({ textSearch: undefined, pageNumber: 1 });
+    this.albums.set([]);
+    this.isLoading.set(false);
+    this.error.set(undefined);
+    this.loadCompleted.set(false);
     this.paramsObservable$ = this.paramsSubject$.asObservable();
-
-    this.loadDataSource();
+    this.loadData();
   }
 
-  textSearchValueDidChange(value: string): void {
-    this.textSearch = value;
-    this.pageNumber = 1;
-    this.albums = undefined;
+  ngOnDestroy(): void {
+    this.unsubscribeAll();
+  }
 
-    const params = {
-      textSearch: value,
-      pageNumber: this.pageNumber,
-    };
-
-    this.paramsSubject$.next(params);
+  textSearchDidChange(textSearch: string): void {
+    this.params.set({ textSearch, pageNumber: 1 });
+    this.albums.set([]);
+    this.paramsSubject$.next(this.params());
   }
 
   onScroll(): void {
-    if (this.loadCompleted === false) {
-      const params = {
-        textSearch: this.textSearch,
-        pageNumber: this.pageNumber,
-      };
-
-      this.paramsSubject$.next(params);
+    if (this.loadCompleted() === false) {
+      this.paramsSubject$.next(this.params());
     }
   }
 
-  loadDataSource(): void {
+  loadData(): void {
     this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
       .pipe(
-        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber }),
-        tap(() => this.busy = true),
+        startWith({ ...this.params() }),
+        tap(() => this.isLoading.set(true)),
+        tap(() => this.error.set(undefined)),
         debounceTime(50),
         switchMap(({ textSearch, pageNumber }) => {
           return this.albumsService.getAlbums(textSearch, pageNumber);
         }),
-        tap(() => this.busy = false),
+        tap(() => this.isLoading.set(false)),
         catchError(err => {
-          this.busy = false;
-          this.retry = true;
+          this.isLoading.set(false);
+          this.error.set(err);
           this.uiUtilities.modalAlert(
             this.transloco.translate('ALBUMS.ERROR_ACCESS_DATA'),
             err,
@@ -163,25 +136,20 @@ export class AlbumsComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe(data => {
-        this.albums = this.albums === undefined ? data.albums : this.albums.concat(data.albums);
-        this.loadCompleted = data.lastPage;
+        this.albums.update((a) => [...a, ...(data.albums)]);
+        this.loadCompleted.set(data.lastPage);
 
-        if (!this.loadCompleted) {
-          this.pageNumber++;
+        if (!this.loadCompleted()) {
+          this.params.update(v => ({ ...v, pageNumber: v.pageNumber + 1 }));
         }
       });
   }
 
-  retryLoadingDataSource(): void {
-    this.retry = false;
-    this.loadDataSource();
+  retry(): void {
+    this.loadData();
   }
 
   unsubscribeAll(): void {
     this.paramsSubscription?.unsubscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeAll();
   }
 }
