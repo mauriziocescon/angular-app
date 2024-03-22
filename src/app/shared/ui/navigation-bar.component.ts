@@ -32,7 +32,7 @@ import { AppConstantsService, AppLanguageService } from '../../core';
             </li>
           </ul>
           <ul class="navbar-nav">
-            @if (canOpenJsonServer) {
+            @if (canOpenJsonServer()) {
               <li class="nav-item">
                 <a class="nav-link" (click)="openJsonServer()"><span class="fas fa-server"></span></a>
               </li>
@@ -56,19 +56,17 @@ export class NavigationBarComponent implements OnInit {
   languages = signal<string[]>([]);
   selectedLanguageId = signal<string | undefined>(undefined);
   isCollapsed = signal<boolean>(false);
+  canOpenJsonServer = signal<boolean>(false);
 
   private router = inject(Router);
   private appConstants = inject(AppConstantsService);
   private appLanguage = inject(AppLanguageService);
 
-  get canOpenJsonServer(): boolean {
-    return this.appConstants.Application.SHOW_JSON_SERVER_API === true;
-  }
-
   ngOnInit(): void {
     this.languages.set(this.appLanguage.getSupportedLanguagesList());
     this.selectedLanguageId.set(this.appLanguage.getLanguageId());
     this.isCollapsed.set(true);
+    this.canOpenJsonServer.set(this.appConstants.Application.SHOW_JSON_SERVER_API === true);
   }
 
   selectLanguage(language: string): void {
