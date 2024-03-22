@@ -7,7 +7,7 @@ import {
   map,
 } from 'rxjs/operators';
 
-import { AppConstantsService, UtilitiesService } from '../core';
+import { AppConstantsService } from '../core';
 
 import { Album } from './album.model';
 
@@ -15,21 +15,21 @@ import { Album } from './album.model';
 export class AlbumsService {
   private http = inject(HttpClient);
   private appConstants = inject(AppConstantsService);
-  private utilities = inject(UtilitiesService);
 
-  getAlbums(textFilter: string | undefined, page: number, limit: number): Observable<{
+  getAlbums(textFilter: string | undefined, page: number): Observable<{
     albums: Album[],
     lastPage: boolean
   }> {
     const url = this.appConstants.Api.albums;
-    const params = { q: textFilter || '', _page: page.toString(), _limit: limit.toString() };
+    const _start = (page - 1) * 20, _limit = 20;
+    const params = { q: textFilter || '', _start, _limit };
 
     return this.http.get<Album[]>(url, { params, observe: 'response' })
       .pipe(
         map(response => {
-          const info = this.utilities.parseLinkHeaders(response.headers);
+          const numOfItems = parseInt(response.headers.get('X-Total-Count'), 10);
+          const lastPage = _start + _limit >= numOfItems;
 
-          const lastPage = parseInt(info ? info.last._page : '1', 10) === page;
           return { albums: response.body as Album[], lastPage };
         }),
         catchError((err: HttpErrorResponse) => this.handleError(err)),

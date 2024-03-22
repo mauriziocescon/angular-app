@@ -69,14 +69,13 @@ import { Album } from './album.model';
   `,
 })
 export class AlbumsComponent implements OnInit, OnDestroy {
-  private paramsSubject$: Subject<{ textSearch: string, pageNumber: number, limit: number }>;
-  private paramsObservable$: Observable<{ textSearch: string, pageNumber: number, limit: number }>;
+  private paramsSubject$: Subject<{ textSearch: string, pageNumber: number }>;
+  private paramsObservable$: Observable<{ textSearch: string, pageNumber: number }>;
   private paramsSubscription: Subscription;
 
   private albums: Album[] | undefined;
   private textSearch: string;
   private pageNumber: number;
-  private limit: number;
   private loadCompleted: boolean;
   private retry: boolean;
   private busy: boolean;
@@ -84,10 +83,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   private transloco = inject(TranslocoService);
   private uiUtilities = inject(UIUtilitiesService);
   private albumsService = inject(AlbumsService);
-
-  constructor() {
-    this.limit = 20;
-  }
 
   get isLoadingData(): boolean {
     return this.busy === true;
@@ -128,7 +123,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     const params = {
       textSearch: value,
       pageNumber: this.pageNumber,
-      limit: this.limit,
     };
 
     this.paramsSubject$.next(params);
@@ -139,7 +133,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
       const params = {
         textSearch: this.textSearch,
         pageNumber: this.pageNumber,
-        limit: this.limit,
       };
 
       this.paramsSubject$.next(params);
@@ -151,11 +144,11 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
     this.paramsSubscription = this.paramsObservable$
       .pipe(
-        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber, limit: this.limit }),
+        startWith({ textSearch: this.textSearch, pageNumber: this.pageNumber }),
         tap(() => this.busy = true),
         debounceTime(50),
-        switchMap(({ textSearch, pageNumber, limit }) => {
-          return this.albumsService.getAlbums(textSearch, pageNumber, limit);
+        switchMap(({ textSearch, pageNumber }) => {
+          return this.albumsService.getAlbums(textSearch, pageNumber);
         }),
         tap(() => this.busy = false),
         catchError(err => {
