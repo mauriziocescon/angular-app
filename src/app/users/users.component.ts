@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -35,13 +35,13 @@ import { User } from './user.model';
 
       <div class="row">
         <div class="col-12">
-          <app-text-filter (valueDidChange)="textSearchValueDidChange($event)"></app-text-filter>
+          <app-text-filter (valueDidChange)="textSearchDidChange($event)"></app-text-filter>
         </div>
       </div>
 
-      @if (showData) {
+      @if (showData()) {
         <div class="row">
-          @for (user of dataSource; track user.id) {
+          @for (user of users(); track user.id) {
             <div class="col-12 col-sm-6 user">
               <app-user [user]="user"></app-user>
             </div>
@@ -52,11 +52,9 @@ import { User } from './user.model';
         </div>
       }
 
-      <div class="full-width-message" [hidden]="!isLoadingData">{{ "USERS.LOADING" | transloco }}</div>
-      <div class="full-width-message" [hidden]="!hasNoData">{{ "USERS.NO_RESULT" | transloco }}</div>
-      <div class="full-width-message" [hidden]="!shouldRetry" (click)="retryLoadingDataSource()">
-        {{ "USERS.RETRY" | transloco }}
-      </div>
+      <div class="full-width-message" [hidden]="!isLoading()">{{ "USERS.LOADING" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!hasNoData()">{{ "USERS.NO_RESULT" | transloco }}</div>
+      <div class="full-width-message" [hidden]="!shouldRetry()" (click)="retry()"> {{ "USERS.RETRY" | transloco }}</div>
       <div class="go-up" appScrollToTop></div>
     </div>`,
   styles: `
@@ -71,70 +69,44 @@ import { User } from './user.model';
   `,
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  users = signal<User[] | undefined>(undefined);
+  isLoading = signal<boolean>(false);
+  hasNoData = computed(() => this.users()?.length === 0 && this.isLoading() === false);
+  shouldRetry = computed(() => this.users() === undefined && this.isLoading() === false);
+  showData = computed(() => this.isLoading() === false && this.hasNoData() === false && this.shouldRetry() === false);
+
   private paramsSubject$: Subject<{ textSearch: string }>;
   private paramsObservable$: Observable<{ textSearch: string }>;
   private paramsSubscription: Subscription;
-
-  private users: User[] | undefined;
-  private textSearch: string;
-  private busy: boolean;
 
   private transloco = inject(TranslocoService);
   private uiUtilities = inject(UIUtilitiesService);
   private usersService = inject(UsersService);
 
-  get isLoadingData(): boolean {
-    return this.busy === true;
-  }
-
-  get hasNoData(): boolean {
-    return this.users !== undefined && this.users.length === 0 && this.isLoadingData === false;
-  }
-
-  get shouldRetry(): boolean {
-    return this.users === undefined && this.isLoadingData === false;
-  }
-
-  get showData(): boolean {
-    return this.isLoadingData === false && this.hasNoData === false && this.shouldRetry === false;
-  }
-
-  get dataSource(): User[] | undefined {
-    return this.users;
-  }
-
   ngOnInit(): void {
-    this.busy = false;
-
     this.paramsSubject$ = new Subject();
     this.paramsObservable$ = this.paramsSubject$.asObservable();
-
-    this.loadDataSource();
+    this.isLoading.set(false);
+    this.loadData();
   }
 
-  textSearchValueDidChange(value: string): void {
-    this.textSearch = value;
-    this.users = undefined;
-
-    const params = {
-      textSearch: value,
-    };
-
-    this.paramsSubject$.next(params);
+  textSearchDidChange(textSearch: string): void {
+    this.users.set(undefined);
+    this.paramsSubject$.next({ textSearch });
   }
 
-  loadDataSource(): void {
+  loadData(): void {
     this.unsubscribeAll();
 
     this.paramsSubscription = this.paramsObservable$
       .pipe(
-        startWith({ textSearch: this.textSearch }),
-        tap(() => this.busy = true),
+        startWith({ textSearch: undefined }),
+        tap(() => this.isLoading.set(true)),
         debounceTime(50),
         switchMap(({ textSearch }) => this.usersService.getUsers(textSearch)),
-        tap(() => this.busy = false),
+        tap(() => this.isLoading.set(false)),
         catchError(err => {
-          this.busy = false;
+          this.isLoading.set(false);
           this.uiUtilities.modalAlert(
             this.transloco.translate('USERS.ERROR_ACCESS_DATA'),
             err,
@@ -143,11 +115,11 @@ export class UsersComponent implements OnInit, OnDestroy {
           return throwError(err);
         }),
       )
-      .subscribe(users => this.users = users);
+      .subscribe(users => this.users.set(users));
   }
 
-  retryLoadingDataSource(): void {
-    this.loadDataSource();
+  retry(): void {
+    this.loadData();
   }
 
   unsubscribeAll(): void {

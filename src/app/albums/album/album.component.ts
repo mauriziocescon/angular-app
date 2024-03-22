@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 import { Album } from '../album.model';
 
@@ -8,11 +8,13 @@ import { Album } from '../album.model';
   template: `
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{ album.id }}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{ album.title }}</h6>
+        <h4 class="card-title">{{ title() }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ subtitle() }}</h6>
       </div>
     </div>`,
 })
 export class AlbumComponent {
-  @Input() album: Album;
+  album = input<Album>();
+  title = computed(() => this.album().id);
+  subtitle = computed(() => this.album().title);
 }

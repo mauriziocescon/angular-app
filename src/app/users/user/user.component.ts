@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 import { User } from '../user.model';
 
@@ -8,12 +8,15 @@ import { User } from '../user.model';
   template: `
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{ user.id }}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
-        <p class="card-text">{{ user.email }} - {{ user.website }}</p>
+        <h4 class="card-title">{{ title() }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ subtitle() }}</h6>
+        <p class="card-text">{{ content() }}</p>
       </div>
     </div>`,
 })
 export class UserComponent {
-  @Input() user: User;
+  user = input<User>();
+  title = computed(() => this.user().id);
+  subtitle = computed(() => this.user().username);
+  content = computed(() => `${this.user().email} - ${this.user().website}`);
 }
