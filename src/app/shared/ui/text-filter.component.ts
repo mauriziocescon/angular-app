@@ -31,7 +31,7 @@ import { TranslocoPipe } from '@ngneat/transloco';
   `,
 })
 export class TextFilterComponent implements OnInit, OnDestroy {
-  @Output() valueDidChange: EventEmitter<string | null>;
+  @Output() valueDidChange = new EventEmitter<string | null>();
 
   searchForm: FormGroup;
   private searchControl: FormControl<string | null>;
@@ -39,10 +39,6 @@ export class TextFilterComponent implements OnInit, OnDestroy {
   private searchControlSubscription: Subscription;
 
   private formBuilder = inject(FormBuilder);
-
-  constructor() {
-    this.valueDidChange = new EventEmitter();
-  }
 
   get isTextFilterNotEmpty(): boolean {
     return !!this.searchControl?.value;
