@@ -1,4 +1,11 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  inject,
+  ChangeDetectionStrategy,
+  output,
+} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -13,6 +20,7 @@ import { TranslocoPipe } from '@ngneat/transloco';
     ReactiveFormsModule,
     TranslocoPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <form [formGroup]="searchForm">
       <div class="input-group">
@@ -31,7 +39,7 @@ import { TranslocoPipe } from '@ngneat/transloco';
   `,
 })
 export class TextFilterComponent implements OnInit, OnDestroy {
-  @Output() valueDidChange = new EventEmitter<string | null>();
+  valueDidChange = output<string | null>();
 
   searchForm: FormGroup;
   private searchControl: FormControl<string | null>;
@@ -65,7 +73,7 @@ export class TextFilterComponent implements OnInit, OnDestroy {
 
     this.searchControlSubscription = this.searchControl
       ?.valueChanges
-      .pipe(debounceTime(1000))
+      .pipe(debounceTime(500))
       .subscribe(value => this.valueDidChange.emit(value));
   }
 

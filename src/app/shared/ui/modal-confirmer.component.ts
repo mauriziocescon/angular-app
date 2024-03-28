@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 
 import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,6 +8,7 @@ import { NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     NgbModalModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="modal-header">
       <h4 class="modal-title">{{ title() }}</h4>

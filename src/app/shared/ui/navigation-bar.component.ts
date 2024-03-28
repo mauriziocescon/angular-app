@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TranslocoPipe } from '@ngneat/transloco';
@@ -14,6 +14,7 @@ import { AppConstantsService, AppLanguageService } from '../../core';
     NgbCollapseModule,
     NgbDropdownModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav class="navbar navbar-expand-lg bg-primary navbar-light fixed-top">
       <div class="container-fluid">
