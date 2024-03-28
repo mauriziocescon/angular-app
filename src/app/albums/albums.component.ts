@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -29,6 +29,7 @@ import { Album } from './album.model';
     TextFilterComponent,
     AlbumComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     AlbumsService,
   ],

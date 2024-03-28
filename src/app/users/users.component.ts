@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
 import {
@@ -27,6 +27,7 @@ import { User } from './user.model';
     TextFilterComponent,
     UserComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     UsersService,
   ],
